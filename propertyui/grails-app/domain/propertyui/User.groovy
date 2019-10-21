@@ -7,6 +7,8 @@ import groovy.transform.ToString
 @ToString(includes = 'username', includeNames = true, includePackage = false)
 class User implements Serializable{
 
+    private static final long serialVersionUID = 1
+
 //    def springSecurityService
 
     String username
