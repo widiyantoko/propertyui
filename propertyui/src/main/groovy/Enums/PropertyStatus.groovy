@@ -1,5 +1,5 @@
 package Enums
 
-enum SaleType {
+enum PropertyStatus {
     SALE, RENT
 }
