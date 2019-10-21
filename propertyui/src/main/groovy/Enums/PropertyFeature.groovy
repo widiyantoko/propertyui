@@ -2,15 +2,15 @@ package Enums
 
 enum PropertyFeature {
 
-    TV("TV", "tv"),
-    GARAGE("GARAGE", "garage"),
-    BALCONY("BALCONY", "balcony"),
-    BATHS("BATHS", "baths"),
-    BEDS("BEDS", "beds"),
-    AC("AIR CONDITIONER", "airconditioner"),
-    GYM("GYM", "gym"),
-    POOL("POOL", "pool"),
-    PARKING("PARKING", "parking"),
+    TV("TV", "monitor"),
+    GARAGE("GARAGE", "vehicle"),
+    BALCONY("BALCONY", "building"),
+    BATHS("BATHS", "holidays"),
+    BEDS("BEDS", "bed"),
+    AC("AIR CONDITIONER", "air-conditioner"),
+    GYM("GYM", "weightlifting"),
+    POOL("POOL", "people-2"), //pool theme class
+    PARKING("PARKING", "transport"),
     TELEPHONE("TELEPHONE", "telephone"),
     WIFI("WIFI", "wifi")
 
