@@ -10,6 +10,7 @@ class UrlMappings {
         }
 
         "/"(controller: 'home', action: 'index')
+        "/property-list/"(controller: 'home', action: 'propertyList')
 
         "500"(view:'/error')
         "404"(view:'/notFound')

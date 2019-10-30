@@ -1,16 +1,11 @@
 package propertyui
 
-import Enums.PropertyFeature
-import Enums.PropertyType
-import Enums.PropertyStatus
-
 class Property {
 
-    static belongsTo = [user: User]
+    static hasMany = [propertyDetails: PropertyDetails]
 
-    PropertyFeature propertyFeature
-    PropertyType propertyType
-    PropertyStatus propertyStatus
+    String propertyType
+    String propertyStatus
 
     String title
     String gallery

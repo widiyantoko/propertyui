@@ -93,7 +93,7 @@ class User implements Serializable{
     static mapping = {
         avatar sqlType: "text"
         password column: '`password`'
-        longName formula: "CASE WHEN title <> '' AND title IS NOT NULL THEN CONCAT_WS(' ', title, first_name,l ast_name) ELSE CONCAT_WS(' ', first_name, last_name) END"
+        longName formula: "CASE WHEN title <> '' AND title IS NOT NULL THEN CONCAT_WS(' ', title, first_name,last_name) ELSE CONCAT_WS(' ', first_name, last_name) END"
     }
 
     def getFullName() {
