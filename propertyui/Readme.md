@@ -15,7 +15,7 @@ Local
 1. Java(TM) SE Runtime Environment (build 1.8.0_162-b12)
 2. grails (3.1.x)
 3. gradle (min version 3.1)
-4. MySQL database (for local development) with table membership. Match the development environment settings in the application.yml file
+4. MySQL database (for local development) with table propertyui. Match the development environment settings in the application.yml file
 ```
 
 ### Installing
