@@ -11,6 +11,8 @@ class UrlMappings {
 
         "/"(controller: 'home', action: 'index')
         "/property-list/"(controller: 'home', action: 'propertyList')
+        "/save-data"(controller: 'home', action: 'saveData')
+        "/property-details/$id?"(controller: 'home', action: 'propertyDetails')
 
         "500"(view:'/error')
         "404"(view:'/notFound')

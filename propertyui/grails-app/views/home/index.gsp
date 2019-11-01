@@ -5,7 +5,7 @@
   Time: 12:53
 --%>
 
-<%@ page contentType="text/html;charset=UTF-8" import="propertyui.PropertyDetails; Enums.PropertyStatus; Enums.PropertyType; Enums.PropertyFeature" %>
+<%@ page contentType="text/html;charset=UTF-8" import="Enums.PropertyStatus; Enums.PropertyType; Enums.PropertyFeature" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -199,12 +199,14 @@
                 <div class="main-title">
                     <h1>Featured Properties</h1>
                 </div>
-                <ul class="list-inline-listing filters filters-listing-navigation">
-                    <li class="active btn filtr-button filtr" data-filter="all">All</li>
-                    <g:each in="${PropertyType}" var="type" status="i">
-                        <li data-filter="${type?.code()}" class="btn btn-inline filtr-button filtr">${type}</li>
-                    </g:each>
-                </ul>
+                <g:if test="${propertyList}">
+                    <ul class="list-inline-listing filters filters-listing-navigation">
+                        <li class="active btn filtr-button filtr" data-filter="all">All</li>
+                        <g:each in="${PropertyType}" var="type" status="i">
+                            <li data-filter="${type?.code()}" class="btn btn-inline filtr-button filtr ${type?.toString()}">${type}</li>
+                        </g:each>
+                    </ul>
+                </g:if>
                 <div class="row">
                     <div class="filtr-container">
                         <g:each in="${propertyList}" var="property" status="i">
@@ -213,7 +215,7 @@
                                 <div class="property">
                                     <!-- Property img -->
                                     <div class="property-img">
-                                        <div class="property-tag button alt featured">Featured</div>
+                                        <div class="property-tag button alt featured">${property?.propertyType}</div>
                                         <div class="property-tag button sale">${property?.propertyStatus}</div>
                                         <div class="property-price">$ ${property?.price}</div>
                                         <img src="http://placehold.it/360x240" alt="fp" class="img-responsive">
@@ -237,11 +239,11 @@
                                     <div class="property-content">
                                         <!-- title -->
                                         <h1 class="title">
-                                            <a href="properties-details.html">${property?.title}</a>
+                                            <a href="${createLink(controller: "home", action: "propertyDetails", params: [id: property?.id])}">${property?.title}</a>
                                         </h1>
                                         <!-- Property address -->
                                         <h3 class="property-address">
-                                            <a href="properties-details.html">
+                                            <a href="">
                                                 <i class="fa fa-map-marker"></i>${property?.address},
                                             </a>
                                         </h3>
@@ -253,9 +255,11 @@
                                             </li>
                                             <g:if test="${details}">
                                                 <g:each var="detail" in="${details}">
+                                                    <g:set var="feature" value="${detail?.getFeature()}"/>
+                                                    <g:set var="unit" value="${detail?.getUnit()}"/>
                                                     <li>
-                                                        <i class="flaticon-${PropertyFeature.getByValue(detail?.feature)?.code()}"></i>
-                                                        <span>${detail?.unit} ${detail?.feature}</span>
+                                                        <i class="flaticon-${PropertyFeature.getByValue(feature)?.code()}"></i>
+                                                        <span>${unit} <g:message code="property.feature.${feature}.label" default="${feature}"/></span>
                                                     </li>
                                                 </g:each>
                                             </g:if>
@@ -263,10 +267,11 @@
                                         <!-- Property footer -->
                                         <div class="property-footer">
                                             <span class="left">
-                                                <a href="#"><i class="fa fa-user"></i>Jhon Doe</a>
+                                                <a href="#"><i class="fa fa-user"></i>${property?.user?.getLongName()}</a>
                                             </span>
                                             <span class="right">
-                                                <i class="fa fa-calendar"></i>5 Days ago
+                                                <i class="fa fa-calendar"></i>
+                                                ${property?.getDatePosted()}
                                             </span>
                                         </div>
                                     </div>
@@ -327,24 +332,6 @@
             </div>
         </div>
         <!-- Services end -->
-
-        <!-- Intro section strat -->
-        <div class="intro-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 col-sm-3 col-xs-12">
-                        <img src="${createLinkTo(dir: 'images', file: 'red-logo.png')}" alt="logo-2">
-                    </div>
-                    <div class="col-md-7 col-sm-6 col-xs-12">
-                        <h3>Looking To Sell Or Rent Your Property?</h3>
-                    </div>
-                    <div class="col-md-2 col-sm-3 col-xs-12">
-                        <a href="submit-property.html" class="btn button-md button-theme">Submit Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Intro section end -->
 
         <g:render template="/templates/footer"/>
 

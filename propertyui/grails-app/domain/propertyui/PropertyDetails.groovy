@@ -2,6 +2,8 @@ package propertyui
 
 class PropertyDetails implements Serializable {
 
+    static belongsTo = [user: User]
+
     Property property
     String feature
     Integer unit

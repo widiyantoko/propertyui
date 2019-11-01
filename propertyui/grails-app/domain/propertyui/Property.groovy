@@ -1,6 +1,10 @@
 package propertyui
 
-class Property {
+import org.ocpsoft.prettytime.PrettyTime
+
+class Property implements Serializable{
+
+    static belongsTo = [user: User]
 
     static hasMany = [propertyDetails: PropertyDetails]
 
@@ -16,15 +20,11 @@ class Property {
     String detailInfo
     String description
 
-    Integer totalRoom
-    Integer totalBathRoom
-    Integer totalBedRoom
     Integer buildingAge
     Integer stars
 
     User createBy
     User updateBy
-    User contactInfo
     User reviewBy
 
     BigDecimal price
@@ -37,7 +37,6 @@ class Property {
     Date paidDate
 
     static constraints = {
-        propertyFeature nullable: true
         propertyType nullable: true
         propertyStatus nullable: true
 
@@ -50,15 +49,10 @@ class Property {
         detailInfo nullable: true
         description nullable: true
 
-        totalRoom nullable: true
-        totalBathRoom nullable: true
-        totalBedRoom nullable: true
-        buildingAge nullable: true
         stars nullable: true
 
         createBy nullable: true
         updateBy nullable: true
-        contactInfo nullable: true
         reviewBy nullable: true
 
         price nullable: true
@@ -74,5 +68,17 @@ class Property {
     static mapping = {
         description sqlType: "text"
         gallery sqlType: "text"
+    }
+
+    def getDatePosted() {
+        Date postDate = lastModified
+
+        PrettyTime time = new PrettyTime(new Locale("en"))
+        return time.format(postDate)
+    }
+
+    def getFullAddress() {
+        String fullAddress = (address ?: "") + " " + (city ?: "") + " " + (state ?: "")
+        return fullAddress?.trim()
     }
 }

@@ -1,3 +1,21 @@
+<!-- Intro section strat -->
+<div class="intro-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <img src="${createLinkTo(dir: 'images', file: 'red-logo.png')}" alt="logo-2">
+            </div>
+            <div class="col-md-7 col-sm-6 col-xs-12">
+                <h3>Looking To Sell Or Rent Your Property?</h3>
+            </div>
+            <div class="col-md-2 col-sm-3 col-xs-12">
+                <a href="submit-property.html" class="btn button-md button-theme">Submit Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Intro section end -->
+
 <!-- Footer start -->
 <footer class="main-footer clearfix">
     <div class="container">
