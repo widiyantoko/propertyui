@@ -201,10 +201,10 @@
                 </div>
                 <g:if test="${propertyList}">
                     <ul class="list-inline-listing filters filters-listing-navigation">
-                        <li class="active btn filtr-button filtr" data-filter="all">All (${countType.get('all')})</li>
+                        <li class="active btn filtr-button filtr" data-filter="all">All</li>
                         <g:each in="${typeList}" var="type">
-                            <li data-filter="${type?.code()}" class="active btn btn-inline filtr-button filtr">
-                                ${type?.name()}  (${countType.get(type.name())})
+                            <li data-filter="${type?.code()}" class="active btn btn-inline filtr-button filtr ${countType.get(type.name()) == 0 ? 'hide' : ''}">
+                                ${type?.name()}
                             </li>
                         </g:each>
                     </ul>
@@ -258,13 +258,15 @@
                                                 <span>4800 sq ft</span>
                                             </li>
                                             <g:if test="${details}">
-                                                <g:each var="detail" in="${details}">
+                                                <g:each var="detail" in="${details}" status="a">
                                                     <g:set var="feature" value="${detail?.getFeature()}"/>
                                                     <g:set var="unit" value="${detail?.getUnit()}"/>
-                                                    <li>
-                                                        <i class="flaticon-${PropertyFeature.getByValue(feature)?.code()}"></i>
-                                                        <span>${unit} <g:message code="property.feature.${feature}.label" default="${feature}"/></span>
-                                                    </li>
+                                                    <g:if test="${a < 6}">
+                                                        <li>
+                                                            <i class="flaticon-${PropertyFeature.getByValue(feature)?.code()}"></i>
+                                                            <span>${unit} <g:message code="property.feature.${feature}.label" default="${feature}"/></span>
+                                                        </li>
+                                                    </g:if>
                                                 </g:each>
                                             </g:if>
                                         </ul>
@@ -401,17 +403,15 @@
                                             <section>
                                                 <h3>Features</h3>
                                                 <div class="features">
-                                                    <g:if test="${details}">
+                                                    <ul class="bullets">
                                                         <g:each var="detail" in="${details}">
-                                                            <ul class="bullets">
-                                                                <g:set var="feature" value="${detail?.getFeature()}"/>
-                                                                <g:set var="unit" value="${detail?.getUnit()}"/>
-                                                                <li><i class="flaticon-${PropertyFeature.getByValue(feature)?.code()}"></i>
-                                                                    <g:message code="property.feature.${feature}.label" default="${feature}"/>
-                                                                </li>
-                                                            </ul>
+                                                            <g:set var="feature" value="${detail?.getFeature()}"/>
+                                                            <g:set var="unit" value="${detail?.getUnit()}"/>
+                                                            <li><i class="flaticon-${PropertyFeature.getByValue(feature)?.code()}"></i>
+                                                                <g:message code="property.feature.${feature}.label" default="${feature}"/>
+                                                            </li>
                                                         </g:each>
-                                                    </g:if>
+                                                    </ul>
                                                 </div>
                                             </section>
                                             <section>

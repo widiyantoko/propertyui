@@ -148,18 +148,18 @@
                                                         <h1><span>Condition</span></h1>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-md-4 col-sm-4 col-xs-12">
-                                                            <ul class="condition">
-                                                                <g:each in="${property.propertyDetails}" var="detail" status="i">
+                                                        <g:each in="${property.propertyDetails}" var="detail" status="i">
+                                                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                                                <ul class="condition">
                                                                     <g:set var="feature" value="${detail?.getFeature()}"/>
                                                                     <g:set var="unit" value="${detail?.getUnit()}"/>
-                                                                        <li>
-                                                                            <i class="fa fa-check-square"></i>
-                                                                            ${unit} <g:message code="property.feature.${feature}.label" default="${feature}"/>
-                                                                        </li>
-                                                                </g:each>
-                                                            </ul>
-                                                        </div>
+                                                                    <li>
+                                                                        <i class="fa fa-check-square"></i>
+                                                                        ${unit} <g:message code="property.feature.${feature}.label" default="${feature}"/>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </g:each>
                                                     </div>
                                                 </div>
                                                 <!-- Properties condition end -->

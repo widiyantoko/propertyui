@@ -339,12 +339,13 @@
                                 <h1><span>popular</span> Category</h1>
                             </div>
                             <ul class="list-unstyled list-cat">
-                                <li><a href="#">Single Family </a> <span>(45)  </span></li>
-                                <li><a href="#">Apartment  </a> <span>(21)  </span></li>
-                                <li><a href="#">Condo </a> <span>(23)  </span></li>
-                                <li><a href="#">Multi Family </a> <span>(19)  </span></li>
-                                <li><a href="#">Villa </a> <span>(19)  </span></li>
-                                <li><a href="#">Other  </a> <span>(22)  </span></li>
+                                <g:each in="${typeList}" var="type">
+                                    <li><a href="${createLink(controller: 'property', action: 'getPropertyByType', params: [type: type?.name()?.toLowerCase()])}">
+                                            <g:message code="property.type.${type?.name()}.label" default="${type?.name()}"/>
+                                        </a>
+                                        <span>(${countType.get(type.name())})</span>
+                                    </li>
+                                </g:each>
                             </ul>
                         </div>
 

@@ -28,6 +28,7 @@ class Property implements Serializable{
     User reviewBy
 
     BigDecimal price
+    BigDecimal size
 
     Boolean isSale = Boolean.FALSE
     Boolean isAvailable = Boolean.TRUE
@@ -48,6 +49,7 @@ class Property implements Serializable{
         postalCode nullable: true
         detailInfo nullable: true
         description nullable: true
+        size nullable: true
 
         stars nullable: true
 

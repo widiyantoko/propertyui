@@ -1,5 +1,6 @@
 package propertyui
 
+import Enums.PropertyStatus
 import Enums.PropertyType
 import grails.transaction.Transactional
 import grails.web.servlet.mvc.GrailsParameterMap
@@ -37,7 +38,7 @@ class PropertyService {
             eq("isSale", Boolean.FALSE)
 
             and {
-                if (params?.type?.equalsIgnoreCase('property')) {
+                if (params?.type?.equalsIgnoreCase('home')) {
                     eq("propertyType", PropertyType.HOME.name())
                 } else if (params?.type?.equalsIgnoreCase('office')) {
                     eq("propertyType", PropertyType.OFFICE.name())
@@ -48,6 +49,24 @@ class PropertyService {
                 }
             }
 
+        } as List<Property>
+
+        return propertyList
+    }
+
+    List<Property> getPropertyByStatus(GrailsParameterMap params) {
+
+        List<Property> propertyList = Property.createCriteria().list {
+            eq("isAvailable", Boolean.TRUE)
+            eq("isSale", Boolean.FALSE)
+
+            and {
+                if (params?.status?.equalsIgnoreCase('sale')) {
+                    eq("propertyStatus", PropertyStatus.SALE.name())
+                } else if (params?.status?.equalsignoreCase('rent')) {
+                    eq("propertyStatus", PropertyStatus.RENT.name())
+                }
+            }
         } as List<Property>
 
         return propertyList
@@ -70,6 +89,26 @@ class PropertyService {
                     eq("propertyType", PropertyType.OFFICE.name())
                 } else {
                     eq("propertyType", PropertyType.OTHERS.name())
+                }
+            }
+        } as Long
+
+        return result
+    }
+
+    Long countPropertyByStatus(PropertyStatus status) {
+
+        Long result = Property.createCriteria().get {
+            eq("isAvailable", Boolean.TRUE)
+            eq("isSale", Boolean.FALSE)
+            projections {
+                count("id")
+            }
+            and {
+                if (status == PropertyStatus.RENT) {
+                    eq("propertyStatus", PropertyStatus.RENT.name())
+                } else if (status == PropertyStatus.SALE) {
+                    eq("propertyStatus", PropertyStatus.SALE.name())
                 }
             }
         } as Long

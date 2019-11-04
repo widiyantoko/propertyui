@@ -38,8 +38,23 @@ class PropertyController {
     def propertyList() {
         List<Property> propertyList = propertyService.getAllProperty()
 
+        List<PropertyType> typeList = [PropertyType.HOME, PropertyType.OFFICE, PropertyType.APARTMENT, PropertyType.OTHERS]
+        Long allTypeCount = 0
+        Map<String, Long> typeCountMap = new HashMap<>()
+
+        for (PropertyType type : typeList) {
+            Long countByType = propertyService.countPropertyByType(type)
+            typeCountMap.put(type.name(), countByType)
+
+            allTypeCount += countByType
+        }
+
+        typeCountMap.put("all", allTypeCount)
+
         render view: "property_list", model: [
-                propertyList: propertyList
+                propertyList: propertyList,
+                typeList: typeList,
+                countType: typeCountMap
         ]
     }
 
@@ -68,6 +83,19 @@ class PropertyController {
         ]
     }
 
+    def getPropertyByStatus() {
+        List<Property> propertyList = propertyService.getPropertyByStatus(params)
+
+        if (!propertyList) {
+            notFound()
+            return
+        }
+
+        render view: "", model: [
+                propertyList: propertyList
+        ]
+    }
+
     def saveData() {
         User user = User.findById(1)
         Date date =  new Date()
@@ -92,6 +120,7 @@ class PropertyController {
                 stars: 5,
                 state: "sulsel",
                 title: "This is title 1",
+                size: 1600,
                 updateBy: user,
                 user: user
         )
