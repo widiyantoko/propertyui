@@ -3,23 +3,40 @@ package propertyui
 import Enums.PropertyFeature
 import Enums.PropertyStatus
 import Enums.PropertyType
-import grails.transaction.Transactional
 
-class HomeController {
+import static org.springframework.http.HttpStatus.NOT_FOUND
 
-    def homeService
+class PropertyController {
+
+    def propertyService
 
     def index() {
-        List<Property> propertyList = homeService.getPropertyList()
+        List<Property> propertyList = propertyService.getPropertyList()
+
+        //count property by type
+        List<PropertyType> typeList = [PropertyType.HOME, PropertyType.OFFICE, PropertyType.APARTMENT, PropertyType.OTHERS]
+        Long allTypeCount = 0
+        Map<String, Long> typeCountMap = new HashMap<>()
+
+        for (PropertyType type : typeList) {
+            Long countByType = propertyService.countPropertyByType(type)
+            typeCountMap.put(type.name(), countByType)
+
+            allTypeCount += countByType
+        }
+        typeCountMap.put("all", allTypeCount)
+
 
         [
-                propertyList: propertyList
+                propertyList: propertyList,
+                typeList: typeList,
+                countType: typeCountMap
         ]
 
     }
 
     def propertyList() {
-        List<Property> propertyList = homeService.getAllProperty()
+        List<Property> propertyList = propertyService.getAllProperty()
 
         render view: "property_list", model: [
                 propertyList: propertyList
@@ -29,8 +46,25 @@ class HomeController {
     def propertyDetails() {
         Property property = Property.findById(params?.long('id'))
 
+        if (!property) {
+            notFound()
+            return
+        }
+
         render view: "property_details", model: [
             property: property
+        ]
+    }
+
+    def getPropertyByType() {
+        List<Property> propertyList = propertyService.getPropertyByType(params)
+
+        if (!propertyList) {
+            notFound()
+            return
+        }
+        render view: "property_by_type", model: [
+                propertyList: propertyList
         ]
     }
 
@@ -75,5 +109,9 @@ class HomeController {
 
         property.propertyDetails = [details]
         property.save(flush: true)
+    }
+
+    protected void notFound() {
+        render status: NOT_FOUND
     }
 }

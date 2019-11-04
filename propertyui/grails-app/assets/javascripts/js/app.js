@@ -239,7 +239,10 @@ $(function () {
 
     // Modal activation
     $('.property-video').on('click', function () {
-        $('#propertyModal').modal('show');
+        var _this = $(this);
+        var _property_id = _this.data('property-id');
+        $('#propertyModal-'+ _property_id).modal('show');
+
     });
 
 

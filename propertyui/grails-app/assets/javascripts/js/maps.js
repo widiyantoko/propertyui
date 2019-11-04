@@ -2,7 +2,7 @@ var properties = {
     "data": [
         {
             "id": 1,
-            "title": "Beautiful single home",
+            "title": "Beautiful single property",
             "price": 2505.11,
             "listing_for": "Sale",
             'author': 'Jhon Doe',
@@ -44,7 +44,7 @@ var properties = {
         },
         {
             "id": 3,
-            "title": "Sweet Family home",
+            "title": "Sweet Family property",
             "price": 2505.11,
             "listing_for": "Rent",
             'author': 'Jhon Doe',
@@ -233,7 +233,7 @@ var properties = {
         },
         {
             "id": 12,
-            "title": "Sweet Family home",
+            "title": "Sweet Family property",
             "price": 2505.11,
             "listing_for": "Sale",
             'author': 'Jhon Doe',
@@ -254,7 +254,7 @@ var properties = {
         },
         {
             "id": 13,
-            "title": "Sweet Family home",
+            "title": "Sweet Family property",
             "price": 2505.11,
             "listing_for": "Sale",
             'author': 'Jhon Doe',

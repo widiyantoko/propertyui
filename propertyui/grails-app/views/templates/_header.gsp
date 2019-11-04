@@ -9,8 +9,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="${createLink(controller: 'home', action: 'index')}" class="logo">
-                    <img src="${createLinkTo(dir: 'images', file: 'red-logo.png')}" alt="logo">
+                <a href="${createLink(controller: 'property', action: 'index')}" class="logo">
+                    <img src="${createLinkTo(dir: 'images', file: 'logo.png')}" alt="logo">
                 </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->

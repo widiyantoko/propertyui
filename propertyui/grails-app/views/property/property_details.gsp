@@ -23,7 +23,7 @@
                     <div class="breadcrumb-area">
                         <h1>Properties Detail</h1>
                         <ul class="breadcrumbs">
-                            <li><a href="${createLink(controller: 'home', action: 'index')}">Home</a></li>
+                            <li><a href="${createLink(controller: 'property', action: 'index')}">Home</a></li>
                             <li class="active">Properties Detail</li>
                         </ul>
                     </div>
@@ -42,11 +42,13 @@
                             <div class="pull-left">
                                 <h3>${property?.title}</h3>
                                 <p>
-                                    <i class="fa fa-map-marker"></i>${property?.address}, ${property?.city}, ${property?.state}
+                                    <i class="fa fa-map-marker"></i>${property?.getFullAddress()}
                                 </p>
                             </div>
                             <div class="pull-right">
-                                <h3><span>$ ${property?.price}</span></h3>
+                                <h3><span>
+                                    <g:formatNumber number="${property?.price}" format="\$###,##0" type="currency" currencyCode="IDR" locale="id_ID"/>
+                                </span></h3>
                                 <!--
                                 <h5>
                                     Per Manth
@@ -254,7 +256,7 @@
                                                     <div class="main-title-2">
                                                         <h1><span>Video </span></h1>
                                                     </div>
-                                                    <iframe src="https://www.youtube.com/embed/5e0LxrLSzok" allowfullscreen=""></iframe>
+                                                    <iframe src="" allowfullscreen=""></iframe>
                                                 </div>
                                                 <!-- Inside properties end -->
                                             </div>

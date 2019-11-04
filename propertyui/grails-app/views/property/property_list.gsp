@@ -23,7 +23,7 @@
                     <div class="breadcrumb-area">
                         <h1>Properties Listing</h1>
                         <ul class="breadcrumbs">
-                            <li><a href="${createLink(controller: 'home', action: 'index')}">Home</a></li>
+                            <li><a href="${createLink(controller: 'property', action: 'index')}">Home</a></li>
                             <li class="active">Properties Listing</li>
                         </ul>
                     </div>
@@ -74,7 +74,9 @@
                                     <div class="property-img">
                                         <div class="property-tag button alt featured">${property?.propertyType}</div>
                                         <div class="property-tag button sale">${property?.propertyStatus}</div>
-                                        <div class="property-price">$ ${property?.price}</div>
+                                        <div class="property-price">
+                                            <g:formatNumber number="${property?.price}" format="\$###,##0" type="currency" currencyCode="IDR" locale="id_ID"/>
+                                        </div>
                                         <img src="http://placehold.it/312x220" alt="fp-list" class="img-responsive hp-1">
                                         <div class="property-overlay">
                                             <a href="properties-details.html" class="overlay-link">
@@ -101,7 +103,7 @@
                                     <!-- Property address -->
                                     <h3 class="property-address">
                                         <a href="properties-details.html">
-                                            <i class="fa fa-map-marker"></i>${property?.address},
+                                            <i class="fa fa-map-marker"></i>${property?.getFullAddress()}
                                         </a>
                                     </h3>
                                     <!-- Facilities List -->

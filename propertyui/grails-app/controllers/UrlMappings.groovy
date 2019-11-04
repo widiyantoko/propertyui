@@ -9,10 +9,11 @@ class UrlMappings {
             }
         }
 
-        "/"(controller: 'home', action: 'index')
-        "/property-list/"(controller: 'home', action: 'propertyList')
-        "/save-data"(controller: 'home', action: 'saveData')
-        "/property-details/$id?"(controller: 'home', action: 'propertyDetails')
+        "/"(controller: 'property', action: 'index')
+        "/property-list/"(controller: 'property', action: 'propertyList')
+        "/save-data"(controller: 'property', action: 'saveData')
+        "/property-details/$id?"(controller: 'property', action: 'propertyDetails')
+        "/property-type/$type"(controller: 'property',action: 'getPropertyByType')
 
         "500"(view:'/error')
         "404"(view:'/notFound')
