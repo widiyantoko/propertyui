@@ -5,7 +5,7 @@
   Time: 21:18
 --%>
 
-<%@ page contentType="text/html;charset=UTF-8" import="Enums.PropertyFeature" %>
+<%@ page contentType="text/html;charset=UTF-8" import="Enums.PropertyFeature; Enums.PropertyStatus; Enums.PropertyType" %>
 <html>
     <head>
         <meta name="layout" content="main">
@@ -21,10 +21,10 @@
             <div class="overlay">
                 <div class="container">
                     <div class="breadcrumb-area">
-                        <h1>Properties Listing</h1>
+                        <h1>Property Listing</h1>
                         <ul class="breadcrumbs">
                             <li><a href="${createLink(controller: 'property', action: 'index')}">Home</a></li>
-                            <li class="active">Properties Listing</li>
+                            <li class="active">Property Listing</li>
                         </ul>
                     </div>
                 </div>
@@ -77,9 +77,9 @@
                                         <div class="property-price">
                                             <g:formatNumber number="${property?.price}" format="\$###,##0" type="currency" currencyCode="IDR" locale="id_ID"/>
                                         </div>
-                                        <img src="http://placehold.it/312x220" alt="fp-list" class="img-responsive hp-1">
+                                        <img src="${property?.gallery ?: 'http://placehold.it/312x220'}" alt="fp-list" class="img-responsive hp-1">
                                         <div class="property-overlay">
-                                            <a href="properties-details.html" class="overlay-link">
+                                            <a href="${createLink(controller: "property", action: "propertyDetails", params: [id: property?.id])}" class="overlay-link">
                                                 <i class="fa fa-link"></i>
                                             </a>
                                             <a class="overlay-link property-video" title="Lexus GS F">
@@ -167,10 +167,12 @@
 
                             <form method="GET">
                                 <div class="form-group">
-                                    <select class="selectpicker search-fields" name="property-status" data-live-search="true" data-live-search-placeholder="Search value">
-                                        <option>Property Status</option>
-                                        <option>For Sale</option>
-                                        <option>For Rent</option>
+                                    <select class="selectpicker search-fields" name="property-status">
+                                        <g:each in="${PropertyStatus}" var="pStatus">
+                                            <option name="propertyStatus" value="${pStatus}">
+                                                <g:message code="property.status.${pStatus}.label"/>
+                                            </option>
+                                        </g:each>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -184,94 +186,20 @@
                                         <option>Canada</option>
                                     </select>
                                 </div>
-
                                 <div class="form-group">
-                                    <select class="selectpicker search-fields" name="property-types" data-live-search="true" data-live-search-placeholder="Search value" >
-                                        <option>Property Types</option>
-                                        <option>Residential</option>
-                                        <option>Commercial</option>
-                                        <option>Land</option>
+                                    <select class="selectpicker search-fields" name="property-types">
+                                        <g:each in="${PropertyType}" var="pType">
+                                            <option name="propertyType" value="${pType}">
+                                                <g:message code="property.type.${pType}.label"/>
+                                            </option>
+                                        </g:each>
                                     </select>
                                 </div>
-
-                                <div class="form-group">
-                                    <select class="selectpicker search-fields" name="area-from" data-live-search="true" data-live-search-placeholder="Search value" >
-                                        <option>Area From</option>
-                                        <option>1000</option>
-                                        <option>800</option>
-                                        <option>600</option>
-                                        <option>400</option>
-                                        <option>200</option>
-                                        <option>100</option>
-                                    </select>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <div class="form-group">
-                                            <select class="selectpicker search-fields" name="bedrooms">
-                                                <option>Bedrooms</option>
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <div class="form-group">
-                                            <select class="selectpicker search-fields" name="bathroom">
-                                                <option>Bathroom</option>
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <div class="form-group">
-                                            <select class="selectpicker search-fields" name="balcony">
-                                                <option>Balcony</option>
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <div class="form-group">
-                                            <select class="selectpicker search-fields" data-live-search="true" name="garage">
-                                                <option>Garage</option>
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="range-slider">
-                                    <label>Area</label>
-                                    <div data-min="0" data-max="10000" data-unit="Sq ft" data-min-name="min_area" data-max-name="max_area" class="range-slider-ui ui-slider" aria-disabled="false"></div>
-                                    <div class="clearfix"></div>
-                                </div>
-
                                 <div class="range-slider">
                                     <label>Price</label>
                                     <div data-min="0" data-max="150000" data-unit="USD" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
                                     <div class="clearfix"></div>
                                 </div>
-
                                 <a class="show-more-options" data-toggle="collapse" data-target="#options-content">
                                     <i class="fa fa-plus-circle"></i> Show More Options
                                 </a>
@@ -328,7 +256,7 @@
                                 </div>
 
                                 <div class="form-group mb-0">
-                                    <button class="search-button">Search</button>
+                                    <button class="search-button">Apply</button>
                                 </div>
                             </form>
                         </div>

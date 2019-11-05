@@ -4676,7 +4676,7 @@ a:hover {
 
 /** SUB BANNER AREA START **/
 .sub-banner {
-    background: url(http://placehold.it/1920x280) top left repeat;
+    background: url(../../images/interior-1.jpg) top left repeat;
     background-size: cover;
     height: 280px;
     background-position: center center;

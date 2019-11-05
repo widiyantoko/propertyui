@@ -26,11 +26,27 @@ class PropertyController {
         }
         typeCountMap.put("all", allTypeCount)
 
+        //count property by status
+        List<PropertyStatus> statusList = [PropertyStatus.SALE, PropertyStatus.RENT]
+        Long allStatusCount = 0
+        Map<String, Long> statusCountMap = new HashMap<>()
+
+        for (PropertyStatus status : statusList) {
+            Long countByStatus = propertyService.countPropertyByStatus(status)
+            statusCountMap.put(status.name(), countByStatus)
+
+            allStatusCount += countByStatus
+        }
+
+        statusCountMap.put("all", allStatusCount)
+
 
         [
                 propertyList: propertyList,
                 typeList: typeList,
-                countType: typeCountMap
+                countType: typeCountMap,
+                statusList: statusList,
+                countStatus: statusCountMap
         ]
 
     }

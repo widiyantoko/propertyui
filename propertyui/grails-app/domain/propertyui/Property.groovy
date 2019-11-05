@@ -19,6 +19,7 @@ class Property implements Serializable{
     String postalCode
     String detailInfo
     String description
+    String brands
 
     Integer buildingAge
     Integer stars
@@ -50,6 +51,7 @@ class Property implements Serializable{
         detailInfo nullable: true
         description nullable: true
         size nullable: true
+        brands nullable: true
 
         stars nullable: true
 
