@@ -852,7 +852,7 @@ input[type=checkbox]:checked + label:before {
 }
 
 .banner-max-height {
-    max-height: 720px !important;
+    max-height: 360px !important;
 }
 
 .banner-max-height img {
@@ -2344,7 +2344,7 @@ footer .footer-item .newsletter {
 }
 
 .view-search {
-    max-width: 400px;
+    max-width: 600px;
     margin: 0 auto;
 }
 
@@ -2788,9 +2788,10 @@ footer .footer-item .newsletter {
 
 /** COUNTERS AREA START **/
 .counters {
-    padding: 40px 0;
+    /*padding: 40px 0;*/
+    padding: 10px 0;
     color: #fff;
-    background: url(http://placehold.it/1920x223);
+    background: url(../../images/interior-2.jpg);
     z-index: 0;
     background-position: center center;
     background-repeat: no-repeat;
@@ -2874,7 +2875,8 @@ footer .footer-item .newsletter {
 /** TESTIMONIALS 2 **/
 .testimonials-2 {
     position: relative;
-    padding: 100px 0 130px;
+    /*padding: 100px 0 130px;*/
+    padding: 50px 0 50px;
     display: inline-block;
     width: 100%;
     float: left;
@@ -6417,7 +6419,8 @@ table.manage-table .title-container .title span {
     }
 
     .counters {
-        padding: 40px 0 0;
+        /*padding: 40px 0 0;*/
+        padding: 10px 0 0;
     }
 
     .contact-1 .contact-form .form-group {

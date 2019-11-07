@@ -20,6 +20,7 @@ class Property implements Serializable{
     String detailInfo
     String description
     String brands
+    String userReview
 
     Integer buildingAge
     Integer stars
@@ -37,6 +38,7 @@ class Property implements Serializable{
     Date createDate
     Date lastModified
     Date paidDate
+    Date reviewLastModified
 
     static constraints = {
         propertyType nullable: true
@@ -52,6 +54,7 @@ class Property implements Serializable{
         description nullable: true
         size nullable: true
         brands nullable: true
+        userReview nullable: true, blank: true
 
         stars nullable: true
 
@@ -67,11 +70,13 @@ class Property implements Serializable{
         createDate nullable: true
         lastModified nullable: true
         paidDate nullable: true
+        reviewLastModified nullable:  true, blank: true
     }
 
     static mapping = {
         description sqlType: "text"
         gallery sqlType: "text"
+        userReview sqlType: "text"
     }
 
     def getDatePosted() {

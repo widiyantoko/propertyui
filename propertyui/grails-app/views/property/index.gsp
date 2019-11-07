@@ -29,112 +29,30 @@
                             <div class="banner-content">
                                 <h1 data-animation="animated fadeInDown delay-05s"><span>Find your </span> Dream House</h1>
                                 <p data-animation="animated fadeInUp delay-1s">Lorem ipsum dolor sit amet, conconsectetuer adipiscing elit Lorem ipsum dolor sit amet, conconsectetuer</p>
-                                <a href="#" class="btn button-md button-theme" data-animation="animated fadeInUp delay-15s">Get Started Now</a>
-                                <a href="#" class="btn button-md border-button-theme" data-animation="animated fadeInUp delay-15s">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item banner-max-height">
-                        <img src="${createLinkTo(dir:'images', file:'interior-2.jpg')}" alt="banner-slider-1" class="img-responsive">
-                        <div class="carousel-caption banner-slider-inner">
-                            <div class="banner-content">
-                                <h1 data-animation="animated fadeInDown delay-1s"><span>Sweet Home For</span> Small Family</h1>
-                                <p data-animation="animated fadeInUp delay-05s">Lorem ipsum dolor sit amet, conconsectetuer adipiscing elit Lorem ipsum dolor sit amet, conconsectetuer</p>
-                                <a href="#" class="btn button-md button-theme" data-animation="animated fadeInUp delay-15s">Get Started Now</a>
-                                <a href="#" class="btn button-md border-button-theme" data-animation="animated fadeInUp delay-15s">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item banner-max-height">
-                        <img src="${createLinkTo(dir:'images', file:'interior-3.jpg')}" alt="banner-slider-1" class="img-responsive">
-                        <div class="carousel-caption banner-slider-inner">
-                            <div class="banner-content">
-                                <h1 data-animation="animated fadeInLeft delay-05s"><span>Best Place To</span> Find Home</h1>
-                                <p data-animation="animated fadeInLeft delay-1s">Lorem ipsum dolor sit amet, conconsectetuer adipiscing elit Lorem ipsum dolor sit amet, conconsectetuer</p>
-                                <a href="#" class="btn button-md button-theme" data-animation="animated fadeInLeft delay-15s">Get Started Now</a>
-                                <a href="#" class="btn button-md border-button-theme" data-animation="animated fadeInLeft delay-20s">Learn More</a>
+                                <div class="col-lg-12">
+                                    <form class="form-search view-search" method="GET">
+                                        <div class="form-group mb-0">
+                                            <input type="text" class="form-control" placeholder="Search">
+                                        </div>
+                                        <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Controls -->
-                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                    <span class="slider-mover-left" aria-hidden="true">
-                        <i class="fa fa-angle-left"></i>
-                    </span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                    <span class="slider-mover-right" aria-hidden="true">
-                        <i class="fa fa-angle-right"></i>
-                    </span>
-                    <span class="sr-only">Next</span>
-                </a>
             </div>
         </div>
         <!-- Banner end -->
 
-        <!-- Search area start -->
-        <div class="search-area">
-            <div class="container">
-                <div class="search-area-inner">
-                    <div class="search-contents ">
-                        <form method="GET">
-                            <div class="row">
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                                    <div class="form-group">
-                                        <select class="selectpicker search-fields" name="property-status">
-                                            <g:each in="${PropertyStatus}" var="pStatus">
-                                                <option name="propertyStatus" value="${pStatus}">
-                                                    <g:message code="property.status.${pStatus}.label"/>
-                                                </option>
-                                            </g:each>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                                    <div class="form-group">
-                                        <select class="selectpicker search-fields" name="location" data-live-search="true" data-live-search-placeholder="Search value">
-                                            <option>Location</option>
-                                            <option>United States</option>
-                                            <option>United Kingdom</option>
-                                            <option>American Samoa</option>
-                                            <option>Belgium</option>
-                                            <option>Cameroon</option>
-                                            <option>Canada</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                                    <div class="form-group">
-                                        <div class="range-slider">
-                                            <div data-min="0" data-max="150000" data-unit="USD" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 ">
-                                    <div class="form-group">
-                                        <button class="search-button">Search</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Search area start -->
-
         <!-- Featured properties start -->
-        <div class="content-area featured-properties">
-            <div class="container">
-                <!-- Main title -->
-                <div class="main-title">
-                    <h1>Featured Properties</h1>
-                </div>
-                <g:if test="${propertyList}">
+        <g:if test="${propertyList}">
+            <div class="content-area featured-properties">
+                <div class="container">
+                    <!-- Main title -->
+                    <div class="main-title">
+                        <h1>Featured Properties</h1>
+                    </div>
                     <ul class="list-inline-listing filters filters-listing-navigation">
                         <li class="active btn filtr-button filtr" data-filter="all">All</li>
                         <g:each in="${typeList}" var="type">
@@ -143,164 +61,304 @@
                             </li>
                         </g:each>
                     </ul>
-                </g:if>
-                <div class="row">
-                    <div class="filtr-container">
-                        <g:each in="${propertyList}" var="property" status="i">
-                            <g:set var="details" value="${property?.propertyDetails}"/>
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  filtr-item" data-category="${PropertyType?.getByValue(property?.propertyType)?.code()}">
-                                <div class="property">
-                                    <!-- Property img -->
-                                    <div class="property-img">
-                                        <a href="${createLink(controller: 'property', action: 'getPropertyByType', params: [type: property?.propertyType?.toLowerCase()])}" class="property-tag button alt featured">${property?.propertyType}</a>
-                                        <div class="property-tag button sale">${property?.propertyStatus}</div>
-                                        <div class="property-price">
-                                            <g:formatNumber number="${property?.price}" format="\$###,##0" type="currency" currencyCode="IDR" locale="id_ID"/>
-                                        </div>
-                                        <img src="${property?.gallery ?: "http://placehold.it/360x240"}" alt="fp" class="img-responsive">
-                                        <div class="property-overlay">
-                                            <a href="${createLink(controller: "property", action: "propertyDetails", params: [id: property?.id])}" class="overlay-link">
-                                                <i class="fa fa-link"></i>
-                                            </a>
-                                            <a class="overlay-link property-video" data-property-id="${property?.id}" data-score="${property?.stars}" title="Lexus GS F">
-                                                <i class="fa fa-video-camera"></i>
-                                            </a>
-                                            <div class="property-magnify-gallery">
-                                                <a href="http://placehold.it/750x540" class="overlay-link">
-                                                    <i class="fa fa-expand"></i>
+                    <div class="row">
+                        <div class="filtr-container">
+                            <g:each in="${propertyList}" var="property" status="i">
+                                <g:set var="details" value="${property?.propertyDetails}"/>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  filtr-item" data-category="${PropertyType?.getByValue(property?.propertyType)?.code()}">
+                                    <div class="property">
+                                        <!-- Property img -->
+                                        <div class="property-img">
+                                            <a href="${createLink(controller: 'property', action: 'getPropertyByType', params: [type: property?.propertyType?.toLowerCase()])}" class="property-tag button alt featured">${property?.propertyType}</a>
+                                            <div class="property-tag button sale">${property?.propertyStatus}</div>
+                                            <div class="property-price">
+                                                <g:formatNumber number="${property?.price}" format="\$###,##0" type="currency" currencyCode="IDR" locale="id_ID"/>
+                                            </div>
+                                            <img src="${property?.gallery ?: "http://placehold.it/360x240"}" alt="fp" class="img-responsive">
+                                            <div class="property-overlay">
+                                                <a href="${createLink(controller: "property", action: "propertyDetails", params: [id: property?.id])}" class="overlay-link">
+                                                    <i class="fa fa-link"></i>
                                                 </a>
-                                                <a href="http://placehold.it/750x540" class="hidden"></a>
-                                                <a href="http://placehold.it/750x540" class="hidden"></a>
+                                                <a class="overlay-link property-video" data-property-id="${property?.id}" data-score="${property?.stars}" title="Lexus GS F">
+                                                    <i class="fa fa-video-camera"></i>
+                                                </a>
+                                                <div class="property-magnify-gallery">
+                                                    <a href="http://placehold.it/750x540" class="overlay-link">
+                                                        <i class="fa fa-expand"></i>
+                                                    </a>
+                                                    <a href="http://placehold.it/750x540" class="hidden"></a>
+                                                    <a href="http://placehold.it/750x540" class="hidden"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Property content -->
+                                        <div class="property-content">
+                                            <!-- title -->
+                                            <h1 class="title">
+                                                <a href="${createLink(controller: "property", action: "propertyDetails", params: [id: property?.id])}">${property?.title}</a>
+                                            </h1>
+                                            <!-- Property address -->
+                                            <h3 class="property-address">
+                                                <a href="">
+                                                    <i class="fa fa-map-marker"></i>${property?.getFullAddress()}
+                                                </a>
+                                            </h3>
+                                            <!-- Facilities List -->
+                                            <ul class="facilities-list clearfix">
+                                                <g:if test="${details}">
+                                                    <g:each var="detail" in="${details}" status="a">
+                                                        <g:set var="feature" value="${detail?.getFeature()}"/>
+                                                        <g:set var="unit" value="${detail?.getUnit()}"/>
+                                                        <g:if test="${a < 6}">
+                                                            <li>
+                                                                <i class="flaticon-${PropertyFeature.getByValue(feature)?.code()}"></i>
+                                                                <span>${unit} <g:message code="property.feature.${feature}.label" default="${feature}"/></span>
+                                                            </li>
+                                                        </g:if>
+                                                    </g:each>
+                                                </g:if>
+                                            </ul>
+                                            <!-- Property footer -->
+                                            <div class="property-footer">
+                                                <span class="left">
+                                                    <a href="#"><i class="fa fa-user"></i>${property?.user?.getLongName()}</a>
+                                                </span>
+                                                <span class="right">
+                                                    <i class="fa fa-calendar"></i>
+                                                    ${property?.getDatePosted()}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Property content -->
-                                    <div class="property-content">
-                                        <!-- title -->
-                                        <h1 class="title">
-                                            <a href="${createLink(controller: "property", action: "propertyDetails", params: [id: property?.id])}">${property?.title}</a>
-                                        </h1>
-                                        <!-- Property address -->
-                                        <h3 class="property-address">
-                                            <a href="">
-                                                <i class="fa fa-map-marker"></i>${property?.getFullAddress()}
-                                            </a>
-                                        </h3>
-                                        <!-- Facilities List -->
-                                        <ul class="facilities-list clearfix">
-                                            <g:if test="${details}">
-                                                <g:each var="detail" in="${details}" status="a">
-                                                    <g:set var="feature" value="${detail?.getFeature()}"/>
-                                                    <g:set var="unit" value="${detail?.getUnit()}"/>
-                                                    <g:if test="${a < 6}">
-                                                        <li>
-                                                            <i class="flaticon-${PropertyFeature.getByValue(feature)?.code()}"></i>
-                                                            <span>${unit} <g:message code="property.feature.${feature}.label" default="${feature}"/></span>
-                                                        </li>
-                                                    </g:if>
-                                                </g:each>
-                                            </g:if>
-                                        </ul>
-                                        <!-- Property footer -->
-                                        <div class="property-footer">
-                                            <span class="left">
-                                                <a href="#"><i class="fa fa-user"></i>${property?.user?.getLongName()}</a>
-                                            </span>
-                                            <span class="right">
-                                                <i class="fa fa-calendar"></i>
-                                                ${property?.getDatePosted()}
-                                            </span>
+                                </div>
+                            </g:each>
+                        </div>
+                        <g:if test="${propertyList?.size() > 0}">
+                            <div class="col-lg-12 text-center mt-20">
+                                <a href="${createLink(controller: "property", action: "propertyList")}" class="btn button-md button-theme text-center">Load More</a>
+                            </div>
+                        </g:if>
+                    </div>
+                </div>
+            </div>
+        </g:if>
+        <!-- Featured properties end -->
+
+        <div class="clearfix"></div>
+        <!-- Categories strat -->
+        <div class="categories">
+            <div class="container">
+                <!-- Main title -->
+                <div class="main-title">
+                    <h1>Popular Places</h1>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row wow">
+                    <div class="col-lg-5 col-md-5 col-sm-12 col-pad wow fadeInRight delay-04s">
+                        <div class="category">
+                            <div class="category_bg_box category_long_bg cat-4-bg">
+                                <div class="category-overlay">
+                                    <div class="category-content">
+                                        <div class="category-subtitle">14 Properties</div>
+                                        <h3 class="category-title"><a href="#">San Francisco</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-7 col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-6 col-pad wow fadeInLeft delay-04s">
+                                <div class="category">
+                                    <div class="category_bg_box cat-1-bg">
+                                        <div class="category-overlay">
+                                            <div class="category-content">
+                                                <div class="category-subtitle">14 Properties</div>
+                                                <h3 class="category-title">
+                                                    <a href="#">Florida</a>
+                                                </h3>
+                                            </div><!-- /.category-content -->
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </g:each>
-                    </div>
-                    <g:if test="${propertyList?.size() > 0}">
-                        <div class="col-lg-12 text-center mt-20">
-                            <a href="${createLink(controller: "property", action: "propertyList")}" class="btn button-md button-theme text-center">Load More</a>
-                        </div>
-                    </g:if>
-                </div>
-            </div>
-        </div>
-        <!-- Featured properties end -->
 
-        <!-- Services start -->
-        <div class="services mb-100 clearfix">
-            <div class="container">
-                <!-- Main title -->
-                <div class="main-title">
-                    <h1>What Are you Looking For?</h1>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-6 wow fadeInLeft delay-04s">
-                        <div class="services-info">
-                            <i class="flaticon-apartment"></i>
-                            <h5>Apartments</h5>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</p>
+                            <div class="col-sm-6 col-pad wow fadeInLeft delay-04s">
+                                <div class="category">
+                                    <div class="category_bg_box cat-2-bg">
+                                        <div class="category-overlay">
+                                            <div class="category-content">
+                                                <div class="category-subtitle">24 Properties</div>
+                                                <h3 class="category-title">
+                                                    <a href="#">California</a>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-pad wow fadeInUp delay-04s">
+                                <div class="category">
+                                    <div class="category_bg_box cat-3-bg">
+                                        <div class="category-overlay">
+                                            <div class="category-content">
+                                                <div class="category-subtitle">9 Properties</div>
+                                                <h3 class="category-title"><a href="#">New York</a></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 wow fadeInLeft delay-04s">
-                        <div class="services-info">
-                            <i class="flaticon-internet"></i>
-                            <h5>Houses</h5>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 wow fadeInRight delay-04s">
-                        <div class="services-info">
-                            <i class="flaticon-vehicle"></i>
-                            <h5>Garages</h5>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 wow fadeInRight delay-04s">
-                        <div class="services-info">
-                            <i class="flaticon-symbol"></i>
-                            <h5>Commercial</h5>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-12 text-center mt-20">
-                        <a href="#" class="btn button-md button-theme text-center">Read More</a>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Services end -->
+        <!-- Categories end-->
 
         <!-- Counters strat -->
-        <div class="counters overview-bgi">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6 bordered-right">
-                        <div class="counter-box">
-                            <i class="flaticon-tag"></i>
-                            <h1 class="counter">${countStatus.get('all')}</h1>
-                            <p>All Available property</p>
-                        </div>
-                    </div>
-                    <g:each in="${statusList}" var="status">
+        <g:if test="${statusList.size() > 0 && countStatus.get('all') != 0}">
+            <div class="counters overview-bgi">
+                <div class="container">
+                    <div class="row">
                         <div class="col-md-3 col-sm-6 bordered-right">
                             <div class="counter-box">
                                 <i class="flaticon-tag"></i>
-                                <h1 class="counter">${countStatus.get(status.name())}</h1>
-                                <p>Listings For <g:message code="property.status.${status.name()}.label" default="${status.name()}"/></p>
+                                <h1 class="counter">${countStatus.get('all')}</h1>
+                                <p><g:message code="all.available.property.label"/></p>
                             </div>
                         </div>
-                    </g:each>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="counter-box">
-                            <i class="flaticon-people-1"></i>
-                            <h1 class="counter">177</h1>
-                            <p>Brokers</p>
+                        <g:each in="${statusList}" var="status">
+                            <div class="col-md-3 col-sm-6 bordered-right">
+                                <div class="counter-box">
+                                    <i class="flaticon-tag"></i>
+                                    <h1 class="counter">${countStatus.get(status.name())}</h1>
+                                    <p>Property For <g:message code="property.status.${status.name()}.label" default="${status.name()}"/></p>
+                                </div>
+                            </div>
+                        </g:each>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="counter-box">
+                                <i class="flaticon-people-1"></i>
+                                <h1 class="counter">${totalUser}</h1>
+                                <p>User</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </g:if>
         <!-- Counters end -->
+
+        <!-- Testimonials 2 -->
+        <g:if test="${lastReviewList}">
+            <div class="testimonials-2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <div class="sec-title-three">
+                                <h4>Happy Clients</h4>
+                                <h2>Testimonials</h2>
+                                <div class="text">
+                                    We collect reviews from our customers so you can get an honest opinion of what an apartment is really like!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                            <div id="carouse3-example-generic" class="carousel slide" data-ride="carousel">
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner" role="listbox">
+                                    <g:each in="${lastReviewList}" var="lr" status="i">
+                                        <div class="item content active clearfix">
+                                            <div class="col-lg-4 col-md-5 col-sm-5 col-xs-12">
+                                                <div class="avatar">
+                                                    <img src="http://placehold.it/220x220" alt="avatar-1" class="img-responsive">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
+                                                <div class="text">
+                                                    ${lr?.userReview}
+                                                </div>
+                                                <div class="author-name">
+                                                    ${lr?.user?.getFullName()}
+                                                </div>
+                                                <ul class="rating">
+                                                    <li>
+                                                        <i class="fa fa-star"></i>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fa fa-star"></i>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fa fa-star"></i>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fa fa-star"></i>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fa fa-star-half-full"></i>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </g:each>
+
+                                    <div class="item content clearfix">
+                                        <div class="col-lg-4 col-md-5 col-sm-5 col-xs-12">
+                                            <div class="avatar">
+                                                <img src="http://placehold.it/220x220" alt="avatar-2" class="img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
+                                            <div class="text">
+                                                Aliquam dictum elit vitae mauris facilisis, at dictum urna dignissim. Donec vel lectus vel felis lacinia luctus vitae iaculis arcu. Mauris mattis, massa eu porta ultricies.
+                                            </div>
+                                            <div class="author-name">
+                                                John Antony
+                                            </div>
+                                            <ul class="rating">
+                                                <li>
+                                                    <i class="fa fa-star"></i>
+                                                </li>
+                                                <li>
+                                                    <i class="fa fa-star"></i>
+                                                </li>
+                                                <li>
+                                                    <i class="fa fa-star"></i>
+                                                </li>
+                                                <li>
+                                                    <i class="fa fa-star"></i>
+                                                </li>
+                                                <li>
+                                                    <i class="fa fa-star-half-full"></i>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- Controls -->
+                                <a class="left carousel-control" href="#carouse3-example-generic" role="button" data-slide="prev">
+                                    <span class="slider-mover-left t-slider-l" aria-hidden="true">
+                                        <i class="fa fa-angle-left"></i>
+                                    </span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#carouse3-example-generic" role="button" data-slide="next">
+                                    <span class="slider-mover-right t-slider-r" aria-hidden="true">
+                                        <i class="fa fa-angle-right"></i>
+                                    </span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </g:if>
+        <!-- Testimonial 2 end -->
+        <div class="clearfix"></div>
 
         <!-- Car Video Modal -->
         <g:each in="${propertyList}" var="property" status="i">

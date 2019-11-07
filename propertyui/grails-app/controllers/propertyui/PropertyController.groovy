@@ -9,9 +9,12 @@ import static org.springframework.http.HttpStatus.NOT_FOUND
 class PropertyController {
 
     def propertyService
+    def userService
 
     def index() {
         List<Property> propertyList = propertyService.getPropertyList()
+        Long totalUser = userService.countTotalUser()
+        List<Property> lastReviewList = userService.getLastUserReview()
 
         //count property by type
         List<PropertyType> typeList = [PropertyType.HOME, PropertyType.OFFICE, PropertyType.APARTMENT, PropertyType.OTHERS]
@@ -46,7 +49,9 @@ class PropertyController {
                 typeList: typeList,
                 countType: typeCountMap,
                 statusList: statusList,
-                countStatus: statusCountMap
+                countStatus: statusCountMap,
+                totalUser: totalUser,
+                lastReviewList: lastReviewList
         ]
 
     }
