@@ -30,12 +30,12 @@
                                 <h1 data-animation="animated fadeInDown delay-05s"><span>Find your </span> Dream House</h1>
                                 <p data-animation="animated fadeInUp delay-1s">Lorem ipsum dolor sit amet, conconsectetuer adipiscing elit Lorem ipsum dolor sit amet, conconsectetuer</p>
                                 <div class="col-lg-12">
-                                    <form class="form-search view-search" method="GET">
+                                    <g:form class="form-search view-search" method="GET" controller="property" action="search">
                                         <div class="form-group mb-0">
-                                           <input type="text" name="" class="form-control" placeholder="Seacrh property"/>
+                                           <input type="text" name="keywords" class="form-control" value="${params?.keywords}" placeholder="<g:message code="public.search.placeholder.label"/>">
                                         </div>
                                         <button type="submit" class="btn"><i class="fa fa-search"></i></button>
-                                    </form>
+                                    </g:form>
                                 </div>
                             </div>
                         </div>

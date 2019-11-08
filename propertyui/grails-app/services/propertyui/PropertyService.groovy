@@ -2,6 +2,7 @@ package propertyui
 
 import Enums.PropertyStatus
 import Enums.PropertyType
+import  org.apache.commons.lang.StringUtils
 import grails.transaction.Transactional
 import grails.web.servlet.mvc.GrailsParameterMap
 
@@ -18,6 +19,47 @@ class PropertyService {
         } as List<Property>
 
         return propertyList
+    }
+
+    List<Property> searchPropertyByParams(GrailsParameterMap params) {
+
+        String keywords = params?.keywords ?: ''
+
+        List<Property> propertyList = Property.createCriteria().list {
+            eq("isAvailable", Boolean.TRUE)
+            eq("isSale", Boolean.FALSE)
+
+            if (StringUtils.isNotBlank(keywords)) {
+                or {
+                    like('title', "%"+keywords+"%")
+                }
+            }
+        } as List<Property>
+
+        return propertyList
+    }
+
+    Long countPropertyByParams(GrailsParameterMap params) {
+
+        String keywords = params?.keywords ?: ''
+
+        Long result = Property.createCriteria().get {
+            eq("isAvailable", Boolean.TRUE)
+            eq("isSale", Boolean.FALSE)
+            projections {
+                count("id")
+            }
+
+            and {
+                if (StringUtils.isNotBlank(keywords)) {
+                    or {
+                        like('title', "%"+keywords+"%")
+                    }
+                }
+            }
+        } as Long
+
+        return result
     }
 
     List<Property> getAllProperty() {

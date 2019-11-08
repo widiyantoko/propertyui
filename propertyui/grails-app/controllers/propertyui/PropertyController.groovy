@@ -58,6 +58,14 @@ class PropertyController {
 
     }
 
+    def search() {
+
+        render view: "property_by_params", model: [
+                propertyList: propertyService.searchPropertyByParams(params),
+                countpropertyByParams: propertyService.countPropertyByParams(params)
+        ]
+    }
+
     def propertyList() {
         List<Property> propertyList = propertyService.getAllProperty()
 
