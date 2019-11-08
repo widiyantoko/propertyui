@@ -2118,20 +2118,20 @@ input[type=checkbox]:checked + label:before {
     height: 200px;
 }
 
+.cat-0-bg{
+    background-image: url(../../images/cat-0-bg.jpg);
+}
+
 .cat-1-bg{
-    background-image: url(http://placehold.it/321x200);
+    background-image: url(../../images/cat-1-bg.jpg);
 }
 
 .cat-2-bg{
-    background-image: url(http://placehold.it/321x200);
+    background-image: url(../../images/cat-2-bg.jpg);
 }
 
 .cat-3-bg{
-    background-image: url(http://placehold.it/662x200);
-}
-
-.cat-4-bg{
-    background-image: url(http://placehold.it/467x420);
+    background-image: url(../../images/cat-3-bg.jpg);
 }
 
 .category:hover .category_bg_box {

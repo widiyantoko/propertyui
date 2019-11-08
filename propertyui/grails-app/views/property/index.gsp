@@ -32,7 +32,7 @@
                                 <div class="col-lg-12">
                                     <form class="form-search view-search" method="GET">
                                         <div class="form-group mb-0">
-                                            <input type="text" class="form-control" placeholder="Search">
+                                           <input type="text" name="" class="form-control" placeholder="Seacrh property"/>
                                         </div>
                                         <button type="submit" class="btn"><i class="fa fa-search"></i></button>
                                     </form>
@@ -154,64 +154,61 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="row wow">
-                    <div class="col-lg-5 col-md-5 col-sm-12 col-pad wow fadeInRight delay-04s">
-                        <div class="category">
-                            <div class="category_bg_box category_long_bg cat-4-bg">
-                                <div class="category-overlay">
-                                    <div class="category-content">
-                                        <div class="category-subtitle">14 Properties</div>
-                                        <h3 class="category-title"><a href="#">San Francisco</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-7 col-md-7 col-sm-12">
-                        <div class="row">
-                            <div class="col-sm-6 col-pad wow fadeInLeft delay-04s">
-                                <div class="category">
-                                    <div class="category_bg_box cat-1-bg">
-                                        <div class="category-overlay">
-                                            <div class="category-content">
-                                                <div class="category-subtitle">14 Properties</div>
-                                                <h3 class="category-title">
-                                                    <a href="#">Florida</a>
-                                                </h3>
-                                            </div><!-- /.category-content -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <g:each in="${popularPropertyList}" var="popularProperty" status="i">
+                        <g:set var="city" value="${popularProperty?.getAt(0)}"/>
+                        <g:set var="total" value="${popularProperty?.getAt(1)}"/>
 
-                            <div class="col-sm-6 col-pad wow fadeInLeft delay-04s">
+                        <g:if test="${i == 0}">
+                            <div class="col-lg-5 col-md-5 col-sm-12 col-pad wow delay-04s fadeInRight">
                                 <div class="category">
-                                    <div class="category_bg_box cat-2-bg">
+                                    <div class="category_bg_box category_long_bg cat-${i}-bg">
                                         <div class="category-overlay">
                                             <div class="category-content">
-                                                <div class="category-subtitle">24 Properties</div>
-                                                <h3 class="category-title">
-                                                    <a href="#">California</a>
-                                                </h3>
+                                                <div class="category-subtitle">${total} Properties</div>
+                                                <h3 class="category-title"><a href="#">${city} ${i} aaa</a></h3>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-sm-12 col-pad wow fadeInUp delay-04s">
-                                <div class="category">
-                                    <div class="category_bg_box cat-3-bg">
-                                        <div class="category-overlay">
-                                            <div class="category-content">
-                                                <div class="category-subtitle">9 Properties</div>
-                                                <h3 class="category-title"><a href="#">New York</a></h3>
+                        </g:if>
+                        <g:elseif test="${i > 0}">
+                            <div class="col-lg-7 col-md-7 col-sm-12">
+                                <div class="row">
+%{--                                    <g:if test="${i < 3}">--}%
+                                        <div class="col-pad wow delay-04s ${i < 3 ? 'col-sm-6 fadeInLeft' : ''}">
+                                            <div class="category">
+                                                <div class="category_bg_box cat-${i}-bg">
+                                                    <div class="category-overlay">
+                                                        <div class="category-content">
+                                                            <div class="category-subtitle">${total} Properties</div>
+                                                            <h3 class="category-title">
+                                                                <a href="#">${city} bbb</a>
+                                                            </h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+%{--                                    </g:if>--}%
+%{--                                    <g:if test="${i == 3}">--}%
+%{--                                        <div class="col-sm-12 col-pad wow delay-04s fadeInUp">--}%
+%{--                                            <div class="category">--}%
+%{--                                                <div class="category_bg_box cat-${i}-bg">--}%
+%{--                                                    <div class="category-overlay">--}%
+%{--                                                        <div class="category-content">--}%
+%{--                                                            <div class="category-subtitle">${total} Properties</div>--}%
+%{--                                                            <h3 class="category-title"><a href="#">${city} ${i} ddd</a></h3>--}%
+%{--                                                        </div>--}%
+%{--                                                    </div>--}%
+%{--                                                </div>--}%
+%{--                                            </div>--}%
+%{--                                        </div>--}%
+%{--                                    </g:if>--}%
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </g:elseif>
+                    </g:each>
                 </div>
             </div>
         </div>
@@ -270,7 +267,7 @@
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner" role="listbox">
                                     <g:each in="${lastReviewList}" var="lr" status="i">
-                                        <div class="item content active clearfix">
+                                        <div class="item content clearfix ${i < 1 ? 'active' : ''}">
                                             <div class="col-lg-4 col-md-5 col-sm-5 col-xs-12">
                                                 <div class="avatar">
                                                     <img src="http://placehold.it/220x220" alt="avatar-1" class="img-responsive">
@@ -278,7 +275,7 @@
                                             </div>
                                             <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
                                                 <div class="text">
-                                                    ${lr?.userReview}
+                                                    <p style="font-style: italic">"${lr?.userReview?.take(300)}"</p>
                                                 </div>
                                                 <div class="author-name">
                                                     ${lr?.user?.getFullName()}
@@ -303,40 +300,6 @@
                                             </div>
                                         </div>
                                     </g:each>
-
-                                    <div class="item content clearfix">
-                                        <div class="col-lg-4 col-md-5 col-sm-5 col-xs-12">
-                                            <div class="avatar">
-                                                <img src="http://placehold.it/220x220" alt="avatar-2" class="img-responsive">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
-                                            <div class="text">
-                                                Aliquam dictum elit vitae mauris facilisis, at dictum urna dignissim. Donec vel lectus vel felis lacinia luctus vitae iaculis arcu. Mauris mattis, massa eu porta ultricies.
-                                            </div>
-                                            <div class="author-name">
-                                                John Antony
-                                            </div>
-                                            <ul class="rating">
-                                                <li>
-                                                    <i class="fa fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fa fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fa fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fa fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fa fa-star-half-full"></i>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
                                 </div>
                                 <!-- Controls -->
                                 <a class="left carousel-control" href="#carouse3-example-generic" role="button" data-slide="prev">

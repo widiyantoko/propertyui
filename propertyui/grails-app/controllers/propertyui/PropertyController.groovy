@@ -15,6 +15,7 @@ class PropertyController {
         List<Property> propertyList = propertyService.getPropertyList()
         Long totalUser = userService.countTotalUser()
         List<Property> lastReviewList = userService.getLastUserReview()
+        def popularPropertyList = propertyService.getPopularPlace()
 
         //count property by type
         List<PropertyType> typeList = [PropertyType.HOME, PropertyType.OFFICE, PropertyType.APARTMENT, PropertyType.OTHERS]
@@ -51,7 +52,8 @@ class PropertyController {
                 statusList: statusList,
                 countStatus: statusCountMap,
                 totalUser: totalUser,
-                lastReviewList: lastReviewList
+                lastReviewList: lastReviewList,
+                popularPropertyList: popularPropertyList
         ]
 
     }

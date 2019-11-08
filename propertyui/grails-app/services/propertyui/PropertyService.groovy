@@ -116,4 +116,9 @@ class PropertyService {
         return result
     }
 
+    def getPopularPlace() {
+       def results =  Property.executeQuery("select city, count(*) from Property group by city", [max: 4, offset: 0])
+        return results
+    }
+
 }
