@@ -32,7 +32,7 @@
                                 <div class="col-lg-12">
                                     <g:form class="form-search view-search" method="GET" controller="property" action="search">
                                         <div class="form-group mb-0">
-                                           <input type="text" name="keywords" class="form-control" value="${params?.keywords}" placeholder="<g:message code="public.search.placeholder.label"/>">
+                                           <input type="text" name="keywords" class="form-control js-search-field" value="${params?.keywords}" placeholder="<g:message code="public.search.placeholder.label"/>">
                                         </div>
                                         <button type="submit" class="btn"><i class="fa fa-search"></i></button>
                                     </g:form>
@@ -146,72 +146,58 @@
 
         <div class="clearfix"></div>
         <!-- Categories strat -->
-        <div class="categories">
-            <div class="container">
-                <!-- Main title -->
-                <div class="main-title">
-                    <h1>Popular Places</h1>
-                </div>
-                <div class="clearfix"></div>
-                <div class="row wow">
-                    <g:each in="${popularPropertyList}" var="popularProperty" status="i">
-                        <g:set var="city" value="${popularProperty?.getAt(0)}"/>
-                        <g:set var="total" value="${popularProperty?.getAt(1)}"/>
+        <g:if test="${popularPropertyList?.size > 2}">
+            <div class="categories">
+                <div class="container">
+                    <!-- Main title -->
+                    <div class="main-title">
+                        <h1>Popular Places</h1>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="row wow">
+                        <g:each in="${popularPropertyList}" var="popularProperty" status="i">
+                            <g:set var="city" value="${popularProperty?.getAt(0)}"/>
+                            <g:set var="total" value="${popularProperty?.getAt(1)}"/>
 
-                        <g:if test="${i == 0}">
-                            <div class="col-lg-5 col-md-5 col-sm-12 col-pad wow delay-04s fadeInRight">
-                                <div class="category">
-                                    <div class="category_bg_box category_long_bg cat-${i}-bg">
-                                        <div class="category-overlay">
-                                            <div class="category-content">
-                                                <div class="category-subtitle">${total} Properties</div>
-                                                <h3 class="category-title"><a href="#">${city} ${i} aaa</a></h3>
+                            <g:if test="${i == 0}">
+                                <div class="col-lg-5 col-md-5 col-sm-12 col-pad wow delay-04s fadeInRight">
+                                    <div class="category">
+                                        <div class="category_bg_box category_long_bg cat-${i}-bg">
+                                            <div class="category-overlay">
+                                                <div class="category-content">
+                                                    <div class="category-subtitle">${total} Properties</div>
+                                                    <h3 class="category-title"><a href="#">${city}</a></h3>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </g:if>
-                        <g:elseif test="${i > 0}">
-                            <div class="col-lg-7 col-md-7 col-sm-12">
-                                <div class="row">
-%{--                                    <g:if test="${i < 3}">--}%
-                                        <div class="col-pad wow delay-04s ${i < 3 ? 'col-sm-6 fadeInLeft' : ''}">
+                            </g:if>
+                            <g:else>
+                                <div class="col-lg-7 col-md-7 col-sm-12">
+                                    <div class="row">
+                                        <div class="${i > 0 && i < 2 ? 'col-sm-12 col-pad wow fadeInLeft delay-04s' : 'col-sm-12 col-pad wow fadeInUp delay-04s'}">
                                             <div class="category">
                                                 <div class="category_bg_box cat-${i}-bg">
                                                     <div class="category-overlay">
                                                         <div class="category-content">
                                                             <div class="category-subtitle">${total} Properties</div>
                                                             <h3 class="category-title">
-                                                                <a href="#">${city} bbb</a>
+                                                                <a href="#">${city}</a>
                                                             </h3>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-%{--                                    </g:if>--}%
-%{--                                    <g:if test="${i == 3}">--}%
-%{--                                        <div class="col-sm-12 col-pad wow delay-04s fadeInUp">--}%
-%{--                                            <div class="category">--}%
-%{--                                                <div class="category_bg_box cat-${i}-bg">--}%
-%{--                                                    <div class="category-overlay">--}%
-%{--                                                        <div class="category-content">--}%
-%{--                                                            <div class="category-subtitle">${total} Properties</div>--}%
-%{--                                                            <h3 class="category-title"><a href="#">${city} ${i} ddd</a></h3>--}%
-%{--                                                        </div>--}%
-%{--                                                    </div>--}%
-%{--                                                </div>--}%
-%{--                                            </div>--}%
-%{--                                        </div>--}%
-%{--                                    </g:if>--}%
+                                    </div>
                                 </div>
-                            </div>
-                        </g:elseif>
-                    </g:each>
+                            </g:else>
+                        </g:each>
+                    </div>
                 </div>
             </div>
-        </div>
+        </g:if>
         <!-- Categories end-->
 
         <!-- Counters strat -->

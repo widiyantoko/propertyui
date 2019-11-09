@@ -2,7 +2,7 @@ package propertyui
 
 import Enums.PropertyStatus
 import Enums.PropertyType
-import  org.apache.commons.lang.StringUtils
+import org.apache.commons.lang.StringUtils
 import grails.transaction.Transactional
 import grails.web.servlet.mvc.GrailsParameterMap
 
@@ -159,7 +159,17 @@ class PropertyService {
     }
 
     def getPopularPlace() {
-       def results =  Property.executeQuery("select city, count(*) from Property group by city", [max: 4, offset: 0])
+       def results =  Property.createCriteria().list {
+           eq("isAvailable", Boolean.TRUE)
+           eq("isSale", Boolean.FALSE)
+           projections {
+               groupProperty("city")
+               count("id", "total")
+           }
+           order("total", "desc")
+           maxResults(3)
+
+       }
         return results
     }
 

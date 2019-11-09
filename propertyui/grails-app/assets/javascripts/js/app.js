@@ -291,6 +291,11 @@ $(function () {
     $(window).resize(function () {
         resizeModalsContent();
     });
+
+    $(document).on('ready', function () {
+       $('.js-search-field').val('');
+    });
+
 });
 
 // mCustomScrollbar initialization
