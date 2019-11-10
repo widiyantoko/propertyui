@@ -32,4 +32,16 @@ class UserService {
 
         return result
     }
+
+    List <User> getAgentList() {
+
+        List<User> userList = User.createCriteria().list {
+           eq('accountLocked', Boolean.FALSE)
+            order('lastUpdated', 'desc')
+            maxResults(10)
+
+        } as List<User>
+
+        return userList
+    }
 }

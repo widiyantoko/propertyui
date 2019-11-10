@@ -87,6 +87,9 @@ class User implements Serializable{
 
         passwordFailed nullable: true, blank: true
         lastLogin nullable: true, blank: true
+
+        dateCreated nullable: true
+        lastUpdated nullable: true
     }
 
     static mapping = {

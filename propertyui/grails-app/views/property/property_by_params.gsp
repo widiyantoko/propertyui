@@ -164,7 +164,7 @@
                             <!-- Page navigation end-->
                         </g:if>
                         <g:else>
-                            <h5>No result found for "${params?.keywords}"</h5>
+                            <h5>No result found for <strong>"${params?.keywords}"</strong></h5><br>
                         </g:else>
                     </div>
                     <div class="col-lg-4 col-md-4 col-xs-12 col-md-pull-8">

@@ -51,7 +51,7 @@
                 <div class="container">
                     <!-- Main title -->
                     <div class="main-title">
-                        <h1>Featured Properties</h1>
+                        <h1><g:message code="public.feature.property.label"/></h1>
                     </div>
                     <ul class="list-inline-listing filters filters-listing-navigation">
                         <li class="active btn filtr-button filtr" data-filter="all">All</li>
