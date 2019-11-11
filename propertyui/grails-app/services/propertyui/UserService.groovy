@@ -1,6 +1,7 @@
 package propertyui
 
 import grails.transaction.Transactional
+import grails.web.servlet.mvc.GrailsParameterMap
 
 @Transactional
 class UserService {
@@ -33,15 +34,16 @@ class UserService {
         return result
     }
 
-    List <User> getAgentList() {
+    List <UserDetails> getAgentList() {
 
-        List<User> userList = User.createCriteria().list {
-           eq('accountLocked', Boolean.FALSE)
-            order('lastUpdated', 'desc')
+        List<UserDetails> details = UserDetails.createCriteria().list {
+            createAlias('user', 'u')
+            eq('u.accountLocked', Boolean.FALSE)
+            order('u.lastUpdated', 'desc')
             maxResults(10)
 
-        } as List<User>
+        } as List<UserDetails>
 
-        return userList
+        return details
     }
 }

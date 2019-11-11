@@ -127,6 +127,19 @@ class PropertyController {
         ]
     }
 
+    def blog() {
+
+        render view: "test", model: [
+
+        ]
+    }
+
+    def about() {
+        render view: "test", model: [
+
+        ]
+    }
+
     def saveData() {
         User user = User.findById(1)
         Date date =  new Date()

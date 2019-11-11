@@ -9,8 +9,6 @@ class User implements Serializable{
 
     private static final long serialVersionUID = 1
 
-    static hasMany = [userDetails: UserDetails]
-
 //    def springSecurityService
 
     String username
@@ -99,7 +97,13 @@ class User implements Serializable{
     }
 
     def getFullName() {
-        String fullName = (title ?: "") + " " + (firstName ?: "") + " " + (lastName ?: "")
+        String fullName = (firstName ?: "") + " " + (lastName ?: "")
+//        String fullName = (title ?: "") + " " + (firstName ?: "") + " " + (lastName ?: "")
         return fullName?.trim()
+    }
+
+    def getUserFullAddress() {
+        String fullAddress = (addressStreetName1?.take(30) ?: addressStreetName2.take(30)) + ", " + (addressCity ?: '') + ", " + (addressState ?: '') + ", " + (addressCountry ?: '')
+        return  fullAddress?.trim()
     }
 }

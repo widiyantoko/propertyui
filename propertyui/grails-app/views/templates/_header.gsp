@@ -16,22 +16,22 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="navbar-collapse collapse" role="navigation" aria-expanded="true" id="app-navigation">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown">
+                    <li class="dropdown  ${request.forwardURI?.equals('/') ? 'active' : ''}">
                         <a href="${createLink(controller: 'property', action: 'index')}">Home</a>
                     </li>
-                    <li class="dropdown">
-                        <a href="${createLink(controller: 'property', action: 'propertyList')}">Agents</a>
+                    <li class="dropdown ${request.forwardURI?.equals('/agent') ? 'active' : ''} ${request.forwardURI?.equals('/agent/' + params?.long('id')) ? 'active' : ''}">
+                        <a href="${createLink(controller: 'user', action: 'agentList')}">Agents</a>
                     </li>
-                    <li class="dropdown">
-                        <a >Blog</a>
+                    <li class="dropdown ${request.forwardURI?.equals('/blog') ? 'active' : ''}">
+                        <a href="${createLink(controller: 'property', action: 'blog')}">Blog</a>
                     </li>
-                    <li class="dropdown">
-                        <a >About</a>
+                    <li class="dropdown ${request.forwardURI?.equals('/about') ? 'active' : ''}">
+                        <a href="${createLink(controller: 'property', action: 'about')}">About</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right rightside-navbar">
                     <li>
-                        <a href="submit-property.html" class="button">Submit Property</a>
+                        <a href="" class="button">Submit Property</a>
                     </li>
                 </ul>
             </div>

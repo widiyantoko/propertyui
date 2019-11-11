@@ -2,12 +2,15 @@ package propertyui
 
 class UserDetails implements Serializable {
 
-    static belongsTo = [user: User]
-
     String socialFacebook
     String socialTwitter
     String socialInstagram
     String socialLinkedin
+
+    User user
+    User updatedBy
+
+    Date lastModified
 
     static constraints = {
 
@@ -15,5 +18,10 @@ class UserDetails implements Serializable {
         socialTwitter nullable: true
         socialInstagram nullable: true
         socialLinkedin nullable: true
+
+        user nullable: true
+        updatedBy nullable: true
+
+        lastModified nullable: true
     }
 }
