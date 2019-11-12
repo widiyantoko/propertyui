@@ -73,42 +73,28 @@ class PropertyService {
         return propertyList
     }
 
-    List<Property> getPropertyByType(GrailsParameterMap params) {
+    List<Property> getProperty(GrailsParameterMap params) {
 
         List<Property> propertyList = Property.createCriteria().list {
             eq("isAvailable", Boolean.TRUE)
             eq("isSale", Boolean.FALSE)
 
             and {
-                if (params?.type?.equalsIgnoreCase('home')) {
+                if (params?.type?.equals(PropertyType.HOME.name())) {
                     eq("propertyType", PropertyType.HOME.name())
-                } else if (params?.type?.equalsIgnoreCase('office')) {
+                } else if (params?.type?.equals(PropertyType.OFFICE.name()) ) {
                     eq("propertyType", PropertyType.OFFICE.name())
-                } else if (params?.type?.equalsIgnoreCase('apartment')) {
+                } else if (params?.type?.equals(PropertyType.APARTMENT.name())) {
                     eq("propertyType", PropertyType.APARTMENT.name())
-                } else if (params?.type?.equalsIgnoreCase('others')){
+                } else if (params?.type?.equals(PropertyType.OTHERS.name())){
                     eq("propertyType", PropertyType.OTHERS.name())
-                }
-            }
-
-        } as List<Property>
-
-        return propertyList
-    }
-
-    List<Property> getPropertyByStatus(GrailsParameterMap params) {
-
-        List<Property> propertyList = Property.createCriteria().list {
-            eq("isAvailable", Boolean.TRUE)
-            eq("isSale", Boolean.FALSE)
-
-            and {
-                if (params?.status?.equalsIgnoreCase('sale')) {
+                } else if (params?.status?.equals(PropertyStatus.SALE.name())) {
                     eq("propertyStatus", PropertyStatus.SALE.name())
-                } else if (params?.status?.equalsignoreCase('rent')) {
+                } else if (params?.status?.equals(PropertyStatus.RENT.name())) {
                     eq("propertyStatus", PropertyStatus.RENT.name())
                 }
             }
+
         } as List<Property>
 
         return propertyList

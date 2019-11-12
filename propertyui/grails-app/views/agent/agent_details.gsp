@@ -24,7 +24,7 @@
                     <div class="breadcrumb-area">
                         <h1>Agent Detail</h1>
                         <ul class="breadcrumbs">
-                            <li><a href="${createLink(controller: 'user', action: 'agentList')}">Back</a></li>
+                            <li><a href="${createLink(controller: 'user', action: 'agentList')}">Agenet List</a></li>
                             <li class="active">Agent Detail</li>
                         </ul>
                     </div>
@@ -38,7 +38,6 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                        <!-- Agent detail start -->
                         <div class="agent-detail clearfix">
                             <div class="col-lg-5 col-md-6 col-sm-5 agent-theme">
                                 <img src="http://placehold.it/312x350" alt="agent-1" class="img-responsive">
@@ -48,7 +47,6 @@
                                 <h3>
                                     <a>${agentDetails?.user?.getFullName()}</a>
                                 </h3>
-                                <!-- Address list -->
                                 <ul class="address-list">
                                     <li><span><i class="fa fa-tag"></i>Title:</span>
                                         ${agentDetails?.user?.getFullName()}
@@ -62,40 +60,24 @@
                                     <li><span><i class="fa fa-mobile"></i>Mobile:</span>
                                         ${agentDetails?.user?.contactMobile ?: '-'}
                                     </li>
-                                    <!--
-                                    <li>
-                                        <span>
-                                            <i class="fa fa-skype"></i>Skype:
-                                        </span>
-                                        john.antony
-                                    </li>
-                                    -->
                                 </ul>
 
                                 <div class="social-media">
-                                    <!-- Social list -->
                                     <ul class="social-list">
-                                        <li><a href="${agentDetails?.socialFacebook}" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="${agentDetails?.socialTwitter}" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="${agentDetails?.socialLinkedin}" class="linkedin-bg"><i class="fa fa-linkedin"></i></a></li>
-                                        <li><a href="${agentDetails?.socialInstagram}" class="google-bg"><i class="fa fa-instagram"></i></a></li>
+                                        <li><a href="${agentDetails?.socialFacebook}" class="facebook-bg ${!agentDetails?.socialFacebook ? 'hidden' : ''}"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="${agentDetails?.socialTwitter}" class="twitter-bg ${!agentDetails?.socialTwitter ? 'hidden' : ''}"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="${agentDetails?.socialLinkedin}" class="linkedin-bg ${!agentDetails?.socialLinkedin ? 'hidden' : ''}"><i class="fa fa-linkedin"></i></a></li>
+                                        <li><a href="${agentDetails?.socialInstagram}" class="google-bg ${!agentDetails?.socialInstagram ? 'hidden' : ''}"><i class="fa fa-instagram"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <!-- Agent detail end -->
 
                         <div class="sidebar-widget clearfix biography">
-                            <!-- Main Title 2 -->
                             <div class="main-title-2">
                                 <h1><span>Biography</span></h1>
                             </div>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra a.
-                            </p>
-                            <p>
-                                Ut euismod ultricies sollicitudin. Curabitur sed dapibus nulla. Nulla eget iaculis lectus. Mauris ac maximus neque. Nam in mauris quis libero sodales eleifend. Morbi varius, nulla sit amet rutrum elementum</p>
-                            <br>
+                            <p>${agentDetails?.user?.biography ?: '-'}</p><br>
 
                             <div class="panel-box">
                                 <ul class="nav nav-tabs">
@@ -142,15 +124,12 @@
 
                         <!-- Recently properties start -->
                         <div class="recently-properties">
-                            <!-- Main title -->
                             <div class="main-title-2">
                                 <h1><span>Recently</span> Properties</h1>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <!-- Property 2 start -->
                                     <div class="property-2">
-                                        <!-- Property img -->
                                         <div class="property-img">
                                             <div class="featured">
                                                 Featured
@@ -182,20 +161,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- content -->
                                         <div class="content">
-                                            <!-- title -->
                                             <h4 class="title">
                                                 <a href="properties-details.html">Big Head House</a>
                                             </h4>
-                                            <!-- Property address -->
                                             <h3 class="property-address">
                                                 <a href="properties-details.html">
                                                     <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
                                                 </a>
                                             </h3>
                                         </div>
-                                        <!-- Facilities List -->
                                         <ul class="facilities-list clearfix">
                                             <li>
                                                 <i class="flaticon-square-layouting-with-black-square-in-east-area"></i>
@@ -215,12 +190,9 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <!-- Property 2 end -->
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <!-- Property 2 start -->
                                     <div class="property-2">
-                                        <!-- Property img -->
                                         <div class="property-img">
                                             <div class="featured">
                                                 Featured
@@ -251,21 +223,17 @@
                                                     <a href="http://placehold.it/750x540" class="hidden"></a>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!-- content -->
+                                        </div>]
                                         <div class="content">
-                                            <!-- title -->
                                             <h4 class="title">
                                                 <a href="properties-details.html">Beautiful Single Home</a>
                                             </h4>
-                                            <!-- Property address -->
                                             <h3 class="property-address">
                                                 <a href="properties-details.html">
                                                     <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
                                                 </a>
                                             </h3>
                                         </div>
-                                        <!-- Facilities List -->
                                         <ul class="facilities-list clearfix">
                                             <li>
                                                 <i class="flaticon-square-layouting-with-black-square-in-east-area"></i>
@@ -285,11 +253,9 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <!-- Property 2 end -->
                                 </div>
                             </div>
                         </div>
-                        <!-- Partners block end -->
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12  col-xs-12">
                         <div class="sidebar">
@@ -327,8 +293,7 @@
                                     </form>
                                 </div>
                             </div>
-                            
-                            <!-- Category posts start -->
+
                             <div class="sidebar-widget category-posts">
                                 <div class="main-title-2">
                                     <h1><span>popular</span> Category</h1>
@@ -342,13 +307,10 @@
                                     <li><a href="#">Other  </a> <span>(22)  </span></li>
                                 </ul>
                             </div>
-                            <!-- Social media start -->
                             <div class="social-media sidebar-widget clearfix">
-                                <!-- Main Title 2 -->
                                 <div class="main-title-2">
                                     <h1><span>Social</span> Media</h1>
                                 </div>
-                                <!-- Social list -->
                                 <ul class="social-list">
                                     <li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
                                     <li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
@@ -357,7 +319,6 @@
                                     <li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>
                                 </ul>
                             </div>
-                            <!-- Tags box -->
                             <div class="sidebar-widget tags-box mb-0">
                                 <div class="main-title-2">
                                     <h1><span>popular</span> Tags</h1>

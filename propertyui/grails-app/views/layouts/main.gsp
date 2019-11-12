@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <title>
-            <g:layoutTitle default="The Nest - Real Estate HTML Template"/>
+            <g:layoutTitle default="My Property"/>
         </title>
 
     %{--    <asset:stylesheet src="application.css"/>--}%

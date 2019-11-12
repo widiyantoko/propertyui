@@ -21,7 +21,6 @@
         <!-- Banner start -->
         <div class="banner">
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
                     <div class="item banner-max-height active">
                         <img src="${createLinkTo(dir:'images', file:'interior-1.jpg')}" alt="banner-slider-1" class="img-responsive">
@@ -49,7 +48,6 @@
         <g:if test="${propertyList}">
             <div class="content-area featured-properties">
                 <div class="container">
-                    <!-- Main title -->
                     <div class="main-title">
                         <h1><g:message code="public.feature.property.label"/></h1>
                     </div>
@@ -67,10 +65,9 @@
                                 <g:set var="details" value="${property?.propertyDetails}"/>
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  filtr-item" data-category="${PropertyType?.getByValue(property?.propertyType)?.code()}">
                                     <div class="property">
-                                        <!-- Property img -->
                                         <div class="property-img">
-                                            <a href="${createLink(controller: 'property', action: 'getPropertyByType', params: [type: property?.propertyType?.toLowerCase()])}" class="property-tag button alt featured">${property?.propertyType}</a>
-                                            <div class="property-tag button sale">${property?.propertyStatus}</div>
+                                            <a href="${createLink(controller: 'property', action: 'getProperty', params: [type: property?.propertyType])}" class="property-tag button alt featured">${property?.propertyType}</a>
+                                            <a href="${createLink(controller: 'property', action: 'getProperty', params: [status: property?.propertyStatus])}" class="property-tag button sale">${property?.propertyStatus}</a>
                                             <div class="property-price">
                                                 <g:formatNumber number="${property?.price}" format="\$###,##0" type="currency" currencyCode="IDR" locale="id_ID"/>
                                             </div>
@@ -91,19 +88,15 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- Property content -->
                                         <div class="property-content">
-                                            <!-- title -->
                                             <h1 class="title">
                                                 <a href="${createLink(controller: "property", action: "propertyDetails", params: [id: property?.id])}">${property?.title}</a>
                                             </h1>
-                                            <!-- Property address -->
                                             <h3 class="property-address">
-                                                <a href="">
+                                                <a>
                                                     <i class="fa fa-map-marker"></i>${property?.getFullAddress()}
                                                 </a>
                                             </h3>
-                                            <!-- Facilities List -->
                                             <ul class="facilities-list clearfix">
                                                 <g:if test="${details}">
                                                     <g:each var="detail" in="${details}" status="a">
@@ -118,10 +111,11 @@
                                                     </g:each>
                                                 </g:if>
                                             </ul>
-                                            <!-- Property footer -->
                                             <div class="property-footer">
                                                 <span class="left">
-                                                    <a href="#"><i class="fa fa-user"></i>${property?.user?.getLongName()}</a>
+                                                    <a href="${createLink(controller: 'user', action: 'agentDetails', params: [id: property?.user?.id])}">
+                                                        <i class="fa fa-user"></i>${property?.user?.getLongName()}
+                                                    </a>
                                                 </span>
                                                 <span class="right">
                                                     <i class="fa fa-calendar"></i>
@@ -149,7 +143,6 @@
         <g:if test="${popularPropertyList?.size > 2}">
             <div class="categories">
                 <div class="container">
-                    <!-- Main title -->
                     <div class="main-title">
                         <h1>Popular Places</h1>
                     </div>
@@ -250,7 +243,6 @@
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                             <div id="carouse3-example-generic" class="carousel slide" data-ride="carousel">
-                                <!-- Wrapper for slides -->
                                 <div class="carousel-inner" role="listbox">
                                     <g:each in="${lastReviewList}" var="lr" status="i">
                                         <div class="item content clearfix ${i < 1 ? 'active' : ''}">
@@ -287,7 +279,6 @@
                                         </div>
                                     </g:each>
                                 </div>
-                                <!-- Controls -->
                                 <a class="left carousel-control" href="#carouse3-example-generic" role="button" data-slide="prev">
                                     <span class="slider-mover-left t-slider-l" aria-hidden="true">
                                         <i class="fa fa-angle-left"></i>
@@ -336,23 +327,25 @@
                                 <div class="col-lg-5 modal-left">
                                     <div class="modal-left-content">
                                         <div class="bs-example" data-example-id="carousel-with-captions">
-                                            <div class="carousel slide" id="properties-carousel" data-ride="carousel">
+                                            <div class="carousel slide" id="properties-carousel-${i}" data-ride="carousel">
                                                 <div class="carousel-inner" role="listbox">
-                                                    <div class="item">
-                                                        <img src="http://placehold.it/450x300 " alt="best-properties">
-                                                    </div>
-                                                    <div class="item">
-                                                        <img src="http://placehold.it/450x300 " alt="best-properties">
-                                                    </div>
                                                     <div class="item active">
-                                                        <iframe class="modalIframe" src="" allowfullscreen></iframe>
+                                                        <img src="${property?.gallery ?: 'http://placehold.it/450x300'}" alt="best-properties">
                                                     </div>
+                                                    <div class="item">
+                                                        <img src="${property?.gallery ?: 'http://placehold.it/450x300'}" alt="best-properties">
+                                                    </div>
+                                                    <!--
+                                                    <div class="item active">
+                                                        <iframe class="modalIframe" src="${property?.gallery}" allowfullscreen></iframe>
+                                                    </div>
+                                                    -->
                                                 </div>
 
-                                                <a class="control control-prev" href="#properties-carousel" role="button" data-slide="prev">
+                                                <a class="control control-prev" href="#properties-carousel-${i}" role="button" data-slide="prev">
                                                     <i class="fa fa-angle-left"></i>
                                                 </a>
-                                                <a class="control control-next" href="#properties-carousel" role="button" data-slide="next">
+                                                <a class="control control-next" href="#properties-carousel-${i}" role="button" data-slide="next">
                                                     <i class="fa fa-angle-right"></i>
                                                 </a>
                                             </div>
@@ -405,7 +398,7 @@
                                                     <i class="fa fa-star s5 active" data-score="5"></i>
                                                 </span>
                                             </div>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's </p>
+                                            <p style="font-style: italic">${property?.userReview?.take(300)}</p>
                                         </section>
                                         <a href="${createLink(controller: 'property', action: 'propertyDetails', params: [id: property?.id])}" class="btn button-sm button-theme">Show Detail</a>
                                     </div>

@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta name="layout" content="main">
-        <title></title>
+        <title>Property ${params?.status ? ' status' : ' type'} - <g:message code="property.listing.${params?.status ?: params?.type}.label" default="${params?.status ?: params?.type }"/></title>
     </head>
 
     <body>
@@ -24,7 +24,9 @@
                         <h1>Properties Listing</h1>
                         <ul class="breadcrumbs">
                             <li><a href="${createLink(controller: 'property', action: 'index')}">Home</a></li>
-                            <li class="active">Property Types <g:message code="property.listing.${params?.type}.label" default="${params?.type}"/></li>
+                            <li class="active">Property  ${params?.status ? ' Status' : ' Type'}
+                                <g:message code="property.listing.${params?.status ?: params?.type}.label" default="${params?.status ?: params?.type}"/>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -37,7 +39,6 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
-                            <!-- Option bar start -->
                             <div class="option-bar">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-2">
@@ -62,7 +63,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Option bar end -->
+
                             <div class="clearfix"></div>
 
                             <!-- property start -->
@@ -70,10 +71,13 @@
                                 <g:set var="details" value="${property?.propertyDetails}"/>
                                 <div class="property property-hp clearfix wow fadeInUp delay-03s">
                                     <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 col-pad">
-                                        <!-- Property img -->
                                         <div class="property-img">
-                                            <div class="property-tag button alt featured">${property?.propertyType}</div>
-                                            <div class="property-tag button sale">${property?.propertyStatus}</div>
+                                            <a href="${createLink(controller: 'property', action: 'getProperty', params: [type: property?.propertyType])}" class="property-tag button alt featured">
+                                                ${property?.propertyType}
+                                            </a>
+                                            <a href="${createLink(controller: 'property', action: 'getProperty', params: [status: property?.propertyStatus])}" class="property-tag button sale">
+                                                ${property?.propertyStatus}
+                                            </a>
                                             <div class="property-price">
                                                 <g:formatNumber number="${property?.price}" format="\$###,##0" type="currency" currencyCode="IDR" locale="id_ID"/>
                                             </div>
@@ -96,18 +100,15 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12 property-content ">
-                                        <!-- title -->
                                         <h1 class="title">
-                                        <a href="${createLink(controller: "property", action: "propertyDetails", params: [id: property?.id])}">${property?.title}</a>
+                                            <a href="${createLink(controller: "property", action: "propertyDetails", params: [id: property?.id])}">${property?.title}</a>
                                         </h1>
-                                        <!-- Property address -->
                                         <h3 class="property-address">
-                                            <a href="#">
+                                            <a>
                                                 <i class="fa fa-map-marker"></i>${property?.getFullAddress()}
                                             </a>
                                         </h3>
-                                        <p>lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the<span class="hidden-sm">1500s, when an unknown printer took a galley of type and scrambled it to make specimen book.</span> </p>
-                                        <!-- Facilities List -->
+                                        <p>${property?.description?.take(200)}</p>
                                         <ul class="facilities-list clearfix">
                                         <g:if test="${details}">
                                             <g:each var="detail" in="${details}" status="a">
@@ -122,10 +123,11 @@
                                             </g:each>
                                         </g:if>
                                         </ul>
-                                        <!-- Property footer -->
                                         <div class="property-footer">
                                             <span class="left">
-                                                <a href="#"><i class="fa fa-user"></i>${property?.user?.getLongName()}</a>
+                                                <a href="${createLink(controller: 'user', action: 'agentDetails', params: [id: property?.user?.id])}">
+                                                    <i class="fa fa-user"></i>${property?.user?.getLongName()}
+                                                </a>
                                             </span>
                                             <span class="right">
                                                 <i class="fa fa-calendar"></i>${property?.getDatePosted()}
@@ -136,7 +138,6 @@
                             </g:each>
                             <!-- property end -->
 
-                            <!-- Page navigation start -->
                             <nav aria-label="Page navigation">
                                 <ul class="pagination">
                                     <li>
@@ -154,7 +155,6 @@
                                     </li>
                                 </ul>
                             </nav>
-                            <!-- Page navigation end-->
                         </div>
                     </div>
                 </div>

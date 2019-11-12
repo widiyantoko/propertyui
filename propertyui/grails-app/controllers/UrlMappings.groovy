@@ -18,7 +18,8 @@ class UrlMappings {
         "/property-list/"(controller: 'property', action: 'propertyList')
         "/save-data"(controller: 'property', action: 'saveData')
         "/property-details/$id?"(controller: 'property', action: 'propertyDetails')
-        "/property-type/$type?"(controller: 'property',action: 'getPropertyByType')
+        "/property/$action?/$id?(.$format)?"(controller: 'property')
+//        "/property-status/$status?"(controller: 'property', action: 'getPropertyByStatus')
 
         "500"(view:'/error')
         "404"(view:'/notFound')

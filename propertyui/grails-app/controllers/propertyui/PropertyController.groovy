@@ -60,9 +60,24 @@ class PropertyController {
 
     def search() {
 
+        List<PropertyType> typeList = [PropertyType.HOME, PropertyType.OFFICE, PropertyType.APARTMENT, PropertyType.OTHERS]
+        Long allTypeCount = 0
+        Map<String, Long> typeCountMap = new HashMap<>()
+
+        for (PropertyType type : typeList) {
+            Long countByType = propertyService.countPropertyByType(type)
+            typeCountMap.put(type.name(), countByType)
+
+            allTypeCount += countByType
+        }
+
+        typeCountMap.put("all", allTypeCount)
+
         render view: "property_by_params", model: [
                 propertyList: propertyService.searchPropertyByParams(params),
-                countpropertyByParams: propertyService.countPropertyByParams(params)
+                countpropertyByParams: propertyService.countPropertyByParams(params),
+                typeList: typeList,
+                countType: typeCountMap
         ]
     }
 
@@ -102,27 +117,14 @@ class PropertyController {
         ]
     }
 
-    def getPropertyByType() {
-        List<Property> propertyList = propertyService.getPropertyByType(params)
+    def getProperty() {
+        List<Property> propertyList = propertyService.getProperty(params)
 
         if (!propertyList) {
             notFound()
             return
         }
         render view: "property_by_type", model: [
-                propertyList: propertyList
-        ]
-    }
-
-    def getPropertyByStatus() {
-        List<Property> propertyList = propertyService.getPropertyByStatus(params)
-
-        if (!propertyList) {
-            notFound()
-            return
-        }
-
-        render view: "", model: [
                 propertyList: propertyList
         ]
     }

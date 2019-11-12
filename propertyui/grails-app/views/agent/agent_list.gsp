@@ -23,7 +23,7 @@
                     <div class="breadcrumb-area">
                         <h1>Agent List</h1>
                         <ul class="breadcrumbs">
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="${createLink(controller: 'property', action: 'index')}">Home</a></li>
                             <li class="active">Agent List</li>
                         </ul>
                     </div>
@@ -72,22 +72,22 @@
                                         <img src="http://placehold.it/231x231" alt="team-2" class="img-responsive">
                                         <ul class="social-list clearfix">
                                             <li>
-                                                <a href="${agent?.socialFacebook}" class="facebook">
+                                                <a href="${agent?.socialFacebook}" class="facebook ${!agent?.socialFacebook ? 'hidden' : ''}">
                                                     <i class="fa fa-facebook"></i>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="${agent?.socialTwitter}" class="twitter">
+                                                <a href="${agent?.socialTwitter}" class="twitter ${!agent?.socialTwitter ? 'hidden' : ''}">
                                                     <i class="fa fa-twitter"></i>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="${agent?.socialLinkedin}" class="linkedin">
+                                                <a href="${agent?.socialLinkedin}" class="linkedin ${!agent?.socialLinkedin ? 'hidden' : ''} ">
                                                     <i class="fa fa-linkedin"></i>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="${agent?.socialInstagram}" class="google">
+                                                <a href="${agent?.socialInstagram}" class="google ${!agent?.socialInstagram ? 'hidden' : ''}">
                                                     <i class="fa fa-instagram"></i>
                                                 </a>
                                             </li>

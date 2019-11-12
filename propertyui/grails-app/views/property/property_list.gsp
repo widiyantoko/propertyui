@@ -72,8 +72,12 @@
                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 col-pad">
                                     <!-- Property img -->
                                     <div class="property-img">
-                                        <div class="property-tag button alt featured">${property?.propertyType}</div>
-                                        <div class="property-tag button sale">${property?.propertyStatus}</div>
+                                        <a href="${createLink(controller: 'property', action: 'getProperty', params: [type: property?.propertyType])}" class="property-tag button alt featured">
+                                            ${property?.propertyType}
+                                        </a>
+                                        <a href="${createLink(controller: 'property', action: 'getProperty', params: [status: property?.propertyStatus])}" class="property-tag button sale">
+                                            ${property?.propertyStatus}
+                                        </a>
                                         <div class="property-price">
                                             <g:formatNumber number="${property?.price}" format="\$###,##0" type="currency" currencyCode="IDR" locale="id_ID"/>
                                         </div>
@@ -98,20 +102,18 @@
                                 <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 property-content ">
                                     <!-- title -->
                                     <h1 class="title">
-                                        <a href="properties-details.html">${property?.title}</a>
+                                        <a href="${createLink(controller: 'property', action: 'propertyDetails', params: [id: property?.id])}">
+                                            ${property?.title}
+                                        </a>
                                     </h1>
                                     <!-- Property address -->
                                     <h3 class="property-address">
-                                        <a href="properties-details.html">
+                                        <a href="">
                                             <i class="fa fa-map-marker"></i>${property?.getFullAddress()}
                                         </a>
                                     </h3>
                                     <!-- Facilities List -->
                                     <ul class="facilities-list clearfix">
-                                        <li>
-                                            <i class="flaticon-square-layouting-with-black-square-in-east-area"></i>
-                                            <span>4800 sq ft</span>
-                                        </li>
                                         <g:if test="${details}">
                                             <g:each var="detail" in="${details}">
                                                 <g:set var="feature" value="${detail?.getFeature()}"/>
@@ -126,7 +128,9 @@
                                     <!-- Property footer -->
                                     <div class="property-footer">
                                         <span class="left">
-                                            <a href="#"><i class="fa fa-user"></i>${property?.user?.getFullName()}</a>
+                                            <a href="${createLink(controller: 'user', action: 'agentDetails', params: [id: property?.user?.id])}">
+                                                <i class="fa fa-user"></i>${property?.user?.getFullName()}
+                                            </a>
                                         </span>
                                         <span class="right">
                                             <i class="fa fa-calendar"></i>
@@ -142,15 +146,15 @@
                         <nav aria-label="Page navigation">
                             <ul class="pagination">
                                 <li>
-                                    <a href="properties-list-rightside.html" aria-label="Previous">
+                                    <a href="" aria-label="Previous">
                                         <span aria-hidden="true">«</span>
                                     </a>
                                 </li>
-                                <li><a href="properties-list-rightside.html">1 <span class="sr-only">(current)</span></a></li>
-                                <li class="active"><a href="properties-list-leftside.html">2</a></li>
-                                <li><a href="properties-list-fullwidth.html">3</a></li>
+                                <li><a href="">1 <span class="sr-only">(current)</span></a></li>
+                                <li class="active"><a href="">2</a></li>
+                                <li><a href="">3</a></li>
                                 <li>
-                                    <a href="properties-list-fullwidth.html" aria-label="Next">
+                                    <a href="" aria-label="Next">
                                         <span aria-hidden="true">»</span>
                                     </a>
                                 </li>
@@ -165,7 +169,10 @@
                                 <h1><span>Advanced</span> Search</h1>
                             </div>
 
-                            <form method="GET">
+                            <g:form method="GET" controller="property" action="search">
+                                <div class="form-group">
+                                    <input type="text" name="keywords" class="form-control search-fields" value="${params?.keywords}" placeholder="<g:message code="public.search.placeholder.label"/>">
+                                </div>
                                 <div class="form-group">
                                     <select class="selectpicker search-fields" name="property-status">
                                         <g:each in="${PropertyStatus}" var="pStatus">
@@ -258,7 +265,7 @@
                                 <div class="form-group mb-0">
                                     <button class="search-button">Apply</button>
                                 </div>
-                            </form>
+                            </g:form>
                         </div>
 
                         <!-- Category posts start -->
@@ -268,7 +275,7 @@
                             </div>
                             <ul class="list-unstyled list-cat">
                                 <g:each in="${typeList}" var="type">
-                                    <li><a href="${createLink(controller: 'property', action: 'getPropertyByType', params: [type: type?.name()?.toLowerCase()])}">
+                                    <li><a href="${createLink(controller: 'property', action: 'getProperty', params: [type: type?.name()])}">
                                             <g:message code="property.type.${type?.name()}.label" default="${type?.name()}"/>
                                         </a>
                                         <span>(${countType.get(type.name())})</span>

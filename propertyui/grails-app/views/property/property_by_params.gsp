@@ -37,7 +37,6 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-8 col-xs-12 col-md-push-4">
-                        <!-- Option bar start -->
                         <div class="option-bar">
                             <div class="row">
                                 <div class="col-lg-6 col-md-5 col-sm-5 col-xs-2">
@@ -56,15 +55,15 @@
                                             <option>Properties (High To Low)</option>
                                             <option>Properties (Low To High)</option>
                                         </select>
-                                        <a href="properties-list-leftside.html" class="change-view-btn active-view-btn"><i class="fa fa-th-list"></i></a>
-                                        <a href="properties-grid-leftside.html" class="change-view-btn"><i class="fa fa-th-large"></i></a>
+                                        <a href="" class="change-view-btn active-view-btn"><i class="fa fa-th-list"></i></a>
+                                        <a href="" class="change-view-btn"><i class="fa fa-th-large"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Option bar end -->
 
                         <div class="clearfix"></div>
+
                         <!-- Property start -->
                         <g:if test="${propertyList}">
                             <h5>
@@ -77,8 +76,12 @@
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 col-pad">
                                         <!-- Property img -->
                                         <div class="property-img">
-                                            <div class="property-tag button alt featured">${property?.propertyType}</div>
-                                            <div class="property-tag button sale">${property?.propertyStatus}</div>
+                                            <a href="${createLink(controller: 'property', action: 'getProperty', params: [type: property?.propertyType])}" class="property-tag button alt featured">
+                                                ${property?.propertyType}
+                                            </a>
+                                            <a href="${createLink(controller: 'property', action: 'getProperty', params: [status: property?.propertyStatus])}" class="property-tag button sale">
+                                                ${property?.propertyStatus}
+                                            </a>
                                             <div class="property-price">
                                                 <g:formatNumber number="${property?.price}" format="\$###,##0" type="currency" currencyCode="IDR" locale="id_ID"/>
                                             </div>
@@ -100,23 +103,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 property-content ">
-                                        <!-- title -->
+                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 property-content">
                                         <h1 class="title">
-                                            <a href="properties-details.html">${property?.title}</a>
+                                            <a href="${createLink(controller: 'property', action: 'propertyDetails', params: [id: property?.id])}">
+                                                ${property?.title}
+                                            </a>
                                         </h1>
-                                        <!-- Property address -->
                                         <h3 class="property-address">
-                                            <a href="properties-details.html">
+                                            <a href="">
                                                 <i class="fa fa-map-marker"></i>${property?.getFullAddress()}
                                             </a>
                                         </h3>
-                                        <!-- Facilities List -->
                                         <ul class="facilities-list clearfix">
-                                            <li>
-                                                <i class="flaticon-square-layouting-with-black-square-in-east-area"></i>
-                                                <span>4800 sq ft</span>
-                                            </li>
                                             <g:if test="${details}">
                                                 <g:each var="detail" in="${details}">
                                                     <g:set var="feature" value="${detail?.getFeature()}"/>
@@ -128,7 +126,6 @@
                                                 </g:each>
                                             </g:if>
                                         </ul>
-                                        <!-- Property footer -->
                                         <div class="property-footer">
                                             <span class="left">
                                                 <a href="#"><i class="fa fa-user"></i>${property?.user?.getFullName()}</a>
@@ -147,15 +144,15 @@
                             <nav aria-label="Page navigation">
                                 <ul class="pagination">
                                     <li>
-                                        <a href="properties-list-rightside.html" aria-label="Previous">
+                                        <a href="" aria-label="Previous">
                                             <span aria-hidden="true">«</span>
                                         </a>
                                     </li>
-                                    <li><a href="properties-list-rightside.html">1 <span class="sr-only">(current)</span></a></li>
-                                    <li class="active"><a href="properties-list-leftside.html">2</a></li>
-                                    <li><a href="properties-list-fullwidth.html">3</a></li>
+                                    <li><a href="">1 <span class="sr-only">(current)</span></a></li>
+                                    <li class="active"><a href="">2</a></li>
+                                    <li><a href="">3</a></li>
                                     <li>
-                                        <a href="properties-list-fullwidth.html" aria-label="Next">
+                                        <a href="" aria-label="Next">
                                             <span aria-hidden="true">»</span>
                                         </a>
                                     </li>
@@ -168,7 +165,6 @@
                         </g:else>
                     </div>
                     <div class="col-lg-4 col-md-4 col-xs-12 col-md-pull-8">
-                        <!-- Search contents sidebar start -->
                         <div class="sidebar-widget">
                             <div class="main-title-2">
                                 <h1><span>Advanced</span> Search</h1>
@@ -280,7 +276,7 @@
                             </div>
                             <ul class="list-unstyled list-cat">
                                 <g:each in="${typeList}" var="type">
-                                    <li><a href="${createLink(controller: 'property', action: 'getPropertyByType', params: [type: type?.name()?.toLowerCase()])}">
+                                    <li><a href="${createLink(controller: 'property', action: 'getProperty', params: [type: type?.name()])}">
                                         <g:message code="property.type.${type?.name()}.label" default="${type?.name()}"/>
                                     </a>
                                         <span>(${countType.get(type.name())})</span>

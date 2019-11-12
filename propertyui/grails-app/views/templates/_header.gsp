@@ -1,3 +1,4 @@
+<%@ page import="Enums.PropertyStatus" %>
 <!-- Main header start -->
 <header class="main-header">
     <div class="container">
@@ -18,6 +19,21 @@
                 <ul class="nav navbar-nav">
                     <li class="dropdown  ${request.forwardURI?.equals('/') ? 'active' : ''}">
                         <a href="${createLink(controller: 'property', action: 'index')}">Home</a>
+                    </li>
+                    <li class="dropdown ${request.forwardURI?.equals('/property-list') ? 'active' : ''}
+                        ${request.forwardURI?.equals('/property/getProperty') ? 'active' : ''}
+                        ${request.forwardURI?.equals('/property-details/' + params?.long('id')) ? 'active' : ''}
+                         ${request.forwardURI?.equals('/property/search') ? 'active' : ''}">
+                        <a href="${createLink(controller: 'property', action: 'propertyList')}">Property</a>
+                        <ul class="dropdown-menu">
+                            <g:each in="${PropertyStatus}" var="status">
+                                <li>
+                                    <a href="${createLink(controller: 'property', action: 'getProperty', params: [status: status])}">
+                                        <g:message code="property.status.${status}.label"/>
+                                    </a>
+                                </li>
+                            </g:each>
+                        </ul>
                     </li>
                     <li class="dropdown ${request.forwardURI?.equals('/agent') ? 'active' : ''} ${request.forwardURI?.equals('/agent/' + params?.long('id')) ? 'active' : ''}">
                         <a href="${createLink(controller: 'user', action: 'agentList')}">Agents</a>

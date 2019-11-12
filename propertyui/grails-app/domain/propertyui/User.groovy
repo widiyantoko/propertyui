@@ -20,6 +20,7 @@ class User implements Serializable{
     String title
     String avatar
     String longName
+    String biography
 
     Boolean accountLocked = false
     Boolean emailVerified = false
@@ -71,6 +72,7 @@ class User implements Serializable{
         title nullable: true
         avatar nullable: true, blank: true
         longName nullable: true
+        biography nullable: true
 
         addressStreetName1 nullable: true
         addressStreetName2 nullable: true
@@ -92,6 +94,7 @@ class User implements Serializable{
 
     static mapping = {
         avatar sqlType: "text"
+        biography sqlType: "text"
         password column: '`password`'
         longName formula: "CASE WHEN title <> '' AND title IS NOT NULL THEN CONCAT_WS(' ', title, first_name,last_name) ELSE CONCAT_WS(' ', first_name, last_name) END"
     }
