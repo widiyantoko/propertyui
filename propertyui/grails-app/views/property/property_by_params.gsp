@@ -143,15 +143,15 @@
                             <!-- Property end -->
 
                             <!-- Page navigation start -->
-%{--                            <g:if test="${totalProperty >= 8}">--}%
-%{--                                <nav aria-label="Page navigation">--}%
-%{--                                    <ul class="pagination">--}%
-%{--                                        <g:form method="post" controller="property" action="propertyList" params="${params - [inputPage: params.inputPage]}">--}%
-%{--                                            <g:paginate maxsteps="0" controller="property" action="propertyList" params="${params - [inputPage: params.inputPage]}" total="${totalProperty}" prev="‹" next="›" first="First" last="Last" />--}%
-%{--                                        </g:form>--}%
-%{--                                    </ul>--}%
-%{--                                </nav>--}%
-%{--                            </g:if>--}%
+                            <g:if test="${countpropertyByParams >= 8}">
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination">
+                                        <g:form method="post" controller="property" action="search" params="${params - [inputPage: params.inputPage]}">
+                                            <g:paginate maxsteps="0" controller="property" action="search" params="${params - [inputPage: params.inputPage]}" total="${countpropertyByParams}" prev="‹" next="›" first="First" last="Last" />
+                                        </g:form>
+                                    </ul>
+                                </nav>
+                            </g:if>
                             <!-- Page navigation end-->
                         </g:if>
                         <g:else>
@@ -165,11 +165,10 @@
                             </div>
 
                             <g:form method="GET" controller="property" action="search">
-                                <div class="form-group">
-                                    <input type="text" name="keywords" class="form-control search-fields" value="${params?.keywords}" placeholder="<g:message code="public.search.placeholder.label"/>">
-                                </div>
+                                <input type="hidden" name="keywords" value="${params?.keywords}">
                                 <div class="form-group">
                                     <select class="selectpicker search-fields" name="propertyStatus">
+                                        <option disabled selected value="" style="display: none">Status</option>
                                         <g:each in="${PropertyStatus.values()}" var="pStatus">
                                             <option name="propertyStatus" value="${pStatus.name()}">
                                                 <g:message code="property.status.${pStatus}.label"/>
@@ -192,6 +191,7 @@
                                 -->
                                 <div class="form-group">
                                     <select class="selectpicker search-fields" name="propertyType">
+                                        <option disabled selected value="" style="display: none">Type</option>
                                         <g:each in="${PropertyType.values()}" var="pType">
                                             <option name="propertyType" value="${pType.name()}">
                                                 <g:message code="property.type.${pType}.label"/>

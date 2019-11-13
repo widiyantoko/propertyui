@@ -165,7 +165,8 @@
                                     <input type="text" name="keywords" class="form-control search-fields" value="${params?.keywords}" placeholder="<g:message code="public.search.placeholder.label"/>">
                                 </div>
                                 <div class="form-group">
-                                    <select class="selectpicker search-fields" name="propertyStatus">
+                                    <select class="selectpicker search-fields js-filter-property-status" name="propertyStatus">
+                                        <option disabled value="" style="display: none" ${!params?.propertyStatus ? 'selected' : ''}>Status</option>
                                         <g:each in="${PropertyStatus}" var="pStatus">
                                             <option name="propertyStatus" value="${pStatus}">
                                                 <g:message code="property.status.${pStatus}.label"/>
@@ -187,9 +188,10 @@
                                 </div>
                                 -->
                                 <div class="form-group">
-                                    <select class="selectpicker search-fields" name="propertyTypes">
+                                    <select class="selectpicker search-fields js-filter-property-type" name="propertyTypes">
+                                        <option disabled selected value="" style="display: none">Type</option>
                                         <g:each in="${PropertyType}" var="pType">
-                                            <option name="propertyType" value="${pType}">
+                                            <option name="propertyType" value="${pType}" class="${pType ? 'selected' : ''}">
                                                 <g:message code="property.type.${pType}.label"/>
                                             </option>
                                         </g:each>

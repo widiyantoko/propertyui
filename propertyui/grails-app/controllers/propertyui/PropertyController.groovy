@@ -82,7 +82,7 @@ class PropertyController {
         render view: "property_by_params", model: [
                 propertyList: propertyService.searchPropertyByParams(params),
                 countpropertyByParams: propertyService.countPropertyByParams(params),
-                totalProperty: propertyService.totalProperty(),
+//                totalProperty: propertyService.totalProperty(),
                 typeList: typeList,
                 countType: typeCountMap
         ]

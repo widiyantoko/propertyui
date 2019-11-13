@@ -27,7 +27,11 @@ class PropertyService {
         String type = params?.propertyType ?: ''
         String status = params?.propertyStatus ?: ''
 
-        List<Property> propertyList = Property.createCriteria().list {
+        Map<String, Object> getParams = processParams(params)
+        Integer maxResult = (Integer) getParams.get("maxRslt")
+        Integer offset = (Integer) getParams.get("offset")
+
+        List<Property> propertyList = Property.createCriteria().list([max: maxResult, offset: offset]) {
             eq("isAvailable", Boolean.TRUE)
             eq("isSale", Boolean.FALSE)
 
@@ -76,6 +80,8 @@ class PropertyService {
     Long countPropertyByParams(GrailsParameterMap params) {
 
         String keywords = params?.keywords ?: ''
+        String type = params?.propertyType ?: ''
+        String status = params?.propertyStatus ?: ''
 
         Long result = Property.createCriteria().get {
             eq("isAvailable", Boolean.TRUE)
@@ -83,11 +89,40 @@ class PropertyService {
             projections {
                 count("id")
             }
+            if (StringUtils.isNotBlank(keywords)) {
+                or {
+                    like('title', "%"+keywords+"%")
+                }
+            }
 
             and {
-                if (StringUtils.isNotBlank(keywords)) {
+                if (type == PropertyType.OTHERS.name()) {
                     or {
-                        like('title', "%"+keywords+"%")
+                        eq("propertyType", PropertyType.OTHERS.name())
+                    }
+                } else if (type == PropertyType.APARTMENT.name()) {
+                    or {
+                        eq("propertyType", PropertyType.APARTMENT.name())
+                    }
+                } else if (type == PropertyType.OFFICE.name()) {
+                    or {
+                        eq("propertyType", PropertyType.OFFICE.name())
+                    }
+                } else if (type == PropertyType.HOME.name()) {
+                    or {
+                        eq("propertyType", PropertyType.HOME.name())
+                    }
+                }
+
+                isNotNull('propertyStatus')
+
+                if (status == PropertyStatus.RENT.name()) {
+                    or {
+                        eq("propertyStatus", PropertyStatus.RENT.name())
+                    }
+                }  else if (status == PropertyStatus.SALE.name()) {
+                    or {
+                        eq("propertyStatus", PropertyStatus.SALE.name())
                     }
                 }
             }
