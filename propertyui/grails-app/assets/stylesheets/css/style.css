@@ -1978,6 +1978,10 @@ input[type=checkbox]:checked + label:before {
     padding-top: 100px;
 }
 
+.content-area-10 {
+    padding: 40px 0 30px;
+}
+
 .theme img {
     margin-bottom: 30px;
 }
@@ -7286,5 +7290,26 @@ table.manage-table .title-container .title span {
 .img-inside-map {
     height: 220px;
 }
+
+/*additional style for pagination*/
+.c-pagination {
+    text-align: right;
+}
+
+.c-pagination .c-pagination-input {
+    width: 50px;
+    margin-left: 5px;
+    text-align: center;
+}
+
+.c-pagination span {
+    margin-left: 5px;
+}
+
+.inline-form-control {
+    display: inline-block;
+    margin-left: 10px;
+}
+
 
 

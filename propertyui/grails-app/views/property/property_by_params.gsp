@@ -66,10 +66,12 @@
 
                         <!-- Property start -->
                         <g:if test="${propertyList}">
-                            <h5>
-                                <strong>${countpropertyByParams}</strong> result found for
-                                <strong>"${params?.keywords}"</strong></h5>
-                            <br>
+                            <g:if test="${!params?.propertyStatus || !params?.propertyType}">
+                                <h5>
+                                    <strong>${countpropertyByParams}</strong> result found for
+                                    <strong>"${params?.keywords}"</strong></h5>
+                                <br>
+                            </g:if>
                             <g:each in="${propertyList}" var="property" status="i">
                                 <g:set var="details" value="${property?.propertyDetails}"/>
                                 <div class="property clearfix wow fadeInUp delay-03s">
@@ -141,23 +143,15 @@
                             <!-- Property end -->
 
                             <!-- Page navigation start -->
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination">
-                                    <li>
-                                        <a href="" aria-label="Previous">
-                                            <span aria-hidden="true">«</span>
-                                        </a>
-                                    </li>
-                                    <li><a href="">1 <span class="sr-only">(current)</span></a></li>
-                                    <li class="active"><a href="">2</a></li>
-                                    <li><a href="">3</a></li>
-                                    <li>
-                                        <a href="" aria-label="Next">
-                                            <span aria-hidden="true">»</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
+%{--                            <g:if test="${totalProperty >= 8}">--}%
+%{--                                <nav aria-label="Page navigation">--}%
+%{--                                    <ul class="pagination">--}%
+%{--                                        <g:form method="post" controller="property" action="propertyList" params="${params - [inputPage: params.inputPage]}">--}%
+%{--                                            <g:paginate maxsteps="0" controller="property" action="propertyList" params="${params - [inputPage: params.inputPage]}" total="${totalProperty}" prev="‹" next="›" first="First" last="Last" />--}%
+%{--                                        </g:form>--}%
+%{--                                    </ul>--}%
+%{--                                </nav>--}%
+%{--                            </g:if>--}%
                             <!-- Page navigation end-->
                         </g:if>
                         <g:else>
@@ -175,14 +169,15 @@
                                     <input type="text" name="keywords" class="form-control search-fields" value="${params?.keywords}" placeholder="<g:message code="public.search.placeholder.label"/>">
                                 </div>
                                 <div class="form-group">
-                                    <select class="selectpicker search-fields" name="property-status">
-                                        <g:each in="${PropertyStatus}" var="pStatus">
-                                            <option name="propertyStatus" value="${pStatus}">
+                                    <select class="selectpicker search-fields" name="propertyStatus">
+                                        <g:each in="${PropertyStatus.values()}" var="pStatus">
+                                            <option name="propertyStatus" value="${pStatus.name()}">
                                                 <g:message code="property.status.${pStatus}.label"/>
                                             </option>
                                         </g:each>
                                     </select>
                                 </div>
+                                <!--
                                 <div class="form-group">
                                     <select class="selectpicker search-fields" name="location" data-live-search="true" data-live-search-placeholder="Search value">
                                         <option>Location</option>
@@ -194,20 +189,24 @@
                                         <option>Canada</option>
                                     </select>
                                 </div>
+                                -->
                                 <div class="form-group">
-                                    <select class="selectpicker search-fields" name="property-types">
-                                        <g:each in="${PropertyType}" var="pType">
-                                            <option name="propertyType" value="${pType}">
+                                    <select class="selectpicker search-fields" name="propertyType">
+                                        <g:each in="${PropertyType.values()}" var="pType">
+                                            <option name="propertyType" value="${pType.name()}">
                                                 <g:message code="property.type.${pType}.label"/>
                                             </option>
                                         </g:each>
                                     </select>
                                 </div>
+                                <!--
                                 <div class="range-slider">
                                     <label>Price</label>
                                     <div data-min="0" data-max="150000" data-unit="USD" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
                                     <div class="clearfix"></div>
                                 </div>
+                                -->
+                                <!--
                                 <a class="show-more-options" data-toggle="collapse" data-target="#options-content">
                                     <i class="fa fa-plus-circle"></i> Show More Options
                                 </a>
@@ -262,7 +261,7 @@
                                         </label>
                                     </div>
                                 </div>
-
+                                -->
                                 <div class="form-group mb-0">
                                     <button type="submit" class="search-button">Apply</button>
                                 </div>
@@ -351,54 +350,6 @@
                             </div>
                         </div>
 
-                        <!-- Latest reviews start -->
-                        <div class="sidebar-widget latest-reviews mb-0">
-                            <div class="main-title-2">
-                                <h1><span>Latest</span> Reviews</h1>
-                            </div>
-                            <div class="media">
-                                <div class="media-left">
-                                    <a href="#">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="avatar-1">
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <h3 class="media-heading"><a href="#">John Antony</a></h3>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet,
-                                    consectetur adipiscing elit.
-                                    Etiamrisus tortor, accumsan at nisi et,
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="media mb-0">
-                                <div class="media-left">
-                                    <a href="#">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="avatar-2">
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <h3 class="media-heading"><a href="#">Karen Paran</a></h3>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet,
-                                    consectetur adipiscing elit.
-                                    Etiamrisus tortor, accumsan at nisi et,
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

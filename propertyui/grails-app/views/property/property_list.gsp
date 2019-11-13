@@ -142,26 +142,17 @@
                         </g:each>
                         <!-- Property end -->
 
-                        <!-- Page navigation start -->
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination">
-                                <li>
-                                    <a href="" aria-label="Previous">
-                                        <span aria-hidden="true">«</span>
-                                    </a>
-                                </li>
-                                <li><a href="">1 <span class="sr-only">(current)</span></a></li>
-                                <li class="active"><a href="">2</a></li>
-                                <li><a href="">3</a></li>
-                                <li>
-                                    <a href="" aria-label="Next">
-                                        <span aria-hidden="true">»</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <!-- Page navigation end-->
+                        <g:if test="${totalProperty >= 8}">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <g:form method="post" controller="property" action="propertyList" params="${params - [inputPage: params.inputPage]}">
+                                        <g:paginate maxsteps="0" controller="property" action="propertyList" params="${params - [inputPage: params.inputPage]}" total="${totalProperty}" prev="‹" next="›" first="First" last="Last" />
+                                    </g:form>
+                                </ul>
+                            </nav>
+                        </g:if>
                     </div>
+
                     <div class="col-lg-4 col-md-4 col-xs-12 col-md-pull-8">
                         <!-- Search contents sidebar start -->
                         <div class="sidebar-widget">
@@ -174,7 +165,7 @@
                                     <input type="text" name="keywords" class="form-control search-fields" value="${params?.keywords}" placeholder="<g:message code="public.search.placeholder.label"/>">
                                 </div>
                                 <div class="form-group">
-                                    <select class="selectpicker search-fields" name="property-status">
+                                    <select class="selectpicker search-fields" name="propertyStatus">
                                         <g:each in="${PropertyStatus}" var="pStatus">
                                             <option name="propertyStatus" value="${pStatus}">
                                                 <g:message code="property.status.${pStatus}.label"/>
@@ -182,6 +173,7 @@
                                         </g:each>
                                     </select>
                                 </div>
+                                <!--
                                 <div class="form-group">
                                     <select class="selectpicker search-fields" name="location" data-live-search="true" data-live-search-placeholder="Search value">
                                         <option>Location</option>
@@ -193,8 +185,9 @@
                                         <option>Canada</option>
                                     </select>
                                 </div>
+                                -->
                                 <div class="form-group">
-                                    <select class="selectpicker search-fields" name="property-types">
+                                    <select class="selectpicker search-fields" name="propertyTypes">
                                         <g:each in="${PropertyType}" var="pType">
                                             <option name="propertyType" value="${pType}">
                                                 <g:message code="property.type.${pType}.label"/>
@@ -202,11 +195,14 @@
                                         </g:each>
                                     </select>
                                 </div>
+                                <!--
                                 <div class="range-slider">
                                     <label>Price</label>
                                     <div data-min="0" data-max="150000" data-unit="USD" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
                                     <div class="clearfix"></div>
                                 </div>
+                                -->
+                                <!--
                                 <a class="show-more-options" data-toggle="collapse" data-target="#options-content">
                                     <i class="fa fa-plus-circle"></i> Show More Options
                                 </a>
@@ -261,7 +257,7 @@
                                         </label>
                                     </div>
                                 </div>
-
+                                -->
                                 <div class="form-group mb-0">
                                     <button class="search-button">Apply</button>
                                 </div>

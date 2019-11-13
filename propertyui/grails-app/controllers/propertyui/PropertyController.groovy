@@ -60,6 +60,12 @@ class PropertyController {
 
     def search() {
 
+        params?.max = params?.int("max", 8)
+        if (params?.inputPage) {
+            Integer inputPage = (params?.int("inputPage") - 1 ) * params?.max
+            params?.offset = inputPage
+        }
+
         List<PropertyType> typeList = [PropertyType.HOME, PropertyType.OFFICE, PropertyType.APARTMENT, PropertyType.OTHERS]
         Long allTypeCount = 0
         Map<String, Long> typeCountMap = new HashMap<>()
@@ -76,13 +82,21 @@ class PropertyController {
         render view: "property_by_params", model: [
                 propertyList: propertyService.searchPropertyByParams(params),
                 countpropertyByParams: propertyService.countPropertyByParams(params),
+                totalProperty: propertyService.totalProperty(),
                 typeList: typeList,
                 countType: typeCountMap
         ]
     }
 
     def propertyList() {
-        List<Property> propertyList = propertyService.getAllProperty()
+
+        params?.max = params?.int("max", 8)
+        if (params?.inputPage) {
+            Integer inputPage = (params?.int("inputPage") - 1 ) * params?.max
+            params?.offset = inputPage
+        }
+
+        List<Property> propertyList = propertyService.getAllProperty(params)
 
         List<PropertyType> typeList = [PropertyType.HOME, PropertyType.OFFICE, PropertyType.APARTMENT, PropertyType.OTHERS]
         Long allTypeCount = 0
@@ -100,7 +114,8 @@ class PropertyController {
         render view: "property_list", model: [
                 propertyList: propertyList,
                 typeList: typeList,
-                countType: typeCountMap
+                countType: typeCountMap,
+                totalProperty: propertyService.totalProperty()
         ]
     }
 

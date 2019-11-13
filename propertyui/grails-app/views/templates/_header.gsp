@@ -1,4 +1,4 @@
-<%@ page import="Enums.PropertyStatus" %>
+<%@ page import="Enums.PropertyType; Enums.PropertyStatus" %>
 <!-- Main header start -->
 <header class="main-header">
     <div class="container">
@@ -23,16 +23,35 @@
                     <li class="dropdown ${request.forwardURI?.equals('/property-list') ? 'active' : ''}
                         ${request.forwardURI?.equals('/property/getProperty') ? 'active' : ''}
                         ${request.forwardURI?.equals('/property-details/' + params?.long('id')) ? 'active' : ''}
-                         ${request.forwardURI?.equals('/property/search') ? 'active' : ''}">
-                        <a href="${createLink(controller: 'property', action: 'propertyList')}">Property</a>
+                        ${request.forwardURI?.equals('/property/search') ? 'active' : ''}">
+                        <a href="${createLink(controller: 'property', action: 'propertyList')}">Property
+                            <span class="caret"></span>
+                        </a>
                         <ul class="dropdown-menu">
-                            <g:each in="${PropertyStatus}" var="status">
-                                <li>
-                                    <a href="${createLink(controller: 'property', action: 'getProperty', params: [status: status])}">
-                                        <g:message code="property.status.${status}.label"/>
-                                    </a>
-                                </li>
-                            </g:each>
+                            <li class="dropdown-submenu">
+                                <a tabindex="0">Status</a>
+                                <ul class="dropdown-menu">
+                                    <g:each in="${PropertyStatus}" var="status">
+                                        <li>
+                                            <a href="${createLink(controller: 'property', action: 'getProperty', params: [status: status])}">
+                                                <g:message code="property.status.${status}.label" default="${status}"/>
+                                            </a>
+                                        </li>
+                                    </g:each>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="0">Type</a>
+                                <ul class="dropdown-menu">
+                                    <g:each in="${PropertyType}" var="type">
+                                        <li>
+                                            <a href="${createLink(controller: 'property', action: 'getProperty', params: [type: type])}">
+                                                <g:message code="property.listing.${type}.label" default="${type}"/>
+                                            </a>
+                                        </li>
+                                    </g:each>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                     <li class="dropdown ${request.forwardURI?.equals('/agent') ? 'active' : ''} ${request.forwardURI?.equals('/agent/' + params?.long('id')) ? 'active' : ''}">

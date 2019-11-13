@@ -24,6 +24,8 @@ class PropertyService {
     List<Property> searchPropertyByParams(GrailsParameterMap params) {
 
         String keywords = params?.keywords ?: ''
+        String type = params?.propertyType ?: ''
+        String status = params?.propertyStatus ?: ''
 
         List<Property> propertyList = Property.createCriteria().list {
             eq("isAvailable", Boolean.TRUE)
@@ -34,6 +36,38 @@ class PropertyService {
                     like('title', "%"+keywords+"%")
                 }
             }
+            and {
+                if (type == PropertyType.OTHERS.name()) {
+                    or {
+                        eq("propertyType", PropertyType.OTHERS.name())
+                    }
+                } else if (type == PropertyType.APARTMENT.name()) {
+                    or {
+                        eq("propertyType", PropertyType.APARTMENT.name())
+                    }
+                } else if (type == PropertyType.OFFICE.name()) {
+                    or {
+                        eq("propertyType", PropertyType.OFFICE.name())
+                    }
+                } else if (type == PropertyType.HOME.name()) {
+                    or {
+                        eq("propertyType", PropertyType.HOME.name())
+                    }
+                }
+
+                isNotNull('propertyStatus')
+
+                if (status == PropertyStatus.RENT.name()) {
+                    or {
+                        eq("propertyStatus", PropertyStatus.RENT.name())
+                    }
+                }  else if (status == PropertyStatus.SALE.name()) {
+                    or {
+                        eq("propertyStatus", PropertyStatus.SALE.name())
+                    }
+                }
+            }
+
         } as List<Property>
 
         return propertyList
@@ -62,9 +96,26 @@ class PropertyService {
         return result
     }
 
-    List<Property> getAllProperty() {
+    Integer totalProperty() {
 
-        List<Property> propertyList = Property.createCriteria().list {
+        Integer result = Property.createCriteria().get {
+            eq("isAvailable", Boolean.TRUE)
+            eq("isSale", Boolean.FALSE)
+            projections {
+                count("id")
+            }
+        } as Integer
+
+        return result
+    }
+
+    List<Property> getAllProperty(GrailsParameterMap params) {
+
+        Map<String, Object> getParams = processParams(params)
+        Integer maxResult = (Integer) getParams.get("maxRslt")
+        Integer offset = (Integer) getParams.get("offset")
+
+        List<Property> propertyList = Property.createCriteria().list([max: maxResult, offset: offset]) {
             eq("isAvailable", Boolean.TRUE)
             eq("isSale", Boolean.FALSE)
             order("lastModified", "desc")
@@ -157,6 +208,21 @@ class PropertyService {
 
        }
         return results
+    }
+
+    private static Map<String, Object> processParams(GrailsParameterMap params) {
+
+        Map<String, Object> newParams = new HashMap<>()
+
+        String keywords = params?.keywords
+        if (StringUtils.isNotBlank(keywords)) {
+            newParams.put("keywords", StringUtils.join("%", keywords, "%"))
+        }
+
+        newParams.put("offset", params?.int("offset", 0))
+        newParams.put("maxRslt", params?.int("max"))
+
+        return newParams
     }
 
 }

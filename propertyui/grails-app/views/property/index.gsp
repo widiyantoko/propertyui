@@ -59,7 +59,8 @@
                             </li>
                         </g:each>
                     </ul>
-                    <div class="row">
+                    <div class="clearfix"></div>
+                    <div class="row wow">
                         <div class="filtr-container">
                             <g:each in="${propertyList}" var="property" status="i">
                                 <g:set var="details" value="${property?.propertyDetails}"/>
@@ -127,14 +128,22 @@
                                 </div>
                             </g:each>
                         </div>
-                        <g:if test="${propertyList?.size() > 0}">
-                            <div class="col-lg-12 text-center mt-20">
-                                <a href="${createLink(controller: "property", action: "propertyList")}" class="btn button-md button-theme text-center">Load More</a>
-                            </div>
-                        </g:if>
                     </div>
                 </div>
             </div>
+            <div class="clearfix"></div>
+            <g:if test="${propertyList?.size() > 0}">
+                <div class="categories">
+                    <div class="container">
+                        <div class="clearfix"></div>
+                        <div class="row wow">
+                            <div class="col-lg-12 text-center mt-20">
+                                <a href="${createLink(controller: "property", action: "propertyList")}" class="btn button-md button-theme text-center">Load More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </g:if>
         </g:if>
         <!-- Featured properties end -->
 
@@ -300,7 +309,11 @@
         <!-- Testimonial 2 end -->
         <div class="clearfix"></div>
 
-        <!-- Car Video Modal -->
+        <div class="content-area-10"></div>
+        <g:render template="/templates/brands_partner"/>
+
+
+    <!-- Car Video Modal -->
         <g:each in="${propertyList}" var="property" status="i">
             <div class="modal property-modal fade" id="propertyModal-${property?.id}" tabindex="-1" role="dialog" aria-labelledby="carModalLabel" aria-hidden="true">
                 <g:set var="details" value="${property?.propertyDetails}"/>
