@@ -161,7 +161,11 @@ class PropertyService {
 
     List<Property> getProperty(GrailsParameterMap params) {
 
-        List<Property> propertyList = Property.createCriteria().list {
+        Map<String, Object> getParams = processParams(params)
+        Integer maxResult = (Integer) getParams.get("maxRslt")
+        Integer offset = (Integer) getParams.get("offset")
+
+        List<Property> propertyList = Property.createCriteria().list([max: maxResult, offset: offset]) {
             eq("isAvailable", Boolean.TRUE)
             eq("isSale", Boolean.FALSE)
 
@@ -174,7 +178,11 @@ class PropertyService {
                     eq("propertyType", PropertyType.APARTMENT.name())
                 } else if (params?.type?.equals(PropertyType.OTHERS.name())){
                     eq("propertyType", PropertyType.OTHERS.name())
-                } else if (params?.status?.equals(PropertyStatus.SALE.name())) {
+                }
+
+                isNotNull("propertyStatus")
+
+                if (params?.status?.equals(PropertyStatus.SALE.name())) {
                     eq("propertyStatus", PropertyStatus.SALE.name())
                 } else if (params?.status?.equals(PropertyStatus.RENT.name())) {
                     eq("propertyStatus", PropertyStatus.RENT.name())

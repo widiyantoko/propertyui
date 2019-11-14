@@ -143,11 +143,11 @@
                             <!-- Property end -->
 
                             <!-- Page navigation start -->
-                            <g:if test="${countpropertyByParams >= 8}">
+                            <g:if test="${countPropertyByParams >= 8}">
                                 <nav aria-label="Page navigation">
                                     <ul class="pagination">
                                         <g:form method="post" controller="property" action="search" params="${params - [inputPage: params.inputPage]}">
-                                            <g:paginate maxsteps="0" controller="property" action="search" params="${params - [inputPage: params.inputPage]}" total="${countpropertyByParams}" prev="‹" next="›" first="First" last="Last" />
+                                            <g:paginate maxsteps="0" controller="property" action="search" params="${params - [inputPage: params.inputPage]}" total="${countPropertyByParams}" prev="‹" next="›" first="First" last="Last" />
                                         </g:form>
                                     </ul>
                                 </nav>

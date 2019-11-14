@@ -138,23 +138,28 @@
                             </g:each>
                             <!-- property end -->
 
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination">
-                                    <li>
-                                        <a href="properties-list-rightside.html" aria-label="Previous">
-                                            <span aria-hidden="true">«</span>
-                                        </a>
-                                    </li>
-                                    <li><a href="properties-list-rightside.html">1 <span class="sr-only">(current)</span></a></li>
-                                    <li><a href="properties-list-leftside.html">2</a></li>
-                                    <li class="active"><a href="properties-list-fullwidth.html">3 </a></li>
-                                    <li>
-                                        <a href="properties-list-fullwidth.html" aria-label="Next">
-                                            <span aria-hidden="true">»</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
+                            <g:if test="${params?.status}">
+                                <g:if test="${countPropertyByStatus >= 8}">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination">
+                                        <g:form method="post" controller="property" action="getProperty" params="${params - [inputPage: params.inputPage]}">
+                                            <g:paginate maxsteps="0" controller="property" action="getProperty" params="${params - [inputPage: params.inputPage]}" total="${countPropertyByStatus}" prev="‹" next="›" first="First" last="Last" />
+                                        </g:form>
+                                        </ul>
+                                    </nav>
+                                </g:if>
+                            </g:if>
+                            <g:else>
+                                <g:if test="${countPropertyByType >= 8}">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination">
+                                        <g:form method="post" controller="property" action="getProperty" params="${params - [inputPage: params.inputPage]}">
+                                            <g:paginate maxsteps="0" controller="property" action="getProperty" params="${params - [inputPage: params.inputPage]}" total="${countPropertyByType}" prev="‹" next="›" first="First" last="Last" />
+                                        </g:form>
+                                        </ul>
+                                    </nav>
+                                </g:if>
+                            </g:else>
                         </div>
                     </div>
                 </div>

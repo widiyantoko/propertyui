@@ -37,7 +37,6 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-8 col-xs-12 col-md-push-4">
-                        <!-- Option bar start -->
                         <div class="option-bar">
                             <div class="row">
                                 <div class="col-lg-6 col-md-5 col-sm-5 col-xs-2">
@@ -70,7 +69,6 @@
                             <g:set var="details" value="${property?.propertyDetails}"/>
                             <div class="property clearfix wow fadeInUp delay-03s">
                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 col-pad">
-                                    <!-- Property img -->
                                     <div class="property-img">
                                         <a href="${createLink(controller: 'property', action: 'getProperty', params: [type: property?.propertyType])}" class="property-tag button alt featured">
                                             ${property?.propertyType}
@@ -100,19 +98,16 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 property-content ">
-                                    <!-- title -->
                                     <h1 class="title">
                                         <a href="${createLink(controller: 'property', action: 'propertyDetails', params: [id: property?.id])}">
                                             ${property?.title}
                                         </a>
                                     </h1>
-                                    <!-- Property address -->
                                     <h3 class="property-address">
                                         <a href="">
                                             <i class="fa fa-map-marker"></i>${property?.getFullAddress()}
                                         </a>
                                     </h3>
-                                    <!-- Facilities List -->
                                     <ul class="facilities-list clearfix">
                                         <g:if test="${details}">
                                             <g:each var="detail" in="${details}">
@@ -125,7 +120,6 @@
                                             </g:each>
                                         </g:if>
                                     </ul>
-                                    <!-- Property footer -->
                                     <div class="property-footer">
                                         <span class="left">
                                             <a href="${createLink(controller: 'user', action: 'agentDetails', params: [id: property?.user?.id])}">
@@ -153,8 +147,8 @@
                         </g:if>
                     </div>
 
+                    <!-- Search contents sidebar start -->
                     <div class="col-lg-4 col-md-4 col-xs-12 col-md-pull-8">
-                        <!-- Search contents sidebar start -->
                         <div class="sidebar-widget">
                             <div class="main-title-2">
                                 <h1><span>Advanced</span> Search</h1>
@@ -162,7 +156,7 @@
 
                             <g:form method="GET" controller="property" action="search">
                                 <div class="form-group">
-                                    <input type="text" name="keywords" class="form-control search-fields" value="${params?.keywords}" placeholder="<g:message code="public.search.placeholder.label"/>">
+                                    <input type="hidden" name="keywords" class="form-control search-fields" value="${params?.keywords}">
                                 </div>
                                 <div class="form-group">
                                     <select class="selectpicker search-fields js-filter-property-status" name="propertyStatus">
@@ -397,6 +391,8 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Search contents sidebar start -->
+
                 </div>
             </div>
         </div>

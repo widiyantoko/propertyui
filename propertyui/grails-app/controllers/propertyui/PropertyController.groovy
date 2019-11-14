@@ -81,8 +81,7 @@ class PropertyController {
 
         render view: "property_by_params", model: [
                 propertyList: propertyService.searchPropertyByParams(params),
-                countpropertyByParams: propertyService.countPropertyByParams(params),
-//                totalProperty: propertyService.totalProperty(),
+                countPropertyByParams: propertyService.countPropertyByParams(params),
                 typeList: typeList,
                 countType: typeCountMap
         ]
@@ -133,6 +132,16 @@ class PropertyController {
     }
 
     def getProperty() {
+
+        params?.max = params?.int("max", 8)
+        if (params?.inputPage) {
+            Integer inputPage = (params?.int("inputPage") - 1 ) * params?.max
+            params?.offset = inputPage
+        }
+
+        PropertyStatus status = params?.status
+        PropertyType type = params?.type
+
         List<Property> propertyList = propertyService.getProperty(params)
 
         if (!propertyList) {
@@ -140,7 +149,9 @@ class PropertyController {
             return
         }
         render view: "property_by_type", model: [
-                propertyList: propertyList
+                propertyList: propertyList,
+                countPropertyByStatus: propertyService.countPropertyByStatus(status),
+                countPropertyByType: propertyService.countPropertyByType(type)
         ]
     }
 
