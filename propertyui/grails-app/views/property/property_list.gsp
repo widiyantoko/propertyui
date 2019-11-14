@@ -167,9 +167,8 @@
                             </div>
 
                             <g:form method="GET" controller="property" action="propertyList">
-%{--                                <div class="form-group">--}%
-%{--                                    <input type="hidden" name="keywords" class="form-control search-fields" value="${params?.keywords}">--}%
-%{--                                </div>--}%
+                                <input type="hidden" name="postDate" value="${params?.postDate}">
+                                <input type="hidden" name="price" value="${params?.price}">
                                 <div class="form-group">
                                     <select class="selectpicker search-fields" name="propertyStatus">
                                         <option disabled value="" style="display: none" ${!params?.propertyStatus ? 'selected' : ''}>Status</option>
