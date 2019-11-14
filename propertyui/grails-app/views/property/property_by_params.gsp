@@ -66,17 +66,14 @@
 
                         <!-- Property start -->
                         <g:if test="${propertyList}">
-                            <g:if test="${!params?.propertyStatus || !params?.propertyType}">
-                                <h5>
-                                    <strong>${countpropertyByParams}</strong> result found for
-                                    <strong>"${params?.keywords}"</strong></h5>
-                                <br>
-                            </g:if>
+                            <h5>
+                                <strong>${countPropertyByParams}</strong> result found for
+                                <strong>"${params?.keywords}"</strong>
+                            </h5><br>
                             <g:each in="${propertyList}" var="property" status="i">
                                 <g:set var="details" value="${property?.propertyDetails}"/>
                                 <div class="property clearfix wow fadeInUp delay-03s">
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 col-pad">
-                                        <!-- Property img -->
                                         <div class="property-img">
                                             <a href="${createLink(controller: 'property', action: 'getProperty', params: [type: property?.propertyType])}" class="property-tag button alt featured">
                                                 ${property?.propertyType}
@@ -165,12 +162,14 @@
                             </div>
 
                             <g:form method="GET" controller="property" action="search">
-                                <input type="hidden" name="keywords" value="${params?.keywords}">
+                                <div class="form-group">
+                                    <input type="text" name="keywords" class="form-control search-fields ${propertyList ? 'hidden': ''}" placeholder="" value="${params?.keywords}">
+                                </div>
                                 <div class="form-group">
                                     <select class="selectpicker search-fields" name="propertyStatus">
                                         <option disabled selected value="" style="display: none">Status</option>
                                         <g:each in="${PropertyStatus.values()}" var="pStatus">
-                                            <option name="propertyStatus" value="${pStatus.name()}">
+                                            <option name="propertyStatus" value="${pStatus.name()}" ${params?.propertyStatus == pStatus.name() ? 'selected' : ''}>
                                                 <g:message code="property.status.${pStatus}.label"/>
                                             </option>
                                         </g:each>
@@ -193,7 +192,7 @@
                                     <select class="selectpicker search-fields" name="propertyType">
                                         <option disabled selected value="" style="display: none">Type</option>
                                         <g:each in="${PropertyType.values()}" var="pType">
-                                            <option name="propertyType" value="${pType.name()}">
+                                            <option name="propertyType" value="${pType.name()}" ${params?.propertyType == pType.name() ? 'selected' : ''}>
                                                 <g:message code="property.type.${pType}.label"/>
                                             </option>
                                         </g:each>
