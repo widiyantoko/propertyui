@@ -49,14 +49,26 @@
                                 </div>
                                 <div class="col-lg-6 col-md-7 col-sm-7 col-xs-10 cod-pad">
                                     <div class="sorting-options">
-                                        <select class="sorting">
-                                            <option>New To Old</option>
-                                            <option>Old To New</option>
-                                            <option>Properties (High To Low)</option>
-                                            <option>Properties (Low To High)</option>
+                                        <select class="sorting js-filter-property-list">
+                                            <option ${params?.postDate?.equals('desc') ? 'selected' : ''}
+                                                    data-url="${createLink(controller: 'property', action: 'propertyList', params: [postDate :'desc', propertyStatus: params?.propertyStatus, propertyType: params?.propertyType])}">
+                                                New To Old
+                                            </option>
+                                            <option ${params?.postDate?.equals('asc') ? 'selected' : ''}
+                                                    data-url="${createLink(controller: 'property', action: 'propertyList', params: [postDate : 'asc', propertyStatus: params?.propertyStatus, propertyType: params?.propertyType])}">
+                                                Old To New
+                                            </option>
+                                            <option ${params?.price?.equals('desc') ? 'selected' : ''}
+                                                    data-url="${createLink(controller: 'property', action: 'propertyList', params: [price : 'desc', propertyStatus: params?.propertyStatus, propertyType: params?.propertyType])}">
+                                                Price (High To Low)
+                                            </option>
+                                            <option ${params?.price?.equals('asc') ? 'selected' : ''}
+                                                    data-url="${createLink(controller: 'property', action: 'propertyList', params: [price : 'asc', propertyStatus: params?.propertyStatus, propertyType: params?.propertyType])}">
+                                                Price (Low To High)
+                                            </option>
                                         </select>
-                                        <a href="properties-list-leftside.html" class="change-view-btn active-view-btn"><i class="fa fa-th-list"></i></a>
-                                        <a href="properties-grid-leftside.html" class="change-view-btn"><i class="fa fa-th-large"></i></a>
+                                        <a href="" class="change-view-btn active-view-btn"><i class="fa fa-th-list"></i></a>
+                                        <a href="" class="change-view-btn"><i class="fa fa-th-large"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -154,12 +166,12 @@
                                 <h1><span>Advanced</span> Search</h1>
                             </div>
 
-                            <g:form method="GET" controller="property" action="search">
+                            <g:form method="GET" controller="property" action="propertyList">
+%{--                                <div class="form-group">--}%
+%{--                                    <input type="hidden" name="keywords" class="form-control search-fields" value="${params?.keywords}">--}%
+%{--                                </div>--}%
                                 <div class="form-group">
-                                    <input type="hidden" name="keywords" class="form-control search-fields" value="${params?.keywords}">
-                                </div>
-                                <div class="form-group">
-                                    <select class="selectpicker search-fields js-filter-property-status" name="propertyStatus">
+                                    <select class="selectpicker search-fields" name="propertyStatus">
                                         <option disabled value="" style="display: none" ${!params?.propertyStatus ? 'selected' : ''}>Status</option>
                                         <g:each in="${PropertyStatus}" var="pStatus">
                                             <option name="propertyStatus" value="${pStatus}">
@@ -182,10 +194,10 @@
                                 </div>
                                 -->
                                 <div class="form-group">
-                                    <select class="selectpicker search-fields js-filter-property-type" name="propertyTypes">
-                                        <option disabled selected value="" style="display: none">Type</option>
+                                    <select class="selectpicker search-fields" name="propertyType">
+                                        <option disabled value="" style="display: none" ${!params?.propertyType ? 'selected' : ''}>Type</option>
                                         <g:each in="${PropertyType}" var="pType">
-                                            <option name="propertyType" value="${pType}" class="${pType ? 'selected' : ''}">
+                                            <option name="propertyType" value="${pType}">
                                                 <g:message code="property.type.${pType}.label"/>
                                             </option>
                                         </g:each>

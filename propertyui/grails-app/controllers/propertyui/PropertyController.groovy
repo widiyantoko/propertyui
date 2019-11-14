@@ -66,6 +66,9 @@ class PropertyController {
             params?.offset = inputPage
         }
 
+        params?.postDate = params?.postDate ?: ''
+        params?.price = params?.price ?: ''
+
         List<PropertyType> typeList = [PropertyType.HOME, PropertyType.OFFICE, PropertyType.APARTMENT, PropertyType.OTHERS]
         Long allTypeCount = 0
         Map<String, Long> typeCountMap = new HashMap<>()
@@ -95,6 +98,9 @@ class PropertyController {
             params?.offset = inputPage
         }
 
+        params?.postDate = params?.postDate ?: ''
+        params?.price = params?.price ?: ''
+
         List<Property> propertyList = propertyService.getAllProperty(params)
 
         List<PropertyType> typeList = [PropertyType.HOME, PropertyType.OFFICE, PropertyType.APARTMENT, PropertyType.OTHERS]
@@ -114,7 +120,7 @@ class PropertyController {
                 propertyList: propertyList,
                 typeList: typeList,
                 countType: typeCountMap,
-                totalProperty: propertyService.totalProperty()
+                totalProperty: propertyService.totalProperty(params)
         ]
     }
 

@@ -1,6 +1,8 @@
 $(function () {
     'use strict';
 
+    var _filterPropertyList = $('.js-filter-property-list');
+
     // Showing page loader
     $(window).load(function () {
         setTimeout(function () {
@@ -294,6 +296,13 @@ $(function () {
 
     $(document).on('ready', function () {
        $('.js-search-field').val('');
+    });
+
+    //order by date posted function
+    _filterPropertyList.on('change', function () {
+        var _this = $(this).children("option:selected");
+        // var url = _this.data('url');
+        window.location.href = _this.data('url');
     });
 
 });
