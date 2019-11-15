@@ -26,7 +26,7 @@
         <asset:link rel="stylesheet" type="text/css" href="css/magnific-popup.css"/>
 
         <asset:link rel="stylesheet" type="text/css" href="css/style.css"/>
-        <asset:link rel="stylesheet" type="text/css" href="css/skins/default.css"/>
+        <asset:link rel="stylesheet" type="text/css" href="css/skins/red.css"/>
 
         <asset:link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
 
