@@ -2,6 +2,7 @@ $(function () {
     'use strict';
 
     var _filterPropertyList = $('.js-filter-property-list');
+    var _filterPropertyParams = $('.js-order-property-date');
 
     // Showing page loader
     $(window).load(function () {
@@ -303,6 +304,11 @@ $(function () {
         var _this = $(this).children("option:selected");
         // var url = _this.data('url');
         window.location.href = _this.data('url');
+    });
+
+    _filterPropertyParams.on('change', function () {
+       var _this = $(this).children("option:selected");
+       window.location.href = _this.data('url');
     });
 
 });

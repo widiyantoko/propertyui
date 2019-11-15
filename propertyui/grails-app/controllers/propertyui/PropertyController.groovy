@@ -66,7 +66,7 @@ class PropertyController {
             params?.offset = inputPage
         }
 
-        params?.postDate = params?.postDate ?: ''
+        params?.postDate = params?.postDate ?: 'desc'
         params?.price = params?.price ?: ''
 
         List<PropertyType> typeList = [PropertyType.HOME, PropertyType.OFFICE, PropertyType.APARTMENT, PropertyType.OTHERS]
@@ -98,7 +98,7 @@ class PropertyController {
             params?.offset = inputPage
         }
 
-        params?.postDate = params?.postDate ?: ''
+        params?.postDate = params?.postDate ?: 'desc'
         params?.price = params?.price ?: ''
 
         List<Property> propertyList = propertyService.getAllProperty(params)
