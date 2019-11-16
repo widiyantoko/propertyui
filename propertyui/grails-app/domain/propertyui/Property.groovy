@@ -82,7 +82,7 @@ class Property implements Serializable{
     def getDatePosted() {
         Date postDate = lastModified
 
-        PrettyTime time = new PrettyTime(new Locale("en"))
+        PrettyTime time = new PrettyTime(new Locale("id"))
         return time.format(postDate)
     }
 

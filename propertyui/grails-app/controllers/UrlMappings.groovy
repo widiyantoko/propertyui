@@ -15,9 +15,9 @@ class UrlMappings {
         "/blog/"(controller: 'property', action: 'blog')
         "/about/"(controller: 'property', action: 'about')
 
-        "/property-list/"(controller: 'property', action: 'propertyList')
+        "/all/"(controller: 'property', action: 'propertyList')
         "/save-data"(controller: 'property', action: 'saveData')
-        "/property-details/$id?"(controller: 'property', action: 'propertyDetails')
+        "/details/$id?"(controller: 'property', action: 'propertyDetails')
         "/property/$action?/$id?(.$format)?"(controller: 'property')
 //        "/property-status/$status?"(controller: 'property', action: 'getPropertyByStatus')
 

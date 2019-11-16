@@ -52,19 +52,19 @@
                                         <select class="sorting js-filter-property-list">
                                             <option ${params?.postDate?.equals('desc') ? 'selected' : ''}
                                                     data-url="${createLink(controller: 'property', action: 'propertyList', params: [postDate :'desc', propertyStatus: params?.propertyStatus, propertyType: params?.propertyType])}">
-                                                New To Old
+                                                <g:message code="public.date.filter.desc.label"/>
                                             </option>
                                             <option ${params?.postDate?.equals('asc') ? 'selected' : ''}
                                                     data-url="${createLink(controller: 'property', action: 'propertyList', params: [postDate : 'asc', propertyStatus: params?.propertyStatus, propertyType: params?.propertyType])}">
-                                                Old To New
+                                                <g:message code="public.date.filter.asc.label"/>
                                             </option>
                                             <option ${params?.price?.equals('desc') ? 'selected' : ''}
                                                     data-url="${createLink(controller: 'property', action: 'propertyList', params: [price : 'desc', propertyStatus: params?.propertyStatus, propertyType: params?.propertyType])}">
-                                                Price (High To Low)
+                                                <g:message code="public.price.filter.desc.label"/>
                                             </option>
                                             <option ${params?.price?.equals('asc') ? 'selected' : ''}
                                                     data-url="${createLink(controller: 'property', action: 'propertyList', params: [price : 'asc', propertyStatus: params?.propertyStatus, propertyType: params?.propertyType])}">
-                                                Price (Low To High)
+                                                <g:message code="public.price.filter.asc.label"/>
                                             </option>
                                         </select>
                                         <a href="" class="change-view-btn active-view-btn"><i class="fa fa-th-list"></i></a>

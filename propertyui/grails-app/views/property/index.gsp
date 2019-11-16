@@ -26,7 +26,7 @@
                         <img src="${createLinkTo(dir:'images', file:'interior-1.jpg')}" alt="banner-slider-1" class="img-responsive">
                         <div class="carousel-caption banner-slider-inner">
                             <div class="banner-content">
-                                <h1 data-animation="animated fadeInDown delay-05s"><span>Find your </span> Dream House</h1>
+                                <g:message code="public.home.banner.title.label"/>
                                 <p data-animation="animated fadeInUp delay-1s">Lorem ipsum dolor sit amet, conconsectetuer adipiscing elit Lorem ipsum dolor sit amet, conconsectetuer</p>
                                 <div class="col-lg-12">
                                     <g:form class="form-search view-search" method="GET" controller="property" action="search">
@@ -115,7 +115,7 @@
                                             <div class="property-footer">
                                                 <span class="left">
                                                     <a href="${createLink(controller: 'user', action: 'agentDetails', params: [id: property?.user?.id])}">
-                                                        <i class="fa fa-user"></i>${property?.user?.getLongName()}
+                                                        <i class="fa fa-user"></i>${property?.user?.getFullName()}
                                                     </a>
                                                 </span>
                                                 <span class="right">
@@ -153,7 +153,7 @@
             <div class="categories">
                 <div class="container">
                     <div class="main-title">
-                        <h1>Popular Places</h1>
+                        <h1><g:message code="public.popular.place.label"/></h1>
                     </div>
                     <div class="clearfix"></div>
                     <div class="row wow">
@@ -365,7 +365,7 @@
                                         </div>
 
                                         <div class="description">
-                                            <h3>Description</h3>
+                                            <h3><g:message code="public.description.label"/></h3>
                                             <p>${property?.description}</p>
                                         </div>
                                     </div>
@@ -376,7 +376,7 @@
                                             <g:formatNumber number="${property?.price}" format="\$###,##0" type="currency" currencyCode="IDR" locale="id_ID"/>
                                         </strong>
                                         <section>
-                                            <h3>Features</h3>
+                                            <h3><g:message code="public.feature.label"/></h3>
                                             <div class="features">
                                                 <ul class="bullets">
                                                     <g:each var="detail" in="${details}">
@@ -390,18 +390,18 @@
                                             </div>
                                         </section>
                                         <section>
-                                            <h3>Overview</h3>
+                                            <h3><g:message code="public.overview.label"/></h3>
                                             <dl>
-                                                <dt>Model</dt>
+                                                <dt><g:message code="public.model.label"/></dt>
                                                 <dd>Maxima</dd>
-                                                <dt>Type</dt>
+                                                <dt><g:message code="public.type.label"/></dt>
                                                 <dd><g:message code="property.type.${property?.propertyType}.label"/></dd>
-                                                <dt>Year</dt>
+                                                <dt><g:message code="public.year.label"/></dt>
                                                 <dd><g:formatDate date="${property?.lastModified}" format="yyyy"/></dd>
                                             </dl>
                                         </section>
                                         <section>
-                                            <h3>Last Review</h3>
+                                            <h3><g:message code="public.lastReview.label"/></h3>
                                             <div class="ratings" data-rating="5">
                                                 <span>
                                                     <i class="fa fa-star s1 active" data-score="1"></i>
