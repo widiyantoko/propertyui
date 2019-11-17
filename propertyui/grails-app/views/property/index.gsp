@@ -53,11 +53,14 @@
                     </div>
                     <ul class="list-inline-listing filters filters-listing-navigation">
                         <li class="active btn filtr-button filtr" data-filter="all">All</li>
-                        <g:each in="${typeList}" var="type">
-                            <li data-filter="${type?.code()}" class="active btn btn-inline filtr-button filtr ${countType.get(type.name()) == 0 ? 'hide' : ''}">
-                                ${type?.name()}
+                        <g:set value="${propertyList.groupBy {it.propertyType}}" var="property"/>
+                        <g:each in="${property}" var="p">
+                           <g:set value="${p.key?.toString()}" var="i"/>
+                            <li data-filter="${PropertyType.getByValue(i)?.code()}" class="active btn btn-inline filtr-button filtr ${!PropertyType.getByValue(i)?.name() ? 'hide' : ''}">
+                                <g:message code="property.type.${i}.label" default="${i}"/>
                             </li>
                         </g:each>
+
                     </ul>
                     <div class="clearfix"></div>
                     <div class="row wow">

@@ -25,7 +25,7 @@ class PropertyService {
 
         String keywords = params?.keywords ?: ''
         String type = params?.propertyType ?: ''
-        String status = params?.propertyStatus ?: ''
+        String status = params?.status ?: ''
 
         Map<String, Object> getParams = processParams(params)
         Integer maxResult = (Integer) getParams.get("maxRslt")
@@ -89,7 +89,7 @@ class PropertyService {
 
         String keywords = params?.keywords ?: ''
         String type = params?.propertyType ?: ''
-        String status = params?.propertyStatus ?: ''
+        String status = params?.status ?: ''
 
         Long result = Property.createCriteria().get {
             eq("isAvailable", Boolean.TRUE)
@@ -146,7 +146,7 @@ class PropertyService {
     Long totalProperty(GrailsParameterMap params) {
 
         String type = params?.propertyType ?: ''
-        String status = params?.propertyStatus ?: ''
+        String status = params?.status ?: ''
 
         Long result = Property.createCriteria().get {
             eq("isAvailable", Boolean.TRUE)
@@ -202,7 +202,7 @@ class PropertyService {
         String sort = getParams.get("sort")
         String price = getParams.get("price")
         String type = params?.propertyType ?: ''
-        String status = params?.propertyStatus ?: ''
+        String status = params?.status ?: ''
 
         List<Property> propertyList = Property.createCriteria().list([max: maxResult, offset: offset]) {
             eq("isAvailable", Boolean.TRUE)

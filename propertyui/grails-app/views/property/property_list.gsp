@@ -51,19 +51,19 @@
                                     <div class="sorting-options">
                                         <select class="sorting js-filter-property-list">
                                             <option ${params?.sort?.equals('desc') ? 'selected' : ''}
-                                                    data-url="${createLink(controller: 'property', action: 'propertyList', params: [sort :'desc', propertyStatus: params?.propertyStatus, propertyType: params?.propertyType])}">
+                                                    data-url="${createLink(controller: 'property', action: 'propertyList', params: [sort :'desc', status: params?.status, propertyType: params?.propertyType])}">
                                                 <g:message code="public.date.filter.desc.label"/>
                                             </option>
                                             <option ${params?.sort?.equals('asc') ? 'selected' : ''}
-                                                    data-url="${createLink(controller: 'property', action: 'propertyList', params: [sort : 'asc', propertyStatus: params?.propertyStatus, propertyType: params?.propertyType])}">
+                                                    data-url="${createLink(controller: 'property', action: 'propertyList', params: [sort : 'asc', status: params?.status, propertyType: params?.propertyType])}">
                                                 <g:message code="public.date.filter.asc.label"/>
                                             </option>
                                             <option ${params?.price?.equals('desc') ? 'selected' : ''}
-                                                    data-url="${createLink(controller: 'property', action: 'propertyList', params: [price : 'desc', propertyStatus: params?.propertyStatus, propertyType: params?.propertyType])}">
+                                                    data-url="${createLink(controller: 'property', action: 'propertyList', params: [price : 'desc', status: params?.status, propertyType: params?.propertyType])}">
                                                 <g:message code="public.price.filter.desc.label"/>
                                             </option>
                                             <option ${params?.price?.equals('asc') ? 'selected' : ''}
-                                                    data-url="${createLink(controller: 'property', action: 'propertyList', params: [price : 'asc', propertyStatus: params?.propertyStatus, propertyType: params?.propertyType])}">
+                                                    data-url="${createLink(controller: 'property', action: 'propertyList', params: [price : 'asc', status: params?.status, propertyType: params?.propertyType])}">
                                                 <g:message code="public.price.filter.asc.label"/>
                                             </option>
                                         </select>
@@ -170,10 +170,10 @@
                                 <input type="hidden" name="postDate" value="${params?.sort}">
                                 <input type="hidden" name="price" value="${params?.price}">
                                 <div class="form-group">
-                                    <select class="selectpicker search-fields" name="propertyStatus">
-                                        <option disabled value="" style="display: none" ${!params?.propertyStatus ? 'selected' : ''}>Status</option>
+                                    <select class="selectpicker search-fields" name="status">
+                                        <option disabled value="" style="display: none" ${!params?.status ? 'selected' : ''}>Status</option>
                                         <g:each in="${PropertyStatus}" var="pStatus">
-                                            <option name="propertyStatus" value="${pStatus}">
+                                            <option name="status" value="${pStatus}">
                                                 <g:message code="property.status.${pStatus}.label"/>
                                             </option>
                                         </g:each>
