@@ -21,37 +21,39 @@
                         <a href="${createLink(controller: 'property', action: 'index')}"><g:message code="public.home.label"/></a>
                     </li>
                     <li class="dropdown ${request.forwardURI?.equals('/all') ? 'active' : ''}
-                        ${request.forwardURI?.equals('/property/getProperty') ? 'active' : ''}
+                        ${request.forwardURI?.equals('/property/buy/' + params?.type) ? 'active' : ''}
                         ${request.forwardURI?.equals('/property-details/' + params?.long('id')) ? 'active' : ''}
                         ${request.forwardURI?.equals('/property/search') ? 'active' : ''}">
                         <a href="${createLink(controller: 'property', action: 'propertyList')}">
-                            <g:message code="public.list.label"/>
+                            <g:message code="public.buy.label"/>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
-                                <a tabindex="0"><g:message code="property.status.label"/></a>
-                                <ul class="dropdown-menu">
-                                    <g:each in="${PropertyStatus}" var="status">
-                                        <li>
-                                            <a href="${createLink(controller: 'property', action: 'getProperty', params: [status: status])}">
-                                                <g:message code="property.status.${status}.label" default="${status}"/>
-                                            </a>
-                                        </li>
-                                    </g:each>
-                                </ul>
+                                <g:each in="${PropertyType.values() - [PropertyType.OFFICE]}" var="type">
+                                    <li>
+                                        <a href="${createLink(controller: 'property', action: 'buy', params: [type: type?.value()?.toLowerCase()])}">
+                                            <g:message code="property.type.${type}.label" default="${type}"/>
+                                        </a>
+                                    </li>
+                                </g:each>
                             </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a>
+                            <g:message code="public.rent.label"/>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
-                                <a tabindex="0"><g:message code="property.type.label"/></a>
-                                <ul class="dropdown-menu">
-                                    <g:each in="${PropertyType}" var="type">
-                                        <li>
-                                            <a href="${createLink(controller: 'property', action: 'getProperty', params: [type: type])}">
-                                                <g:message code="property.listing.${type}.label" default="${type}"/>
-                                            </a>
-                                        </li>
-                                    </g:each>
-                                </ul>
+                                <g:each in="${PropertyType.values() - [PropertyType.LAND]}" var="type">
+                                    <li>
+                                        <a href="${createLink(controller: 'property', action: 'rent', params: [type: type?.value()?.toLowerCase()])}">
+                                            <g:message code="property.type.${type}.label" default="${type}"/>
+                                        </a>
+                                    </li>
+                                </g:each>
                             </li>
                         </ul>
                     </li>
@@ -66,7 +68,9 @@
                         </a>
                     </li>
                     <li class="dropdown ${request.forwardURI?.equals('/about') ? 'active' : ''}">
-                        <a href="${createLink(controller: 'property', action: 'about')}">About</a>
+                        <a href="${createLink(controller: 'property', action: 'about')}">
+                            <g:message code="public.about.label"/>
+                        </a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right rightside-navbar">

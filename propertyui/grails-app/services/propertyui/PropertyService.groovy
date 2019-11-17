@@ -30,7 +30,7 @@ class PropertyService {
         Map<String, Object> getParams = processParams(params)
         Integer maxResult = (Integer) getParams.get("maxRslt")
         Integer offset = (Integer) getParams.get("offset")
-        String postDate = getParams.get("postDate")
+        String sort = getParams.get("sort")
         String price = getParams.get("price")
 
         List<Property> propertyList = Property.createCriteria().list([max: maxResult, offset: offset]) {
@@ -74,8 +74,8 @@ class PropertyService {
                 }
             }
 
-            if (postDate) {
-                order("lastModified", postDate)
+            if (sort) {
+                order("lastModified", sort)
             } else {
                 order("price", price)
             }
@@ -104,9 +104,13 @@ class PropertyService {
             }
 
             and {
-                if (type == PropertyType.OTHERS.name()) {
+                if (type == PropertyType.LAND.name()) {
                     or {
-                        eq("propertyType", PropertyType.OTHERS.name())
+                        eq("propertyType", PropertyType.LAND.name())
+                    }
+                } else if(type == PropertyType.RUKO.name()) {
+                    or {
+                        eq("propertyType", PropertyType.RUKO.name())
                     }
                 } else if (type == PropertyType.APARTMENT.name()) {
                     or {
@@ -151,9 +155,13 @@ class PropertyService {
                 count("id")
             }
 
-            if (type == PropertyType.OTHERS.name()) {
+            if (type == PropertyType.LAND.name()) {
                 or {
-                    eq("propertyType", PropertyType.OTHERS.name())
+                    eq("propertyType", PropertyType.LAND.name())
+                }
+            } else if(type == PropertyType.RUKO.name()) {
+                or {
+                    eq("propertyType", PropertyType.RUKO.name())
                 }
             } else if (type == PropertyType.APARTMENT.name()) {
                 or {
@@ -191,7 +199,7 @@ class PropertyService {
         Map<String, Object> getParams = processParams(params)
         Integer maxResult = (Integer) getParams.get("maxRslt")
         Integer offset = (Integer) getParams.get("offset")
-        String postDate = getParams.get("postDate")
+        String sort = getParams.get("sort")
         String price = getParams.get("price")
         String type = params?.propertyType ?: ''
         String status = params?.propertyStatus ?: ''
@@ -201,9 +209,13 @@ class PropertyService {
             eq("isSale", Boolean.FALSE)
 
             and {
-                if (type == PropertyType.OTHERS.name()) {
+                if (type == PropertyType.LAND.name()) {
                     or {
-                        eq("propertyType", PropertyType.OTHERS.name())
+                        eq("propertyType", PropertyType.LAND.name())
+                    }
+                } else if(type == PropertyType.RUKO.name()) {
+                    or {
+                        eq("propertyType", PropertyType.RUKO.name())
                     }
                 } else if (type == PropertyType.APARTMENT.name()) {
                     or {
@@ -232,8 +244,8 @@ class PropertyService {
                 }
             }
 
-            if (postDate) {
-                order("lastModified", postDate)
+            if (sort) {
+                order("lastModified", sort)
             } else {
                 order("price", price)
             }
@@ -243,39 +255,64 @@ class PropertyService {
         return propertyList
     }
 
-    List<Property> getProperty(GrailsParameterMap params) {
+    List<Property> getPropertyByType(GrailsParameterMap params) {
 
         Map<String, Object> getParams = processParams(params)
         Integer maxResult = (Integer) getParams.get("maxRslt")
         Integer offset = (Integer) getParams.get("offset")
+        String sort = getParams.get("sort")
+        String price = getParams.get("price")
 
         List<Property> propertyList = Property.createCriteria().list([max: maxResult, offset: offset]) {
             eq("isAvailable", Boolean.TRUE)
             eq("isSale", Boolean.FALSE)
+            eq("propertyStatus", PropertyStatus.SALE.name())
 
             and {
-                if (params?.type?.equals(PropertyType.HOME.name())) {
+                if (params?.type?.equalsIgnoreCase('home')) {
                     eq("propertyType", PropertyType.HOME.name())
-                } else if (params?.type?.equals(PropertyType.OFFICE.name()) ) {
-                    eq("propertyType", PropertyType.OFFICE.name())
-                } else if (params?.type?.equals(PropertyType.APARTMENT.name())) {
+                } else if (params?.type?.equalsIgnoreCase('apartment')) {
                     eq("propertyType", PropertyType.APARTMENT.name())
-                } else if (params?.type?.equals(PropertyType.OTHERS.name())){
-                    eq("propertyType", PropertyType.OTHERS.name())
+                } else if (params?.type?.equalsIgnoreCase('ruko')) {
+                    eq("propertyType", PropertyType.RUKO.name())
+                } else if (params?.type?.equalsIgnoreCase('land')) {
+                    eq("propertyType", PropertyType.LAND.name())
                 }
+            }
 
-                isNotNull("propertyStatus")
-
-                if (params?.status?.equals(PropertyStatus.SALE.name())) {
-                    eq("propertyStatus", PropertyStatus.SALE.name())
-                } else if (params?.status?.equals(PropertyStatus.RENT.name())) {
-                    eq("propertyStatus", PropertyStatus.RENT.name())
-                }
+            if (sort) {
+                order("lastModified", sort)
+            } else {
+                order("price", price)
             }
 
         } as List<Property>
 
         return propertyList
+    }
+
+    Long totalPropertyByType(GrailsParameterMap params) {
+        Long result = Property.createCriteria().get {
+            eq("isAvailable", Boolean.TRUE)
+            eq("isSale", Boolean.FALSE)
+            eq("propertyStatus", PropertyStatus.SALE.name())
+            projections {
+                count("id")
+            }
+            and {
+                if (params?.type?.equalsIgnoreCase('home')) {
+                    eq("propertyType", PropertyType.HOME.name())
+                } else if (params?.type?.equalsIgnoreCase('apartment')) {
+                    eq("propertyType", PropertyType.APARTMENT.name())
+                } else if (params?.type?.equalsIgnoreCase('ruko')) {
+                    eq("propertyType", PropertyType.RUKO.name())
+                } else if (params?.type?.equalsIgnoreCase('land')) {
+                    eq("propertyType", PropertyType.LAND.name())
+                }
+            }
+        } as Long
+
+        return result
     }
 
     Long countPropertyByType(PropertyType type) {
@@ -293,8 +330,10 @@ class PropertyService {
                     eq("propertyType", PropertyType.APARTMENT.name())
                 } else if (type == PropertyType.OFFICE) {
                     eq("propertyType", PropertyType.OFFICE.name())
+                } else if (type == PropertyType.RUKO) {
+                    eq("propertyType", PropertyType.RUKO.name())
                 } else {
-                    eq("propertyType", PropertyType.OTHERS.name())
+                    eq("propertyType", PropertyType.LAND.name())
                 }
             }
         } as Long
@@ -348,7 +387,7 @@ class PropertyService {
 
         newParams.put("offset", params?.int("offset", 0))
         newParams.put("maxRslt", params?.int("max"))
-        newParams.put("postDate", params?.postDate)
+        newParams.put("sort", params?.sort)
         newParams.put("price", params?.price)
 
         return newParams

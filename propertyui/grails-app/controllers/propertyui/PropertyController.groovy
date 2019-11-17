@@ -18,7 +18,7 @@ class PropertyController {
         def popularPropertyList = propertyService.getPopularPlace()
 
         //count property by type
-        List<PropertyType> typeList = [PropertyType.HOME, PropertyType.OFFICE, PropertyType.APARTMENT, PropertyType.OTHERS]
+        List<PropertyType> typeList = [PropertyType.HOME, PropertyType.OFFICE, PropertyType.APARTMENT, PropertyType.RUKO, PropertyType.LAND]
         Long allTypeCount = 0
         Map<String, Long> typeCountMap = new HashMap<>()
 
@@ -66,10 +66,10 @@ class PropertyController {
             params?.offset = inputPage
         }
 
-        params?.postDate = params?.postDate ?: 'desc'
+        params?.sort = params?.sort ?: 'desc'
         params?.price = params?.price ?: ''
 
-        List<PropertyType> typeList = [PropertyType.HOME, PropertyType.OFFICE, PropertyType.APARTMENT, PropertyType.OTHERS]
+        List<PropertyType> typeList = [PropertyType.HOME, PropertyType.OFFICE, PropertyType.APARTMENT, PropertyType.RUKO, PropertyType.LAND]
         Long allTypeCount = 0
         Map<String, Long> typeCountMap = new HashMap<>()
 
@@ -98,12 +98,12 @@ class PropertyController {
             params?.offset = inputPage
         }
 
-        params?.postDate = params?.postDate ?: 'desc'
+        params?.sort = params?.sort ?: 'desc'
         params?.price = params?.price ?: ''
 
         List<Property> propertyList = propertyService.getAllProperty(params)
 
-        List<PropertyType> typeList = [PropertyType.HOME, PropertyType.OFFICE, PropertyType.APARTMENT, PropertyType.OTHERS]
+        List<PropertyType> typeList = [PropertyType.HOME, PropertyType.OFFICE, PropertyType.APARTMENT, PropertyType.RUKO, PropertyType.LAND]
         Long allTypeCount = 0
         Map<String, Long> typeCountMap = new HashMap<>()
 
@@ -137,7 +137,7 @@ class PropertyController {
         ]
     }
 
-    def getProperty() {
+    def buy() {
 
         params?.max = params?.int("max", 8)
         if (params?.inputPage) {
@@ -145,10 +145,10 @@ class PropertyController {
             params?.offset = inputPage
         }
 
-        PropertyStatus status = params?.status
-        PropertyType type = params?.type
+        params?.sort = params?.sort ?: 'desc'
+        params?.price = params?.price ?: ''
 
-        List<Property> propertyList = propertyService.getProperty(params)
+        List<Property> propertyList = propertyService.getPropertyByType(params)
 
         if (!propertyList) {
             notFound()
@@ -156,9 +156,12 @@ class PropertyController {
         }
         render view: "property_by_type", model: [
                 propertyList: propertyList,
-                countPropertyByStatus: propertyService.countPropertyByStatus(status),
-                countPropertyByType: propertyService.countPropertyByType(type)
+                countPropertyByType: propertyService.totalPropertyByType(params)
         ]
+    }
+
+    def rent(){
+
     }
 
     def blog() {

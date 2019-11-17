@@ -8,18 +8,18 @@ class UrlMappings {
                 // apply constraints here
             }
         }
-//        home page
+
+        //home page & header
         "/"(controller: 'property', action: 'index')
         "/agent/"(controller: "user", action: "agentList")
         "/agent/$id?"(controller: 'user', action: 'agentDetails')
         "/blog/"(controller: 'property', action: 'blog')
         "/about/"(controller: 'property', action: 'about')
+        "/property/$action?/$type?"(controller: 'property')
 
         "/all/"(controller: 'property', action: 'propertyList')
         "/save-data"(controller: 'property', action: 'saveData')
         "/details/$id?"(controller: 'property', action: 'propertyDetails')
-        "/property/$action?/$id?(.$format)?"(controller: 'property')
-//        "/property-status/$status?"(controller: 'property', action: 'getPropertyByStatus')
 
         "500"(view:'/error')
         "404"(view:'/notFound')

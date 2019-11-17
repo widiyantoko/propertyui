@@ -50,12 +50,12 @@
                                 <div class="col-lg-6 col-md-7 col-sm-7 col-xs-10 cod-pad">
                                     <div class="sorting-options">
                                         <select class="sorting js-order-property-date">
-                                            <option ${params?.postDate?.equals('desc') ? 'selected' : ''}
-                                                    data-url="${createLink(controller: 'property', action: 'search', params: [keywords: params?.keywords, postDate :'desc', propertyStatus: params?.propertyStatus, propertyType: params?.propertyType])}">
+                                            <option ${params?.sort?.equals('desc') ? 'selected' : ''}
+                                                    data-url="${createLink(controller: 'property', action: 'search', params: [keywords: params?.keywords, sort :'desc', propertyStatus: params?.propertyStatus, propertyType: params?.propertyType])}">
                                                 <g:message code="public.date.filter.desc.label"/>
                                             </option>
-                                            <option ${params?.postDate?.equals('asc') ? 'selected' : ''}
-                                                    data-url="${createLink(controller: 'property', action: 'search', params: [keywords: params?.keywords, postDate :'asc', propertyStatus: params?.propertyStatus, propertyType: params?.propertyType])}">
+                                            <option ${params?.sort?.equals('asc') ? 'selected' : ''}
+                                                    data-url="${createLink(controller: 'property', action: 'search', params: [keywords: params?.keywords, sort :'asc', propertyStatus: params?.propertyStatus, propertyType: params?.propertyType])}">
                                                 <g:message code="public.date.filter.asc.label"/>
                                             </option>
                                             <option ${params?.price?.equals('desc') ? 'selected' : ''}
@@ -174,7 +174,7 @@
                             </div>
 
                             <g:form method="GET" controller="property" action="search">
-                                <input type="hidden" name="postDate" value="${params?.postDate}">
+                                <input type="hidden" name="postDate" value="${params?.sort}">
                                 <input type="hidden" name="price" value="${params?.price}">
                                 <div class="form-group">
                                     <input type="text" name="keywords" class="form-control search-fields ${propertyList ? 'hidden': ''}" placeholder="" value="${params?.keywords}">

@@ -3,6 +3,7 @@ $(function () {
 
     var _filterPropertyList = $('.js-filter-property-list');
     var _filterPropertyParams = $('.js-order-property-date');
+    var _filterPropertyType = $('.js-filter-property-by-type');
 
     // Showing page loader
     $(window).load(function () {
@@ -307,6 +308,11 @@ $(function () {
     });
 
     _filterPropertyParams.on('change', function () {
+       var _this = $(this).children("option:selected");
+       window.location.href = _this.data('url');
+    });
+
+    _filterPropertyType.on('change', function () {
        var _this = $(this).children("option:selected");
        window.location.href = _this.data('url');
     });

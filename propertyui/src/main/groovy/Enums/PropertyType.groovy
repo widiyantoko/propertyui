@@ -1,10 +1,11 @@
 package Enums
 
 enum PropertyType {
-    HOME("HOME", "1"),
-    OFFICE("OFFICE", "2"),
-    APARTMENT("APARTMENT", "3"),
-    OTHERS("OTHERS", "4")
+    HOME("Home", "1"),
+    OFFICE("Office", "2"),
+    APARTMENT("Apartment", "3"),
+    RUKO("Ruko", "4"),
+    LAND("Land", "5")
 
     private static Map<String, PropertyType> valuesMap = new HashMap<String, PropertyType>()
     static {

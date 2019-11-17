@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta name="layout" content="main">
-        <title>Property ${params?.status ? ' status' : ' type'} - <g:message code="property.listing.${params?.status ?: params?.type}.label" default="${params?.status ?: params?.type }"/></title>
+        <title>${params?.status ? ' status' : ' Tipe'} - <g:message code="property.listing.${params?.status ?: params?.type}.label" default="${params?.status ?: params?.type }"/></title>
     </head>
 
     <body>
@@ -23,9 +23,12 @@
                     <div class="breadcrumb-area">
                         <h1>Properties Listing</h1>
                         <ul class="breadcrumbs">
-                            <li><a href="${createLink(controller: 'property', action: 'index')}">Home</a></li>
-                            <li class="active">Property  ${params?.status ? ' Status' : ' Type'}
-                                <g:message code="property.listing.${params?.status ?: params?.type}.label" default="${params?.status ?: params?.type}"/>
+                            <li><a href="${createLink(controller: 'property', action: 'index')}">
+                                    <g:message code="public.home.label"/>
+                                 </a>
+                            </li>
+                            <li class="active">Property  ${params?.type ? ' Type' : ''}
+                                <g:message code="property.listing.${params?.type}.label" default="${params?.type}"/>
                             </li>
                         </ul>
                     </div>
@@ -46,19 +49,31 @@
                                             <span class="heading-icon">
                                                 <i class="fa fa-th-list"></i>
                                             </span>
-                                            <span class="hidden-xs">Properties List</span>
+                                            <span class="hidden-xs">${propertyList?.size()} Properties List</span>
                                         </h4>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10 col-pad">
                                         <div class="sorting-options">
-                                            <select class="sorting">
-                                                <option>New To Old</option>
-                                                <option>Old To New</option>
-                                                <option>Properties (High To Low)</option>
-                                                <option>Properties (Low To High)</option>
+                                            <select class="sorting js-filter-property-by-type">
+                                                <option ${params?.sort?.equals('desc') ? 'selected' : ''}
+                                                        data-url="${createLink(controller: 'property', action: 'buy', params: [type: params?.type, sort :'desc'])}">
+                                                    <g:message code="public.date.filter.desc.label"/>
+                                                </option>
+                                                <option ${params?.sort?.equals('asc') ? 'selected' : ''}
+                                                        data-url="${createLink(controller: 'property', action: 'buy', params: [type: params?.type, sort : 'asc'])}">
+                                                    <g:message code="public.date.filter.asc.label"/>
+                                                </option>
+                                                <option ${params?.price?.equals('desc') ? 'selected' : ''}
+                                                        data-url="${createLink(controller: 'property', action: 'buy', params: [type: params?.type, price : 'desc'])}">
+                                                    <g:message code="public.price.filter.asc.label"/>
+                                                </option>
+                                                <option ${params?.price?.equals('asc') ? 'selected' : ''}
+                                                        data-url="${createLink(controller: 'property', action: 'buy', params: [type: params?.type, price : 'asc'])}">
+                                                    <g:message code="public.price.filter.desc.label"/>
+                                                </option>
                                             </select>
-                                            <a href="properties-list-fullwidth.html" class="change-view-btn active-view-btn"><i class="fa fa-th-list"></i></a>
-                                            <a href="properties-grid-fullwidth.html" class="change-view-btn"><i class="fa fa-th-large"></i></a>
+                                            <a href="" class="change-view-btn active-view-btn"><i class="fa fa-th-list"></i></a>
+                                            <a href="" class="change-view-btn"><i class="fa fa-th-large"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -138,28 +153,16 @@
                             </g:each>
                             <!-- property end -->
 
-                            <g:if test="${params?.status}">
-                                <g:if test="${countPropertyByStatus >= 8}">
-                                    <nav aria-label="Page navigation">
-                                        <ul class="pagination">
-                                        <g:form method="post" controller="property" action="getProperty" params="${params - [inputPage: params.inputPage]}">
-                                            <g:paginate maxsteps="0" controller="property" action="getProperty" params="${params - [inputPage: params.inputPage]}" total="${countPropertyByStatus}" prev="‹" next="›" first="First" last="Last" />
-                                        </g:form>
-                                        </ul>
-                                    </nav>
-                                </g:if>
+                            <g:if test="${countPropertyByType >= 8}">
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination">
+                                    <g:form method="post" controller="property" action="buy" params="${params - [inputPage: params.inputPage]}">
+                                        <g:paginate maxsteps="0" controller="property" action="buy" params="${params - [inputPage: params.inputPage]}" total="${countPropertyByType}" prev="‹" next="›" first="First" last="Last" />
+                                    </g:form>
+                                    </ul>
+                                </nav>
                             </g:if>
-                            <g:else>
-                                <g:if test="${countPropertyByType >= 8}">
-                                    <nav aria-label="Page navigation">
-                                        <ul class="pagination">
-                                        <g:form method="post" controller="property" action="getProperty" params="${params - [inputPage: params.inputPage]}">
-                                            <g:paginate maxsteps="0" controller="property" action="getProperty" params="${params - [inputPage: params.inputPage]}" total="${countPropertyByType}" prev="‹" next="›" first="First" last="Last" />
-                                        </g:form>
-                                        </ul>
-                                    </nav>
-                                </g:if>
-                            </g:else>
+
                         </div>
                     </div>
                 </div>
