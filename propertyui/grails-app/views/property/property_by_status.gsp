@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: gHost
-  Date: 2019-11-02
-  Time: 20:11
+  Date: 2019-11-17
+  Time: 19:36
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" import="Enums.PropertyFeature" %>
@@ -24,11 +24,11 @@
                         <h1>Properties Listing</h1>
                         <ul class="breadcrumbs">
                             <li><a href="${createLink(controller: 'property', action: 'index')}">
-                                    <g:message code="public.home.label"/>
-                                 </a>
+                                <g:message code="public.home.label"/>
+                            </a>
                             </li>
                             <li class="active">Property  ${params?.type ? ' Type' : ''}
-                                <g:message code="property.listing.${params?.type}.label" default="${params?.type}"/>
+                            <g:message code="property.listing.${params?.type}.label" default="${params?.type}"/>
                             </li>
                         </ul>
                     </div>
@@ -36,6 +36,7 @@
             </div>
         </div>
         <!-- Sub Banner end -->
+
         <g:if test="${propertyList?.size() > 0}">
             <!-- Properties section body start -->
             <div class="properties-section property-big content-area">
@@ -125,18 +126,18 @@
                                         </h3>
                                         <p>${property?.description?.take(200)}</p>
                                         <ul class="facilities-list clearfix">
-                                        <g:if test="${details}">
-                                            <g:each var="detail" in="${details}" status="a">
-                                                <g:set var="feature" value="${detail?.getFeature()}"/>
-                                                <g:set var="unit" value="${detail?.getUnit()}"/>
-                                                <g:if test="${a < 6}">
-                                                    <li>
-                                                        <i class="flaticon-${PropertyFeature.getByValue(feature)?.code()}"></i>
-                                                        <span>${unit} <g:message code="property.feature.${feature}.label" default="${feature}"/></span>
-                                                    </li>
-                                                </g:if>
-                                            </g:each>
-                                        </g:if>
+                                            <g:if test="${details}">
+                                                <g:each var="detail" in="${details}" status="a">
+                                                    <g:set var="feature" value="${detail?.getFeature()}"/>
+                                                    <g:set var="unit" value="${detail?.getUnit()}"/>
+                                                    <g:if test="${a < 6}">
+                                                        <li>
+                                                            <i class="flaticon-${PropertyFeature.getByValue(feature)?.code()}"></i>
+                                                            <span>${unit} <g:message code="property.feature.${feature}.label" default="${feature}"/></span>
+                                                        </li>
+                                                    </g:if>
+                                                </g:each>
+                                            </g:if>
                                         </ul>
                                         <div class="property-footer">
                                             <span class="left">
@@ -153,12 +154,12 @@
                             </g:each>
                             <!-- property end -->
 
-                            <g:if test="${countPropertyByType >= 8}">
+                            <g:if test="${countPropertyByStatus >= 8}">
                                 <nav aria-label="Page navigation">
                                     <ul class="pagination">
-                                    <g:form method="post" controller="property" action="buy" params="${params - [inputPage: params.inputPage]}">
-                                        <g:paginate maxsteps="0" controller="property" action="buy" params="${params - [inputPage: params.inputPage]}" total="${countPropertyByType}" prev="‹" next="›" first="First" last="Last" />
-                                    </g:form>
+                                        <g:form method="post" controller="property" action="buy" params="${params - [inputPage: params.inputPage]}">
+                                            <g:paginate maxsteps="0" controller="property" action="buy" params="${params - [inputPage: params.inputPage]}" total="${countPropertyByStatus}" prev="‹" next="›" first="First" last="Last" />
+                                        </g:form>
                                     </ul>
                                 </nav>
                             </g:if>
@@ -169,6 +170,8 @@
             </div>
             <!-- Properties section body end -->
         </g:if>
+
         <g:render template="/templates/footer"/>
+
     </body>
 </html>

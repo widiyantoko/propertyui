@@ -24,7 +24,7 @@
                         ${request.forwardURI?.equals('/property/buy/' + params?.type) ? 'active' : ''}
                         ${request.forwardURI?.equals('/property-details/' + params?.long('id')) ? 'active' : ''}
                         ${request.forwardURI?.equals('/property/search') ? 'active' : ''}">
-                        <a href="${createLink(controller: 'property', action: 'propertyList')}">
+                        <a tabindex="0" data-toggle="dropdown" data-submenu="" aria-expanded="false" href="${createLink(controller: 'property', action: 'propertyList')}">
                             <g:message code="public.buy.label"/>
                             <span class="caret"></span>
                         </a>
@@ -40,8 +40,8 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="dropdown">
-                        <a>
+                    <li class="dropdown ${request.forwardURI?.equals('/property/rent/' + params?.type) ? 'active' : ''}">
+                        <a tabindex="0" data-toggle="dropdown" data-submenu="" aria-expanded="false">
                             <g:message code="public.rent.label"/>
                             <span class="caret"></span>
                         </a>

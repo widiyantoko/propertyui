@@ -267,6 +267,7 @@ class PropertyService {
             eq("isAvailable", Boolean.TRUE)
             eq("isSale", Boolean.FALSE)
             eq("propertyStatus", PropertyStatus.SALE.name())
+            ne("propertyStatus", PropertyStatus.RENT.name())
 
             and {
                 if (params?.type?.equalsIgnoreCase('home')) {
@@ -296,6 +297,69 @@ class PropertyService {
             eq("isAvailable", Boolean.TRUE)
             eq("isSale", Boolean.FALSE)
             eq("propertyStatus", PropertyStatus.SALE.name())
+            ne("propertyStatus", PropertyStatus.RENT.name())
+            projections {
+                count("id")
+            }
+            and {
+                if (params?.type?.equalsIgnoreCase('home')) {
+                    eq("propertyType", PropertyType.HOME.name())
+                } else if (params?.type?.equalsIgnoreCase('apartment')) {
+                    eq("propertyType", PropertyType.APARTMENT.name())
+                } else if (params?.type?.equalsIgnoreCase('ruko')) {
+                    eq("propertyType", PropertyType.RUKO.name())
+                } else if (params?.type?.equalsIgnoreCase('land')) {
+                    eq("propertyType", PropertyType.LAND.name())
+                }
+            }
+        } as Long
+
+        return result
+    }
+
+    List<Property> getPropertyByStatus(GrailsParameterMap params) {
+
+        Map<String, Object> getParams = processParams(params)
+        Integer maxResult = (Integer) getParams.get("maxRslt")
+        Integer offset = (Integer) getParams.get("offset")
+        String sort = getParams.get("sort")
+        String price = getParams.get("price")
+
+        List<Property> propertyList = Property.createCriteria().list([max: maxResult, offset: offset]) {
+            eq("isAvailable", Boolean.TRUE)
+            eq("isSale", Boolean.FALSE)
+            eq("propertyStatus", PropertyStatus.RENT.name())
+            ne("propertyStatus", PropertyStatus.SALE.name())
+
+            and {
+                if (params?.type?.equalsIgnoreCase('home')) {
+                    eq("propertyType", PropertyType.HOME.name())
+                } else if (params?.type?.equalsIgnoreCase('apartment')) {
+                    eq("propertyType", PropertyType.APARTMENT.name())
+                } else if (params?.type?.equalsIgnoreCase('ruko')) {
+                    eq("propertyType", PropertyType.RUKO.name())
+                } else if (params?.type?.equalsIgnoreCase('office')) {
+                    eq("propertyType", PropertyType.OFFICE.name())
+                }
+            }
+
+            if (sort) {
+                order("lastModified", sort)
+            } else {
+                order("price", price)
+            }
+
+        } as List<Property>
+
+        return propertyList
+    }
+
+    Long totalPropertyByStatus(GrailsParameterMap params) {
+        Long result = Property.createCriteria().get {
+            eq("isAvailable", Boolean.TRUE)
+            eq("isSale", Boolean.FALSE)
+            eq("propertyStatus", PropertyStatus.RENT.name())
+            ne("propertyStatus", PropertyStatus.SALE.name())
             projections {
                 count("id")
             }
