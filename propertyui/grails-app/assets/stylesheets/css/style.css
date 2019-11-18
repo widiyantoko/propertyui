@@ -2195,7 +2195,8 @@ input[type=checkbox]:checked + label:before {
 footer {
     background: #111;
     color: #7c7e83;
-    padding: 100px 0 30px;
+    /*padding: 100px 0 30px;*/
+    padding: 40px 0 10px;
 }
 
 footer .footer-item .newsletter input {
@@ -2245,7 +2246,8 @@ footer .footer-item .newsletter {
 }
 
 .footer-item {
-    margin-bottom: 50px;
+    /*margin-bottom: 50px;*/
+    margin-bottom: 20px;
 }
 
 .footer-info .personal-info li i {
@@ -6860,8 +6862,11 @@ table.manage-table .title-container .title span {
 
     .banner .btn {
         font-size: 11px;
-        padding: 9px 10px 7px 10px;
+        /*padding: 9px 10px 7px 10px;*/
+        padding: 10px 10px 10px 10px;
+        /*margin-bottom: 5px;*/
         margin-bottom: 5px;
+        margin-top: 5px;
     }
 
     .logo {

@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row clearfix">
             <div class="col-md-8 col-sm-12">
-                &copy;  2019 <a href="http://themevessel.com/" target="_blank">gHost Dev</a>
+                &copy;  2019 <a href="#" target="_blank">gHost Dev</a>
             </div>
             <div class="col-md-4 col-sm-12">
                 <ul class="social-list clearfix">
