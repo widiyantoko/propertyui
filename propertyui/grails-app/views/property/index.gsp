@@ -52,7 +52,9 @@
                         <h1><g:message code="public.feature.property.label"/></h1>
                     </div>
                     <ul class="list-inline-listing filters filters-listing-navigation">
-                        <li class="active btn filtr-button filtr" data-filter="all">All</li>
+                        <li class="active btn filtr-button filtr" data-filter="all">
+                            <g:message code="property.type.all.label"/>
+                        </li>
                         <g:set value="${propertyList.groupBy {it.propertyType}}" var="property"/>
                         <g:each in="${property}" var="p">
                            <g:set value="${p.key?.toString()}" var="i"/>
@@ -70,8 +72,12 @@
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  filtr-item" data-category="${PropertyType?.getByValue(property?.propertyType)?.code()}">
                                     <div class="property">
                                         <div class="property-img">
-                                            <a href="${createLink(controller: 'property', action: 'getProperty', params: [type: property?.propertyType])}" class="property-tag button alt featured">${property?.propertyType}</a>
-                                            <a href="${createLink(controller: 'property', action: 'getProperty', params: [status: property?.propertyStatus])}" class="property-tag button sale">${property?.propertyStatus}</a>
+                                            <a href="${createLink(controller: 'property', action: 'buy', params: [type: property?.propertyType?.toLowerCase()])}" class="property-tag button alt featured">
+                                                <g:message code="property.type.${property?.propertyType}.label" default="${property?.propertyType}"/>
+                                            </a>
+                                            <a class="property-tag button sale">
+                                                <g:message code="property.status.${property?.propertyStatus}.label" default="${property?.propertyStatus}"/>
+                                            </a>
                                             <div class="property-price">
                                                 <g:formatNumber number="${property?.price}" format="\$###,##0" type="currency" currencyCode="IDR" locale="id_ID"/>
                                             </div>
@@ -141,7 +147,9 @@
                         <div class="clearfix"></div>
                         <div class="row wow">
                             <div class="col-lg-12 text-center mt-20">
-                                <a href="${createLink(controller: "property", action: "propertyList")}" class="btn button-md button-theme text-center">Load More</a>
+                                <a href="${createLink(controller: "property", action: "propertyList")}" class="btn button-md button-theme text-center">
+                                    <g:message code="public.button.more.label"/>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -222,7 +230,7 @@
                                 <div class="counter-box">
                                     <i class="flaticon-tag"></i>
                                     <h1 class="counter">${countStatus.get(status.name())}</h1>
-                                    <p>Property For <g:message code="property.status.${status.name()}.label" default="${status.name()}"/></p>
+                                    <p>Untuk di <g:message code="property.status.${status.name()}.label" default="${status.name()}"/></p>
                                 </div>
                             </div>
                         </g:each>
@@ -265,7 +273,8 @@
                                             </div>
                                             <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
                                                 <div class="text">
-                                                    <p style="font-style: italic">"${lr?.userReview?.take(300)}"</p>
+%{--                                                    <p style="font-style: italic">"${lr?.userReview?.take(300)}"</p>--}%
+                                                    <p style="font-style: italic">"${lr?.userReview?.take(240)}"</p>
                                                 </div>
                                                 <div class="author-name">
                                                     ${lr?.user?.getFullName()}
@@ -416,7 +425,9 @@
                                             </div>
                                             <p style="font-style: italic">${property?.userReview?.take(300)}</p>
                                         </section>
-                                        <a href="${createLink(controller: 'property', action: 'propertyDetails', params: [id: property?.id])}" class="btn button-sm button-theme">Show Detail</a>
+                                        <a href="${createLink(controller: 'property', action: 'propertyDetails', params: [id: property?.id])}" class="btn button-sm button-theme">
+                                            <g:message code="public.show.detail.label"/>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -426,6 +437,7 @@
             </div>
         </g:each>
 
+        <g:render template="/templates/simple_footer"/>
         <g:render template="/templates/footer"/>
 
     </body>

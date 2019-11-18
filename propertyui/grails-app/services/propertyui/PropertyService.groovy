@@ -24,7 +24,7 @@ class PropertyService {
     List<Property> searchPropertyByParams(GrailsParameterMap params) {
 
         String keywords = params?.keywords ?: ''
-        String type = params?.propertyType ?: ''
+        String type = params?.type ?: ''
         String status = params?.status ?: ''
 
         Map<String, Object> getParams = processParams(params)
@@ -43,9 +43,13 @@ class PropertyService {
                 }
             }
             and {
-                if (type == PropertyType.OTHERS.name()) {
+                if (type == PropertyType.RUKO.name()) {
                     or {
-                        eq("propertyType", PropertyType.OTHERS.name())
+                        eq("propertyType", PropertyType.RUKO.name())
+                    }
+                } else if (type == PropertyType.LAND.name()) {
+                    or {
+                        eq("propertyType", PropertyType.LAND.name())
                     }
                 } else if (type == PropertyType.APARTMENT.name()) {
                     or {
@@ -88,7 +92,7 @@ class PropertyService {
     Long countPropertyByParams(GrailsParameterMap params) {
 
         String keywords = params?.keywords ?: ''
-        String type = params?.propertyType ?: ''
+        String type = params?.type ?: ''
         String status = params?.status ?: ''
 
         Long result = Property.createCriteria().get {
@@ -145,7 +149,7 @@ class PropertyService {
 
     Long totalProperty(GrailsParameterMap params) {
 
-        String type = params?.propertyType ?: ''
+        String type = params?.type ?: ''
         String status = params?.status ?: ''
 
         Long result = Property.createCriteria().get {
@@ -155,23 +159,23 @@ class PropertyService {
                 count("id")
             }
 
-            if (type == PropertyType.LAND.name()) {
+            if (type?.equalsIgnoreCase('land')) {
                 or {
                     eq("propertyType", PropertyType.LAND.name())
                 }
-            } else if(type == PropertyType.RUKO.name()) {
+            } else if(type?.equalsIgnoreCase('ruko')) {
                 or {
                     eq("propertyType", PropertyType.RUKO.name())
                 }
-            } else if (type == PropertyType.APARTMENT.name()) {
+            } else if (type?.equalsIgnoreCase('apartment')) {
                 or {
                     eq("propertyType", PropertyType.APARTMENT.name())
                 }
-            } else if (type == PropertyType.OFFICE.name()) {
+            } else if (type?.equalsIgnoreCase('office')) {
                 or {
                     eq("propertyType", PropertyType.OFFICE.name())
                 }
-            } else if (type == PropertyType.HOME.name()) {
+            } else if (type?.equalsIgnoreCase('home')) {
                 or {
                     eq("propertyType", PropertyType.HOME.name())
                 }
@@ -179,11 +183,11 @@ class PropertyService {
 
             isNotNull('propertyStatus')
 
-            if (status == PropertyStatus.RENT.name()) {
+            if (status?.equalsIgnoreCase('rent')) {
                 or {
                     eq("propertyStatus", PropertyStatus.RENT.name())
                 }
-            }  else if (status == PropertyStatus.SALE.name()) {
+            }  else if (status?.equalsIgnoreCase('sale')) {
                 or {
                     eq("propertyStatus", PropertyStatus.SALE.name())
                 }
@@ -201,7 +205,7 @@ class PropertyService {
         Integer offset = (Integer) getParams.get("offset")
         String sort = getParams.get("sort")
         String price = getParams.get("price")
-        String type = params?.propertyType ?: ''
+        String type = params?.type ?: ''
         String status = params?.status ?: ''
 
         List<Property> propertyList = Property.createCriteria().list([max: maxResult, offset: offset]) {
@@ -209,23 +213,23 @@ class PropertyService {
             eq("isSale", Boolean.FALSE)
 
             and {
-                if (type == PropertyType.LAND.name()) {
+                if (type?.equalsIgnoreCase('land')) {
                     or {
                         eq("propertyType", PropertyType.LAND.name())
                     }
-                } else if(type == PropertyType.RUKO.name()) {
+                } else if(type?.equalsIgnoreCase('ruko')) {
                     or {
                         eq("propertyType", PropertyType.RUKO.name())
                     }
-                } else if (type == PropertyType.APARTMENT.name()) {
+                } else if (type?.equalsIgnoreCase('apartment')) {
                     or {
                         eq("propertyType", PropertyType.APARTMENT.name())
                     }
-                } else if (type == PropertyType.OFFICE.name()) {
+                } else if (type?.equalsIgnoreCase('office')) {
                     or {
                         eq("propertyType", PropertyType.OFFICE.name())
                     }
-                } else if (type == PropertyType.HOME.name()) {
+                } else if (type?.equalsIgnoreCase('home')) {
                     or {
                         eq("propertyType", PropertyType.HOME.name())
                     }
@@ -233,11 +237,11 @@ class PropertyService {
 
                 isNotNull('propertyStatus')
 
-                if (status == PropertyStatus.RENT.name()) {
+                if (status?.equalsIgnoreCase('rent')) {
                     or {
                         eq("propertyStatus", PropertyStatus.RENT.name())
                     }
-                }  else if (status == PropertyStatus.SALE.name()) {
+                }  else if (status?.equalsIgnoreCase('sale')) {
                     or {
                         eq("propertyStatus", PropertyStatus.SALE.name())
                     }

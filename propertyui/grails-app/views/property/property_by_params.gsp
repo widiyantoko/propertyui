@@ -51,19 +51,19 @@
                                     <div class="sorting-options">
                                         <select class="sorting js-order-property-date">
                                             <option ${params?.sort?.equals('desc') ? 'selected' : ''}
-                                                    data-url="${createLink(controller: 'property', action: 'search', params: [keywords: params?.keywords, sort :'desc', status: params?.status, propertyType: params?.propertyType])}">
+                                                    data-url="${createLink(controller: 'property', action: 'search', params: [keywords: params?.keywords, sort :'desc', status: params?.status, type: params?.type])}">
                                                 <g:message code="public.date.filter.desc.label"/>
                                             </option>
                                             <option ${params?.sort?.equals('asc') ? 'selected' : ''}
-                                                    data-url="${createLink(controller: 'property', action: 'search', params: [keywords: params?.keywords, sort :'asc', status: params?.status, propertyType: params?.propertyType])}">
+                                                    data-url="${createLink(controller: 'property', action: 'search', params: [keywords: params?.keywords, sort :'asc', status: params?.status, type: params?.type])}">
                                                 <g:message code="public.date.filter.asc.label"/>
                                             </option>
                                             <option ${params?.price?.equals('desc') ? 'selected' : ''}
-                                                    data-url="${createLink(controller: 'property', action: 'search', params: [keywords: params?.keywords, price : 'desc', status: params?.status, propertyType: params?.propertyType])}">
+                                                    data-url="${createLink(controller: 'property', action: 'search', params: [keywords: params?.keywords, price : 'desc', status: params?.status, type: params?.type])}">
                                                 <g:message code="public.price.filter.desc.label"/>
                                             </option>
                                             <option ${params?.price?.equals('asc') ? 'selected' : ''}
-                                                    data-url="${createLink(controller: 'property', action: 'search', params: [keywords: params?.keywords, price : 'asc', status: params?.status, propertyType: params?.propertyType])}">
+                                                    data-url="${createLink(controller: 'property', action: 'search', params: [keywords: params?.keywords, price : 'asc', status: params?.status, type: params?.type])}">
                                                 <g:message code="public.price.filter.asc.label"/>
                                             </option>
                                         </select>
@@ -88,10 +88,10 @@
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 col-pad">
                                         <div class="property-img">
                                             <a href="${createLink(controller: 'property', action: 'getProperty', params: [type: property?.propertyType])}" class="property-tag button alt featured">
-                                                ${property?.propertyType}
+                                                <g:message code="property.type.${property?.propertyType}.label" default="${property?.propertyType}"/>
                                             </a>
                                             <a href="${createLink(controller: 'property', action: 'getProperty', params: [status: property?.propertyStatus])}" class="property-tag button sale">
-                                                ${property?.propertyStatus}
+                                                <g:message code="property.status.${property?.propertyStatus}.label" default="${property?.propertyStatus}"/>
                                             </a>
                                             <div class="property-price">
                                                 <g:formatNumber number="${property?.price}" format="\$###,##0" type="currency" currencyCode="IDR" locale="id_ID"/>
@@ -174,7 +174,7 @@
                             </div>
 
                             <g:form method="GET" controller="property" action="search">
-                                <input type="hidden" name="postDate" value="${params?.sort}">
+                                <input type="hidden" name="sort" value="${params?.sort}">
                                 <input type="hidden" name="price" value="${params?.price}">
                                 <div class="form-group">
                                     <input type="text" name="keywords" class="form-control search-fields ${propertyList ? 'hidden': ''}" placeholder="" value="${params?.keywords}">
@@ -203,10 +203,10 @@
                                 </div>
                                 -->
                                 <div class="form-group">
-                                    <select class="selectpicker search-fields" name="propertyType">
-                                        <option disabled selected value="" style="display: none" ${!params?.propertyType ? 'selected' : ''}>Type</option>
+                                    <select class="selectpicker search-fields" name="type">
+                                        <option disabled selected value="" style="display: none" ${!params?.type ? 'selected' : ''}>Type</option>
                                         <g:each in="${PropertyType}" var="pType">
-                                            <option name="propertyType" value="${pType}">
+                                            <option name="type" value="${pType}">
                                                 <g:message code="property.type.${pType}.label"/>
                                             </option>
                                         </g:each>
