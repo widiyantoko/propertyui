@@ -210,6 +210,24 @@ class PropertyController {
 
     }
 
+    def type() {
+        params?.max = params?.int("max", 8)
+        if (params?.inputPage) {
+            Integer inputPage = (params?.int("inputPage") - 1 ) * params?.max
+            params?.offset = inputPage
+        }
+
+        params?.sort = params?.sort ?: 'desc'
+        params?.price = params?.price ?: ''
+
+        List<Property> propertyList = propertyService.getAllProperty(params)
+
+        render view: "property_all_type", model: [
+                propertyList: propertyList,
+                countPropertyByStatus: propertyService.totalProperty(params)
+        ]
+    }
+
     def blog() {
 
         render view: "test", model: [

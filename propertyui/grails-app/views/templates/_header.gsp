@@ -24,7 +24,8 @@
                         ${request.forwardURI?.equals('/property/buy/' + params?.type) ? 'active' : ''}
                         ${request.forwardURI?.equals('/property-details/' + params?.long('id')) ? 'active' : ''}
                         ${request.forwardURI?.equals('/property/search') ? 'active' : ''}
-                        ${request.forwardURI?.equals('/property/list/sale') ? 'active' : ''}">
+                        ${request.forwardURI?.equals('/property/list/sale') ? 'active' : ''}
+                        ${request.forwardURI?.equals('/property/type/' + params?.type) ? 'active' : ''}">
                         <a tabindex="0" data-toggle="dropdown" data-submenu="" aria-expanded="false">
                             <g:message code="public.buy.label"/>
                             <span class="caret"></span>

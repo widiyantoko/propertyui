@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: gHost
   Date: 2019-11-19
-  Time: 15:43
+  Time: 18:01
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" import="Enums.PropertyFeature" %>
@@ -51,7 +51,7 @@
                                                 <i class="fa fa-th-list"></i>
                                             </span>
                                             <span class="hidden-xs">${countPropertyByStatus} Property
-                                                <g:message code="property.listing.${params?.type}.label" default="${params?.type}"/>
+                                            <g:message code="property.listing.${params?.type}.label" default="${params?.type}"/>
                                             </span>
                                         </h4>
                                     </div>
@@ -59,19 +59,19 @@
                                         <div class="sorting-options">
                                             <select class="sorting js-filter-property-by-type">
                                                 <option ${params?.sort?.equals('desc') ? 'selected' : ''}
-                                                        data-url="${createLink(controller: 'property', action: 'list', params: [type: params?.type, sort :'desc'])}">
+                                                        data-url="${createLink(controller: 'property', action: 'type', params: [type: params?.type, sort :'desc'])}">
                                                     <g:message code="public.date.filter.desc.label"/>
                                                 </option>
                                                 <option ${params?.sort?.equals('asc') ? 'selected' : ''}
-                                                        data-url="${createLink(controller: 'property', action: 'list', params: [type: params?.type, sort : 'asc'])}">
+                                                        data-url="${createLink(controller: 'property', action: 'type', params: [type: params?.type, sort : 'asc'])}">
                                                     <g:message code="public.date.filter.asc.label"/>
                                                 </option>
                                                 <option ${params?.price?.equals('desc') ? 'selected' : ''}
-                                                        data-url="${createLink(controller: 'property', action: 'list', params: [type: params?.type, price : 'desc'])}">
+                                                        data-url="${createLink(controller: 'property', action: 'type', params: [type: params?.type, price : 'desc'])}">
                                                     <g:message code="public.price.filter.asc.label"/>
                                                 </option>
                                                 <option ${params?.price?.equals('asc') ? 'selected' : ''}
-                                                        data-url="${createLink(controller: 'property', action: 'list', params: [type: params?.type, price : 'asc'])}">
+                                                        data-url="${createLink(controller: 'property', action: 'type', params: [type: params?.type, price : 'asc'])}">
                                                     <g:message code="public.price.filter.desc.label"/>
                                                 </option>
                                             </select>
@@ -159,8 +159,8 @@
                             <g:if test="${countPropertyByStatus >= 8}">
                                 <nav aria-label="Page navigation">
                                     <ul class="pagination">
-                                        <g:form method="post" controller="property" action="list" params="${params - [inputPage: params.inputPage]}">
-                                            <g:paginate maxsteps="0" controller="property" action="list" params="${params - [inputPage: params.inputPage]}" total="${countPropertyByStatus}" prev="‹" next="›" first="First" last="Last" />
+                                        <g:form method="post" controller="property" action="type" params="${params - [inputPage: params.inputPage]}">
+                                            <g:paginate maxsteps="0" controller="property" action="type" params="${params - [inputPage: params.inputPage]}" total="${countPropertyByStatus}" prev="‹" next="›" first="First" last="Last" />
                                         </g:form>
                                     </ul>
                                 </nav>

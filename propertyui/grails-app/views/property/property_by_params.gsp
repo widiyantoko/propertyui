@@ -288,7 +288,7 @@
                             </div>
                             <ul class="list-unstyled list-cat">
                                 <g:each in="${typeList}" var="type">
-                                    <li><a href="${createLink(controller: 'property', action: 'getProperty', params: [type: type?.name()])}">
+                                    <li><a href="${createLink(controller: 'property', action: 'type', params: [type: type?.name()?.toLowerCase()])}">
                                         <g:message code="property.type.${type?.name()}.label" default="${type?.name()}"/>
                                     </a>
                                         <span>(${countType.get(type.name())})</span>

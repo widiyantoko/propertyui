@@ -147,57 +147,6 @@ class PropertyService {
         return result
     }
 
-    Long totalProperty(GrailsParameterMap params) {
-
-        String type = params?.type ?: ''
-        String status = params?.status ?: ''
-
-        Long result = Property.createCriteria().get {
-            eq("isAvailable", Boolean.TRUE)
-            eq("isSale", Boolean.FALSE)
-            projections {
-                count("id")
-            }
-
-            if (type?.equalsIgnoreCase('land')) {
-                or {
-                    eq("propertyType", PropertyType.LAND.name())
-                }
-            } else if(type?.equalsIgnoreCase('ruko')) {
-                or {
-                    eq("propertyType", PropertyType.RUKO.name())
-                }
-            } else if (type?.equalsIgnoreCase('apartment')) {
-                or {
-                    eq("propertyType", PropertyType.APARTMENT.name())
-                }
-            } else if (type?.equalsIgnoreCase('office')) {
-                or {
-                    eq("propertyType", PropertyType.OFFICE.name())
-                }
-            } else if (type?.equalsIgnoreCase('home')) {
-                or {
-                    eq("propertyType", PropertyType.HOME.name())
-                }
-            }
-
-            isNotNull('propertyStatus')
-
-            if (status?.equalsIgnoreCase('rent')) {
-                or {
-                    eq("propertyStatus", PropertyStatus.RENT.name())
-                }
-            }  else if (status?.equalsIgnoreCase('sale')) {
-                or {
-                    eq("propertyStatus", PropertyStatus.SALE.name())
-                }
-            }
-
-        } as Long
-
-        return result
-    }
-
     List<Property> getAllProperty(GrailsParameterMap params) {
 
         Map<String, Object> getParams = processParams(params)
@@ -257,6 +206,57 @@ class PropertyService {
         } as List<Property>
 
         return propertyList
+    }
+
+    Long totalProperty(GrailsParameterMap params) {
+
+        String type = params?.type ?: ''
+        String status = params?.status ?: ''
+
+        Long result = Property.createCriteria().get {
+            eq("isAvailable", Boolean.TRUE)
+            eq("isSale", Boolean.FALSE)
+            projections {
+                count("id")
+            }
+
+            if (type?.equalsIgnoreCase('land')) {
+                or {
+                    eq("propertyType", PropertyType.LAND.name())
+                }
+            } else if(type?.equalsIgnoreCase('ruko')) {
+                or {
+                    eq("propertyType", PropertyType.RUKO.name())
+                }
+            } else if (type?.equalsIgnoreCase('apartment')) {
+                or {
+                    eq("propertyType", PropertyType.APARTMENT.name())
+                }
+            } else if (type?.equalsIgnoreCase('office')) {
+                or {
+                    eq("propertyType", PropertyType.OFFICE.name())
+                }
+            } else if (type?.equalsIgnoreCase('home')) {
+                or {
+                    eq("propertyType", PropertyType.HOME.name())
+                }
+            }
+
+            isNotNull('propertyStatus')
+
+            if (status?.equalsIgnoreCase('rent')) {
+                or {
+                    eq("propertyStatus", PropertyStatus.RENT.name())
+                }
+            }  else if (status?.equalsIgnoreCase('sale')) {
+                or {
+                    eq("propertyStatus", PropertyStatus.SALE.name())
+                }
+            }
+
+        } as Long
+
+        return result
     }
 
     List<Property> getPropertyByType(GrailsParameterMap params) {
