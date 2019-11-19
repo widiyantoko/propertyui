@@ -101,7 +101,7 @@
                                                 <a href="${createLink(controller: "property", action: "propertyDetails", params: [id: property?.id])}" class="overlay-link">
                                                     <i class="fa fa-link"></i>
                                                 </a>
-                                                <a class="overlay-link property-video" title="Lexus GS F">
+                                                <a class="overlay-link property-video" data-property-id="${property?.id}" title="Lexus GS F">
                                                     <i class="fa fa-video-camera"></i>
                                                 </a>
                                                 <div class="property-magnify-gallery">
@@ -366,6 +366,11 @@
             </div>
         </div>
         <!-- Properties section body end -->
+
+        <g:if test="${propertyList}">
+            <g:render template="modal_property_preview" model="${propertyList}"/>
+        </g:if>
+
         <g:render template="/templates/footer"/>
     </body>
 </html>

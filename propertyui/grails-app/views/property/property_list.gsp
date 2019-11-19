@@ -44,7 +44,7 @@
                                         <span class="heading-icon">
                                             <i class="fa fa-th-list"></i>
                                         </span>
-                                        <span class="hidden-xs">Properties List</span>
+                                        <span class="hidden-xs">${totalProperty} Properties List</span>
                                     </h4>
                                 </div>
                                 <div class="col-lg-6 col-md-7 col-sm-7 col-xs-10 cod-pad">
@@ -103,7 +103,7 @@
                                             <a href="${createLink(controller: "property", action: "propertyDetails", params: [id: property?.id])}" class="overlay-link">
                                                 <i class="fa fa-link"></i>
                                             </a>
-                                            <a class="overlay-link property-video" title="Lexus GS F">
+                                            <a class="overlay-link property-video" data-property-id="${property?.id}" title="Lexus GS F">
                                                 <i class="fa fa-video-camera"></i>
                                             </a>
                                             <div class="property-magnify-gallery">
@@ -417,6 +417,11 @@
             </div>
         </div>
         <!-- Properties section body end -->
+
+        <g:if test="${propertyList}">
+            <g:render template="modal_property_preview" model="${propertyList}"/>
+        </g:if>
+
         <g:render template="/templates/footer"/>
     </body>
 </html>
