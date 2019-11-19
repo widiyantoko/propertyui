@@ -25,7 +25,7 @@
                         ${request.forwardURI?.equals('/property-details/' + params?.long('id')) ? 'active' : ''}
                         ${request.forwardURI?.equals('/property/search') ? 'active' : ''}
                         ${request.forwardURI?.equals('/property/list/sale') ? 'active' : ''}">
-                        <a tabindex="0" data-toggle="dropdown" data-submenu="" aria-expanded="false" href="${createLink(controller: 'property', action: 'propertyList')}">
+                        <a tabindex="0" data-toggle="dropdown" data-submenu="" aria-expanded="false">
                             <g:message code="public.buy.label"/>
                             <span class="caret"></span>
                         </a>

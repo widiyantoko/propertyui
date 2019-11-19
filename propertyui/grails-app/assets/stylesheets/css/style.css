@@ -7303,6 +7303,7 @@ table.manage-table .title-container .title span {
 
 .c-pagination .c-pagination-input {
     width: 50px;
+    height: 30px;
     margin-left: 5px;
     text-align: center;
 }

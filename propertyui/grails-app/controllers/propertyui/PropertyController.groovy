@@ -154,7 +154,7 @@ class PropertyController {
             notFound()
             return
         }
-        render view: "property_by_type", model: [
+        render view: "property_status_sale", model: [
                 propertyList: propertyList,
                 countPropertyByType: propertyService.totalPropertyByType(params)
         ]
@@ -178,7 +178,7 @@ class PropertyController {
             return
         }
 
-        render view: "property_by_status", model: [
+        render view: "property_status_rent", model: [
                 propertyList: propertyList,
                 countPropertyByStatus: propertyService.totalPropertyByStatus(params)
         ]
@@ -203,7 +203,7 @@ class PropertyController {
             return
         }
 
-        render view: "property_availability", model: [
+        render view: "property_rent_and_sale", model: [
                 propertyList: propertyList,
                 countPropertyByStatus: propertyService.totalPropertyByStatusFor(params)
         ]

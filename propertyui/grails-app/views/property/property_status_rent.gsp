@@ -57,19 +57,19 @@
                                         <div class="sorting-options">
                                             <select class="sorting js-filter-property-by-type">
                                                 <option ${params?.sort?.equals('desc') ? 'selected' : ''}
-                                                        data-url="${createLink(controller: 'property', action: 'buy', params: [type: params?.type, sort :'desc'])}">
+                                                        data-url="${createLink(controller: 'property', action: 'rent', params: [type: params?.type, sort :'desc'])}">
                                                     <g:message code="public.date.filter.desc.label"/>
                                                 </option>
                                                 <option ${params?.sort?.equals('asc') ? 'selected' : ''}
-                                                        data-url="${createLink(controller: 'property', action: 'buy', params: [type: params?.type, sort : 'asc'])}">
+                                                        data-url="${createLink(controller: 'property', action: 'rent', params: [type: params?.type, sort : 'asc'])}">
                                                     <g:message code="public.date.filter.asc.label"/>
                                                 </option>
                                                 <option ${params?.price?.equals('desc') ? 'selected' : ''}
-                                                        data-url="${createLink(controller: 'property', action: 'buy', params: [type: params?.type, price : 'desc'])}">
+                                                        data-url="${createLink(controller: 'property', action: 'rent', params: [type: params?.type, price : 'desc'])}">
                                                     <g:message code="public.price.filter.asc.label"/>
                                                 </option>
                                                 <option ${params?.price?.equals('asc') ? 'selected' : ''}
-                                                        data-url="${createLink(controller: 'property', action: 'buy', params: [type: params?.type, price : 'asc'])}">
+                                                        data-url="${createLink(controller: 'property', action: 'rent', params: [type: params?.type, price : 'asc'])}">
                                                     <g:message code="public.price.filter.desc.label"/>
                                                 </option>
                                             </select>
@@ -88,11 +88,11 @@
                                 <div class="property property-hp clearfix wow fadeInUp delay-03s">
                                     <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 col-pad">
                                         <div class="property-img">
-                                            <a href="${createLink(controller: 'property', action: 'getProperty', params: [type: property?.propertyType])}" class="property-tag button alt featured">
-                                                ${property?.propertyType}
+                                            <a class="property-tag button alt featured">
+                                                <g:message code="property.type.${property?.propertyType}.label" default="${property?.propertyType}"/>
                                             </a>
-                                            <a href="${createLink(controller: 'property', action: 'getProperty', params: [status: property?.propertyStatus])}" class="property-tag button sale">
-                                                ${property?.propertyStatus}
+                                            <a class="property-tag button sale">
+                                                <g:message code="property.status.${property?.propertyStatus}.label" default="${property?.propertyStatus}"/>
                                             </a>
                                             <div class="property-price">
                                                 <g:formatNumber number="${property?.price}" format="\$###,##0" type="currency" currencyCode="IDR" locale="id_ID"/>
@@ -157,8 +157,8 @@
                             <g:if test="${countPropertyByStatus >= 8}">
                                 <nav aria-label="Page navigation">
                                     <ul class="pagination">
-                                        <g:form method="post" controller="property" action="buy" params="${params - [inputPage: params.inputPage]}">
-                                            <g:paginate maxsteps="0" controller="property" action="buy" params="${params - [inputPage: params.inputPage]}" total="${countPropertyByStatus}" prev="‹" next="›" first="First" last="Last" />
+                                        <g:form method="post" controller="property" action="rent" params="${params - [inputPage: params.inputPage]}">
+                                            <g:paginate maxsteps="0" controller="property" action="rent" params="${params - [inputPage: params.inputPage]}" total="${countPropertyByStatus}" prev="‹" next="›" first="First" last="Last" />
                                         </g:form>
                                     </ul>
                                 </nav>

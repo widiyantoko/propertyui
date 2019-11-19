@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: gHost
-  Date: 2019-11-02
-  Time: 20:11
+  Date: 2019-11-19
+  Time: 15:43
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" import="Enums.PropertyFeature" %>
@@ -24,11 +24,11 @@
                         <h1>Properties Listing</h1>
                         <ul class="breadcrumbs">
                             <li><a href="${createLink(controller: 'property', action: 'index')}">
-                                    <g:message code="public.home.label"/>
-                                 </a>
+                                <g:message code="public.home.label"/>
+                            </a>
                             </li>
                             <li class="active">Property  ${params?.type ? ' Type' : ''}
-                                <g:message code="property.listing.${params?.type}.label" default="${params?.type}"/>
+                            <g:message code="property.listing.${params?.type}.label" default="${params?.type}"/>
                             </li>
                         </ul>
                     </div>
@@ -36,6 +36,7 @@
             </div>
         </div>
         <!-- Sub Banner end -->
+
         <g:if test="${propertyList?.size() > 0}">
             <!-- Properties section body start -->
             <div class="properties-section property-big content-area">
@@ -49,26 +50,28 @@
                                             <span class="heading-icon">
                                                 <i class="fa fa-th-list"></i>
                                             </span>
-                                            <span class="hidden-xs">${propertyList?.size()} Properties List ${params?.type}</span>
+                                            <span class="hidden-xs">${countPropertyByStatus} Property
+                                                <g:message code="public.${params?.type}.label" default="${params?.type}"/>
+                                            </span>
                                         </h4>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10 col-pad">
                                         <div class="sorting-options">
                                             <select class="sorting js-filter-property-by-type">
                                                 <option ${params?.sort?.equals('desc') ? 'selected' : ''}
-                                                        data-url="${createLink(controller: 'property', action: 'buy', params: [type: params?.type, sort :'desc'])}">
+                                                        data-url="${createLink(controller: 'property', action: 'list', params: [type: params?.type, sort :'desc'])}">
                                                     <g:message code="public.date.filter.desc.label"/>
                                                 </option>
                                                 <option ${params?.sort?.equals('asc') ? 'selected' : ''}
-                                                        data-url="${createLink(controller: 'property', action: 'buy', params: [type: params?.type, sort : 'asc'])}">
+                                                        data-url="${createLink(controller: 'property', action: 'list', params: [type: params?.type, sort : 'asc'])}">
                                                     <g:message code="public.date.filter.asc.label"/>
                                                 </option>
                                                 <option ${params?.price?.equals('desc') ? 'selected' : ''}
-                                                        data-url="${createLink(controller: 'property', action: 'buy', params: [type: params?.type, price : 'desc'])}">
+                                                        data-url="${createLink(controller: 'property', action: 'list', params: [type: params?.type, price : 'desc'])}">
                                                     <g:message code="public.price.filter.asc.label"/>
                                                 </option>
                                                 <option ${params?.price?.equals('asc') ? 'selected' : ''}
-                                                        data-url="${createLink(controller: 'property', action: 'buy', params: [type: params?.type, price : 'asc'])}">
+                                                        data-url="${createLink(controller: 'property', action: 'list', params: [type: params?.type, price : 'asc'])}">
                                                     <g:message code="public.price.filter.desc.label"/>
                                                 </option>
                                             </select>
@@ -81,17 +84,17 @@
 
                             <div class="clearfix"></div>
 
-                            <!-- property start -->
+                        <!-- property start -->
                             <g:each in="${propertyList}" var="property" status="i">
                                 <g:set var="details" value="${property?.propertyDetails}"/>
                                 <div class="property property-hp clearfix wow fadeInUp delay-03s">
                                     <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 col-pad">
                                         <div class="property-img">
-                                            <a href="${createLink(controller: 'property', action: 'getProperty', params: [type: property?.propertyType])}" class="property-tag button alt featured">
-                                                ${property?.propertyType}
+                                            <a class="property-tag button alt featured">
+                                                <g:message code="property.type.${property?.propertyType}.label" default="${property?.propertyType}"/>
                                             </a>
-                                            <a href="${createLink(controller: 'property', action: 'getProperty', params: [status: property?.propertyStatus])}" class="property-tag button sale">
-                                                ${property?.propertyStatus}
+                                            <a class="property-tag button sale">
+                                                <g:message code="property.status.${property?.propertyStatus}.label" default="${property?.propertyStatus}"/>
                                             </a>
                                             <div class="property-price">
                                                 <g:formatNumber number="${property?.price}" format="\$###,##0" type="currency" currencyCode="IDR" locale="id_ID"/>
@@ -125,18 +128,18 @@
                                         </h3>
                                         <p>${property?.description?.take(200)}</p>
                                         <ul class="facilities-list clearfix">
-                                        <g:if test="${details}">
-                                            <g:each var="detail" in="${details}" status="a">
-                                                <g:set var="feature" value="${detail?.getFeature()}"/>
-                                                <g:set var="unit" value="${detail?.getUnit()}"/>
-                                                <g:if test="${a < 6}">
-                                                    <li>
-                                                        <i class="flaticon-${PropertyFeature.getByValue(feature)?.code()}"></i>
-                                                        <span>${unit} <g:message code="property.feature.${feature}.label" default="${feature}"/></span>
-                                                    </li>
-                                                </g:if>
-                                            </g:each>
-                                        </g:if>
+                                            <g:if test="${details}">
+                                                <g:each var="detail" in="${details}" status="a">
+                                                    <g:set var="feature" value="${detail?.getFeature()}"/>
+                                                    <g:set var="unit" value="${detail?.getUnit()}"/>
+                                                    <g:if test="${a < 6}">
+                                                        <li>
+                                                            <i class="flaticon-${PropertyFeature.getByValue(feature)?.code()}"></i>
+                                                            <span>${unit} <g:message code="property.feature.${feature}.label" default="${feature}"/></span>
+                                                        </li>
+                                                    </g:if>
+                                                </g:each>
+                                            </g:if>
                                         </ul>
                                         <div class="property-footer">
                                             <span class="left">
@@ -151,14 +154,14 @@
                                     </div>
                                 </div>
                             </g:each>
-                            <!-- property end -->
+                        <!-- property end -->
 
-                            <g:if test="${countPropertyByType >= 8}">
+                            <g:if test="${countPropertyByStatus >= 8}">
                                 <nav aria-label="Page navigation">
                                     <ul class="pagination">
-                                    <g:form method="post" controller="property" action="buy" params="${params - [inputPage: params.inputPage]}">
-                                        <g:paginate maxsteps="0" controller="property" action="buy" params="${params - [inputPage: params.inputPage]}" total="${countPropertyByType}" prev="‹" next="›" first="First" last="Last" />
-                                    </g:form>
+                                        <g:form method="post" controller="property" action="list" params="${params - [inputPage: params.inputPage]}">
+                                            <g:paginate maxsteps="0" controller="property" action="list" params="${params - [inputPage: params.inputPage]}" total="${countPropertyByStatus}" prev="‹" next="›" first="First" last="Last" />
+                                        </g:form>
                                     </ul>
                                 </nav>
                             </g:if>
@@ -169,6 +172,8 @@
             </div>
             <!-- Properties section body end -->
         </g:if>
+
         <g:render template="/templates/footer"/>
+
     </body>
 </html>
