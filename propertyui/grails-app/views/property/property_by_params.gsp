@@ -174,8 +174,6 @@
                             </div>
 
                             <g:form method="GET" controller="property" action="search">
-                                <input type="hidden" name="sort" value="${params?.sort}">
-                                <input type="hidden" name="price" value="${params?.price}">
                                 <div class="form-group">
                                     <input type="text" name="keywords" class="form-control search-fields ${propertyList ? 'hidden': ''}" placeholder="" value="${params?.keywords}">
                                 </div>

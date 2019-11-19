@@ -174,8 +174,6 @@
                             </div>
 
                             <g:form method="GET" controller="property" action="propertyList">
-                                <input type="hidden" name="sort" value="${params?.sort}">
-                                <input type="hidden" name="price" value="${params?.price}">
                                 <div class="form-group">
                                     <select class="selectpicker search-fields" name="status">
                                         <option disabled value="" style="display: none" ${!params?.status ? 'selected' : ''}>
