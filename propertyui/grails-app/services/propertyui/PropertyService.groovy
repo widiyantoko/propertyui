@@ -43,23 +43,23 @@ class PropertyService {
                 }
             }
             and {
-                if (type == PropertyType.RUKO.name()) {
-                    or {
-                        eq("propertyType", PropertyType.RUKO.name())
-                    }
-                } else if (type == PropertyType.LAND.name()) {
+                if (type?.equalsIgnoreCase('land')) {
                     or {
                         eq("propertyType", PropertyType.LAND.name())
                     }
-                } else if (type == PropertyType.APARTMENT.name()) {
+                } else if(type?.equalsIgnoreCase('ruko')) {
+                    or {
+                        eq("propertyType", PropertyType.RUKO.name())
+                    }
+                } else if (type?.equalsIgnoreCase('apartment')) {
                     or {
                         eq("propertyType", PropertyType.APARTMENT.name())
                     }
-                } else if (type == PropertyType.OFFICE.name()) {
+                } else if (type?.equalsIgnoreCase('office')) {
                     or {
                         eq("propertyType", PropertyType.OFFICE.name())
                     }
-                } else if (type == PropertyType.HOME.name()) {
+                } else if (type?.equalsIgnoreCase('home')) {
                     or {
                         eq("propertyType", PropertyType.HOME.name())
                     }
@@ -67,11 +67,11 @@ class PropertyService {
 
                 isNotNull('propertyStatus')
 
-                if (status == PropertyStatus.RENT.name()) {
+                if (status?.equalsIgnoreCase('rent')) {
                     or {
                         eq("propertyStatus", PropertyStatus.RENT.name())
                     }
-                }  else if (status == PropertyStatus.SALE.name()) {
+                }  else if (status?.equalsIgnoreCase('sale')) {
                     or {
                         eq("propertyStatus", PropertyStatus.SALE.name())
                     }
@@ -108,23 +108,23 @@ class PropertyService {
             }
 
             and {
-                if (type == PropertyType.LAND.name()) {
+                if (type?.equalsIgnoreCase('land')) {
                     or {
                         eq("propertyType", PropertyType.LAND.name())
                     }
-                } else if(type == PropertyType.RUKO.name()) {
+                } else if(type?.equalsIgnoreCase('ruko')) {
                     or {
                         eq("propertyType", PropertyType.RUKO.name())
                     }
-                } else if (type == PropertyType.APARTMENT.name()) {
+                } else if (type?.equalsIgnoreCase('apartment')) {
                     or {
                         eq("propertyType", PropertyType.APARTMENT.name())
                     }
-                } else if (type == PropertyType.OFFICE.name()) {
+                } else if (type?.equalsIgnoreCase('office')) {
                     or {
                         eq("propertyType", PropertyType.OFFICE.name())
                     }
-                } else if (type == PropertyType.HOME.name()) {
+                } else if (type?.equalsIgnoreCase('home')) {
                     or {
                         eq("propertyType", PropertyType.HOME.name())
                     }
@@ -132,11 +132,11 @@ class PropertyService {
 
                 isNotNull('propertyStatus')
 
-                if (status == PropertyStatus.RENT.name()) {
+                if (status?.equalsIgnoreCase('rent')) {
                     or {
                         eq("propertyStatus", PropertyStatus.RENT.name())
                     }
-                }  else if (status == PropertyStatus.SALE.name()) {
+                }  else if (status?.equalsIgnoreCase('sale')) {
                     or {
                         eq("propertyStatus", PropertyStatus.SALE.name())
                     }
@@ -424,6 +424,74 @@ class PropertyService {
                     eq("propertyStatus", PropertyStatus.SALE.name())
                 }
             }
+        } as Long
+
+        return result
+    }
+
+    List<Property> getPropertyByStatusFor(GrailsParameterMap params) {
+
+        Map<String, Object> getParams = processParams(params)
+        Integer maxResult = (Integer) getParams.get("maxRslt")
+        Integer offset = (Integer) getParams.get("offset")
+        String sort = getParams.get("sort")
+        String price = getParams.get("price")
+        String type = params?.type ?: ''
+
+        List<Property> propertyList = Property.createCriteria().list([max: maxResult, offset: offset]) {
+            eq("isAvailable", Boolean.TRUE)
+            eq("isSale", Boolean.FALSE)
+
+            and {
+                isNotNull("propertyStatus")
+                if (type?.equalsIgnoreCase('sale')) {
+                    or {
+                        eq("propertyStatus", PropertyStatus.SALE.name())
+                        ne("propertyStatus", PropertyStatus.RENT.name())
+                    }
+                } else if (type?.equalsIgnoreCase('rent')){
+                    or {
+                        eq("propertyStatus", PropertyStatus.RENT.name())
+                        ne("propertyStatus", PropertyStatus.SALE.name())
+                    }
+                }
+            }
+
+            if (sort) {
+                order("lastModified", sort)
+            } else {
+                order("price", price)
+            }
+
+        } as List<Property>
+
+        return propertyList
+    }
+
+    Long totalPropertyByStatusFor(GrailsParameterMap params) {
+        String type = params?.type ?: ''
+        Long result = Property.createCriteria().get {
+            eq("isAvailable", Boolean.TRUE)
+            eq("isSale", Boolean.FALSE)
+            projections {
+                count("id")
+            }
+
+            and {
+                isNotNull("propertyStatus")
+                if (type?.equalsIgnoreCase('sale')) {
+                    or {
+                        eq("propertyStatus", PropertyStatus.SALE.name())
+                        ne("propertyStatus", PropertyStatus.RENT.name())
+                    }
+                } else if (type?.equalsIgnoreCase('rent')){
+                    or {
+                        eq("propertyStatus", PropertyStatus.RENT.name())
+                        ne("propertyStatus", PropertyStatus.SALE.name())
+                    }
+                }
+            }
+
         } as Long
 
         return result

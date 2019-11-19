@@ -182,8 +182,8 @@
                                 <div class="form-group">
                                     <select class="selectpicker search-fields" name="status">
                                         <option disabled value="" style="display: none" ${!params?.status ? 'selected' : ''}>Status</option>
-                                        <g:each in="${PropertyStatus}" var="pStatus">
-                                            <option name="status" value="${pStatus}">
+                                        <g:each in="${PropertyStatus?.values()}" var="pStatus">
+                                            <option name="status" value="${pStatus?.name()?.toLowerCase()}" ${params?.status == pStatus?.name()?.toLowerCase() ? 'selected' : ''}>
                                                 <g:message code="property.status.${pStatus}.label"/>
                                             </option>
                                         </g:each>
@@ -205,8 +205,8 @@
                                 <div class="form-group">
                                     <select class="selectpicker search-fields" name="type">
                                         <option disabled selected value="" style="display: none" ${!params?.type ? 'selected' : ''}>Type</option>
-                                        <g:each in="${PropertyType}" var="pType">
-                                            <option name="type" value="${pType}">
+                                        <g:each in="${PropertyType?.values()}" var="pType">
+                                            <option name="type" value="${pType?.name()?.toLowerCase()}" ${params?.type == pType?.name()?.toLowerCase() ? 'selected' : ''}>
                                                 <g:message code="property.type.${pType}.label"/>
                                             </option>
                                         </g:each>

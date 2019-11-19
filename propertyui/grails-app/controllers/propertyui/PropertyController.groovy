@@ -185,6 +185,31 @@ class PropertyController {
 
     }
 
+    def list() {
+
+        params?.max = params?.int("max", 8)
+        if (params?.inputPage) {
+            Integer inputPage = (params?.int("inputPage") - 1 ) * params?.max
+            params?.offset = inputPage
+        }
+
+        params?.sort = params?.sort ?: 'desc'
+        params?.price = params?.price ?: ''
+
+        List<Property> propertyList = propertyService.getPropertyByStatusFor(params)
+
+        if (!propertyList) {
+            notFound()
+            return
+        }
+
+        render view: "property_availability", model: [
+                propertyList: propertyList,
+                countPropertyByStatus: propertyService.totalPropertyByStatusFor(params)
+        ]
+
+    }
+
     def blog() {
 
         render view: "test", model: [

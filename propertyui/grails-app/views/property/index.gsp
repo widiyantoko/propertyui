@@ -72,10 +72,17 @@
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  filtr-item" data-category="${PropertyType?.getByValue(property?.propertyType)?.code()}">
                                     <div class="property">
                                         <div class="property-img">
-                                            <a href="${createLink(controller: 'property', action: 'buy', params: [type: property?.propertyType?.toLowerCase()])}" class="property-tag button alt featured">
-                                                <g:message code="property.type.${property?.propertyType}.label" default="${property?.propertyType}"/>
-                                            </a>
-                                            <a class="property-tag button sale">
+                                            <g:if test="${property?.propertyStatus == PropertyStatus.SALE.name()}">
+                                                <a href="${createLink(controller: 'property', action: 'buy', params: [type: property?.propertyType?.toLowerCase()])}" class="property-tag button alt featured">
+                                                    <g:message code="property.type.${property?.propertyType}.label" default="${property?.propertyType}"/>
+                                                </a>
+                                            </g:if>
+                                            <g:elseif test="${property?.propertyStatus == PropertyStatus.RENT.name()}">
+                                                <a href="${createLink(controller: 'property', action: 'rent', params: [type: property?.propertyType?.toLowerCase()])}" class="property-tag button alt featured">
+                                                    <g:message code="property.type.${property?.propertyType}.label" default="${property?.propertyType}"/>
+                                                </a>
+                                            </g:elseif>
+                                            <a href="${createLink(controller: 'property', action: 'list', params: [type: property?.propertyStatus?.toLowerCase()])}" class="property-tag button sale">
                                                 <g:message code="property.status.${property?.propertyStatus}.label" default="${property?.propertyStatus}"/>
                                             </a>
                                             <div class="property-price">
@@ -437,7 +444,7 @@
             </div>
         </g:each>
 
-        <g:render template="/templates/simple_footer"/>
+%{--        <g:render template="/templates/simple_footer"/>--}%
         <g:render template="/templates/footer"/>
 
     </body>
