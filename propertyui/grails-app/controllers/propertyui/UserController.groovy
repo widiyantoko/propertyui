@@ -30,6 +30,10 @@ class UserController {
         ]
     }
 
+    def forgotPassword() {
+
+    }
+
     protected void notFound() {
         render status: NOT_FOUND
     }
