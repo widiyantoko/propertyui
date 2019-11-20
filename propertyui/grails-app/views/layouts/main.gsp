@@ -59,6 +59,7 @@
         <asset:javascript src="js/jquery.magnific-popup.min.js"/>
         <asset:javascript src="js/maps.js"/>
         <asset:javascript src="js/app.js"/>
+        <asset:javascript src="/js/modules/registration.js"/>
 
         <asset:javascript src="js/ie10-viewport-bug-workaround.js"/>
 

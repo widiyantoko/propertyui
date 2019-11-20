@@ -7317,5 +7317,17 @@ table.manage-table .title-container .title span {
     margin-left: 10px;
 }
 
+.checkbox .check-has-error::before {
+    border: 1px solid #b31d13;
+}
+
+label.o-form-error {
+    display: block;
+    font-weight: normal;
+    color: #b31d13;
+    margin-top: 5px;
+    margin-bottom: 0;
+    font-size: 14px; }
+
 
 
