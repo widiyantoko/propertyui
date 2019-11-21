@@ -10,12 +10,19 @@
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                 <ul class="top-social-media pull-right">
-                    <li>
-                        <a href="${createLink(controller: 'login', action: 'index')}" class="sign-in"><i class="fa fa-sign-in"></i> Login</a>
-                    </li>
-                    <li>
-                        <a href="${createLink(controller: 'registration', action: 'index')}" class="sign-in"><i class="fa fa-user"></i> Register</a>
-                    </li>
+                    <sec:access expression="!isAuthenticated()">
+                        <li>
+                            <a href="${createLink(url: '/login/auth')}" class="sign-in"><i class="fa fa-sign-in"></i> Login</a>
+                        </li>
+                        <li>
+                            <a href="${createLink(controller: 'registration', action: 'index')}" class="sign-in"><i class="fa fa-user"></i> Register</a>
+                        </li>
+                    </sec:access>
+                    <sec:access expression="isAuthenticated()">
+                        <li>
+                            <a href="${createLink(url: '/logout')}" class="-sign-out"><i class="fa fa-sign-out"></i> Logout</a>
+                        </li>
+                    </sec:access>
                 </ul>
             </div>
         </div>
