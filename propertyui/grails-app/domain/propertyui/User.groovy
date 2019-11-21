@@ -9,7 +9,7 @@ class User implements Serializable{
 
     private static final long serialVersionUID = 1
 
-//    def springSecurityService
+    def springSecurityService
 
     String username
     String password
@@ -31,6 +31,7 @@ class User implements Serializable{
     String addressState
     String addressZip
     String addressCountry
+    String verificationCode
 
     String contactMobile
     String contactOffice
@@ -59,7 +60,7 @@ class User implements Serializable{
 
     protected void encodePassword() {
         password = password.encodeAsSHA256()
-//        password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
+        password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
     }
 
     static constraints = {
@@ -81,6 +82,7 @@ class User implements Serializable{
         addressState nullable: true
         addressZip nullable: true
         addressCountry nullable: true
+        verificationCode nullable: true, blank: true, unique: true
 
         contactMobile nullable: true
         contactOffice nullable: true

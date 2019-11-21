@@ -16,6 +16,7 @@ class UrlMappings {
         "/blog/"(controller: 'property', action: 'blog')
         "/about/"(controller: 'property', action: 'about')
         "/property/$action?/$type?"(controller: 'property')
+        "/sign-up"(controller: "registration", action: "index")
 
         "/all/"(controller: 'property', action: 'propertyList')
         "/save-data"(controller: 'property', action: 'saveData')

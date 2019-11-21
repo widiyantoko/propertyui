@@ -2,6 +2,9 @@ package propertyui
 
 import grails.transaction.Transactional
 import grails.web.servlet.mvc.GrailsParameterMap
+import org.apache.commons.lang.RandomStringUtils
+import org.apache.commons.lang.math.RandomUtils
+import propertyui.model.UserRegister
 
 @Transactional
 class UserService {
@@ -45,5 +48,24 @@ class UserService {
         } as List<UserDetails>
 
         return details
+    }
+
+    void createNewUser(User user, UserRegister userRegister, Boolean isAdmin = false) {
+        user.username = userRegister.email
+        user.title = userRegister.title
+        user.firstName = userRegister.firstName
+        user.lastName = userRegister.lastName
+        user.email = userRegister.email
+        user.password = userRegister.password
+        user.accountLocked = Boolean.FALSE
+        user.emailVerified = user?.emailVerified ?: Boolean.FALSE
+        user.verificationCode = RandomStringUtils.random(64, true, true)
+
+        user.validate()
+        if (user.hasErrors()) {
+            return
+        }
+
+        user.save()
     }
 }
