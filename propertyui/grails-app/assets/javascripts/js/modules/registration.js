@@ -27,8 +27,10 @@
             errorClass: "o-form-error",
             errorPlacement: function(error, element) {
                 var name = element.attr('name');
-                if(name === 'title' || name === 'firstName' || name === 'lastName') {
+                if(name === 'title' || name === 'lastName'){
                     error.appendTo($('.js-error-name-placement'));
+                } else if (name === 'firstName'){
+                    error.appendTo($('.js-error-first-name-placement'));
                 }else if(name === 'acceptTnc'){
                     error.insertAfter($('.checkbox'));
                 }else{

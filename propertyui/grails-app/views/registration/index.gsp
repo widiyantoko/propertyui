@@ -35,6 +35,11 @@
                                                data-msg="${message(code: 'first.name.required.label', default: 'First Name is required.')}"
                                         />
                                     </div>
+                                    <div class="js-error-first-name-placement">
+                                        <g:hasErrors bean="${userRegister}" field="firstName">
+                                            <label id="firstName-error" class="o-form-error" for="firstName"><g:fieldError bean="${userRegister}" field="firstName"/></label>
+                                        </g:hasErrors>
+                                    </div>
                                     <div class="form-group">
                                         <input type="text" name="lastName" id="lastName" class="input-text ${hasErrors(bean:userRegister, field: 'lastName', 'form-has-error')}"
                                                value="${this.userRegister?.lastName}"
@@ -44,9 +49,6 @@
                                         />
                                     </div>
                                     <div class="js-error-name-placement">
-                                        <g:hasErrors bean="${userRegister}" field="firstName">
-                                            <label id="firstName-error" class="o-form-error" for="firstName"><g:fieldError bean="${userRegister}" field="firstName"/></label>
-                                        </g:hasErrors>
                                         <g:hasErrors bean="${userRegister}" field="lastName">
                                             <label id="lastName-error" class="o-form-error" for="lastName"><g:fieldError bean="${userRegister}" field="lastName"/></label>
                                         </g:hasErrors>
