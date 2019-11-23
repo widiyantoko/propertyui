@@ -114,7 +114,7 @@
                             </div>
                             <div class="footer">
                                 <span>
-                                    I want to <a href="${createLink(url: '/login/auth')}">return to login</a>
+                                    I want to <a href="${createLink(url: '/login/auth')}">Return to login</a>
                                 </span>
                             </div>
                         </div>

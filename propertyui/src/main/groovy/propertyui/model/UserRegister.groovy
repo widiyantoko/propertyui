@@ -7,7 +7,7 @@ import propertyui.User
 
 class UserRegister implements Validateable {
 
-    String title
+//    String title
     String firstName
     String lastName
     String email
@@ -18,7 +18,7 @@ class UserRegister implements Validateable {
 
     static constraints = {
 
-        title(blank: false, inList: UserTitle.values().value)
+//        title(blank: false, inList: UserTitle.values().value)
         firstName(blank: false)
         lastName(blank: false)
         email(blank: false, validator: { val, obj ->

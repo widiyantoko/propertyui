@@ -52,12 +52,13 @@ class UserService {
 
     void createNewUser(User user, UserRegister userRegister, Boolean isAdmin = false) {
         user.username = userRegister.email
-        user.title = userRegister.title
+//        user.title = userRegister.title
         user.firstName = userRegister.firstName
         user.lastName = userRegister.lastName
         user.email = userRegister.email
         user.password = userRegister.password
         user.accountLocked = Boolean.FALSE
+        user.accountExpired = Boolean.FALSE
         user.emailVerified = user?.emailVerified ?: Boolean.FALSE
         user.verificationCode = RandomStringUtils.random(64, true, true)
 
@@ -67,5 +68,9 @@ class UserService {
         }
 
         user.save()
+        Role roleUser = Role.findByAuthority("ROLE_BASIC")
+        if (roleUser) {
+            new UserRole(role: roleUser, user: user).save()
+        }
     }
 }
