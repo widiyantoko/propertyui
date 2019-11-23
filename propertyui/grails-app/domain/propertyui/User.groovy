@@ -11,6 +11,10 @@ class User implements Serializable{
 
     def springSecurityService
 
+    static transients = ['springSecurityService']
+
+    static hasMany = [userRoles: UserRole]
+
     String username
     String password
     String email
@@ -24,6 +28,9 @@ class User implements Serializable{
 
     Boolean accountLocked = false
     Boolean emailVerified = false
+    Boolean enabled = true
+    Boolean accountExpired = false
+    Boolean passwordExpired = false
 
     String addressStreetName1
     String addressStreetName2
@@ -46,6 +53,10 @@ class User implements Serializable{
         this()
         this.username = username
         this.password = password
+    }
+
+    Set<Role> getAuthorities() {
+        UserRole.findByUser(this)*.role
     }
 
     def beforeInsert() {
@@ -73,7 +84,7 @@ class User implements Serializable{
         title nullable: true
         avatar nullable: true, blank: true
         longName nullable: true
-        biography nullable: true
+        biography nullable: true, blank: true
 
         addressStreetName1 nullable: true
         addressStreetName2 nullable: true
