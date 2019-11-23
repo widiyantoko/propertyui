@@ -43,6 +43,13 @@ class RegistrationController {
             return
         }
 
+        //email new register here
+        try {
+
+        } catch (Exception ex) {
+            log?.error(ex?.message, ex)
+        }
+
         try {
             User user = new User()
             userService.createNewUser(user, userRegister)

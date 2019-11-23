@@ -39,6 +39,7 @@ class User implements Serializable{
     String addressZip
     String addressCountry
     String verificationCode
+    String resetToken
 
     String contactMobile
     String contactOffice

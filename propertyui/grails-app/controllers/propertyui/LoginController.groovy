@@ -3,15 +3,32 @@ package propertyui
 import grails.converters.JSON
 import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.transaction.Transactional
+import org.apache.commons.lang.RandomStringUtils
+import org.apache.commons.lang.math.RandomUtils
 import org.springframework.security.authentication.AccountExpiredException
 import org.springframework.security.authentication.DisabledException
 import org.springframework.security.authentication.LockedException
 import org.springframework.security.web.WebAttributes
+import propertyui.model.ForgotPassword
 
 import javax.security.auth.login.CredentialExpiredException
 
 @Transactional(readOnly = true)
 class LoginController extends grails.plugin.springsecurity.LoginController{
+
+    def checkEmailAddress() {
+        if (request.xhr) {
+            Boolean res = true
+            String email = params?.email
+            User user = User.findByEmail(email)
+            if (params?.id == 'registration' && user) {
+                res = false
+            } else if (params?.id == 'forgot' && !user) {
+                res = true
+            }
+            render res
+        }
+    }
 
     def auth() {
 
@@ -62,7 +79,38 @@ class LoginController extends grails.plugin.springsecurity.LoginController{
         }
     }
 
+    @Transactional
     def forgotPassword() {
+        [ forgotPassword: new ForgotPassword()]
+    }
+
+    @Transactional
+    def sendResetLink(ForgotPassword forgotPassword) {
+
+        forgotPassword.validate()
+        if (forgotPassword.hasErrors()) {
+            transactionStatus.setRollbackOnly()
+            flash.error = message(code: "public.forgotPassword.change.failed", default: "Reset password email has not been sent.")
+            respond forgotPassword.errors, view: 'forgotPassword'
+            return
+        }
+
+        try {
+            User user = User.findByEmail(forgotPassword.email)
+            String token = RandomStringUtils.random(64, true, true)
+            user.resetToken = token
+            user.save()
+
+        } catch (Exception e) {
+            transactionStatus.setRollbackOnly()
+            log.error(e?.message, e)
+
+            flash.error = message(code: "public.forgotPassword.change.failed", default: "Reset password email has not been sent.")
+            respond forgotPassword.errors, view: 'forgotPassword'
+            return
+        }
+
+        flash.email = forgotPassword.email
 
     }
 }
