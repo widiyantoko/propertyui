@@ -10,6 +10,7 @@ import org.springframework.security.authentication.DisabledException
 import org.springframework.security.authentication.LockedException
 import org.springframework.security.web.WebAttributes
 import propertyui.model.ForgotPassword
+import propertyui.model.PasswordReset
 
 import javax.security.auth.login.CredentialExpiredException
 
@@ -111,6 +112,61 @@ class LoginController extends grails.plugin.springsecurity.LoginController{
         }
 
         flash.email = forgotPassword.email
+        resetLinkSent()
+    }
+
+    def newPassword(String id) {
+        def user = User.findByResetToken(id)
+        if (!user) {
+            flash.error = message(code: 'property.newPassword.token.invalid', default: 'Reset password link is invalid.')
+            render(view: 'newPassword', model: [
+                    invalidToken: Boolean.TRUE,
+                    passwordReset: new PasswordReset()])
+            return
+        }
+
+        render(view: 'newPassword')
+    }
+
+    @Transactional
+    def resetPassword(PasswordReset passwordReset) {
+        User user = User.createCriteria().get {
+            and {
+                eq("resetToken", params?.id)
+                ne("resetToken", "")
+                isNotNull("resetToken")
+            }
+            maxResults(1)
+        }
+
+        if (!user) {
+            flash.error = message(code: 'property.newPassword.token.invalid', default: 'Reset password link is invalid.')
+            render(view: 'newPassword')
+            return
+        }
+
+        try {
+            user.password = passwordReset.password
+            user.resetToken = null
+            user.save()
+            request.logout()
+        } catch (Exception e) {
+            transactionStatus.setRollbackOnly()
+            log.error(e?.message, e)
+
+            flash.error = message(code: 'property.newPassword.change.failed', default: 'Your password has not been changed.')
+            respond passwordReset.errors, view: "newPassword"
+            return
+        }
+
+        passwordChange()
+    }
+
+    protected passwordChange() {
+
+    }
+
+    protected resetLinkSent() {
 
     }
 }

@@ -42,6 +42,12 @@
         });
         //end forgot password
 
+        //new password
+
+
+
+        //end new password
+
     });
 
 }));
