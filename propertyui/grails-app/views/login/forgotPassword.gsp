@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta name="layout" content="main">
-        <title>Reset Password</title>
+        <title>Forgot Password</title>
     </head>
 
     <body>
@@ -36,12 +36,12 @@
                                 <div class="main-title">
                                     <h1>Forgot Password</h1>
                                 </div>
-                                <g:form class="js-forgot-password-form" controller="login" action="" method="POST">
+                                <g:form class="js-forgot-password-form" controller="login" action="sendResetLink" method="POST">
                                     <div class="form-group">
                                         <input type="text" id="forgot-email" name="email" class="input-text" placeholder="Email Address"
                                                data-url-remote="${createLink(action: 'checkEmailAddress', id: 'forgot')}"
                                                data-msg="${message(code: 'email.require.label', default: 'Email Address is required.')}"
-                                               data-msg-email="${message(code: 'property.model.UserRegister.email.invalid.email', default: 'Email "{0}" is invalid.')}"
+                                               data-msg-email='${message(code: 'property.model.ForgotPassword.email.invalid.email', default: 'Email "{0}" is invalid.')}'
                                                data-msg-remote="${message(code: 'property.model.ForgotPassword.email.notFound', default: 'No account was found  with this email address.')}"
                                         />
                                         <g:hasErrors bean="${forgotPassword}" field="email">
@@ -57,7 +57,7 @@
                             </div>
                             <div class="footer">
                                 <span>
-                                    I want to <a href="${createLink(controller: 'login', action: 'auth')}">return to login</a>
+                                    I want to <a href="${createLink(controller: 'login', action: 'auth')}">Return to login</a>
                                 </span>
                             </div>
                         </div>
@@ -65,5 +65,6 @@
                 </div>
             </div>
         </div>
+        <g:render template="/templates/footer"/>
     </body>
 </html>

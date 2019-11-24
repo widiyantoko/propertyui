@@ -64,6 +64,7 @@
         <asset:javascript src="/js/main.js"/>
         <asset:javascript src="/js/modules/login.js"/>
         <asset:javascript src="/js/jquery-validation-1.17.0/additional-methods.min.js"/>
+        <asset:javascript src="/js/modules/user-password.js"/>
 
         <asset:javascript src="js/ie10-viewport-bug-workaround.js"/>
 

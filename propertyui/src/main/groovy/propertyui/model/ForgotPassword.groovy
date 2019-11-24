@@ -10,7 +10,7 @@ class ForgotPassword implements Validateable{
 
     static constraints = {
         email(nullable: false, blank: false, validator: { val, obj ->
-            if (!EmailValidator.getInstance().isValid(val as String)) return ['property.model.UserRegister.email.invalid.email']
+            if (!EmailValidator.getInstance().isValid(val as String)) return ['property.model.ForgotPassword.email.invalid.email']
             if (User.countByEmail(val as String) == 0) return ['property.model.ForgotPassword.email.notFound']
         })
     }
