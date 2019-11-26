@@ -57,7 +57,7 @@ class User implements Serializable{
     }
 
     Set<Role> getAuthorities() {
-        UserRole.findByUser(this)*.role
+        UserRole.findAllByUser(this)*.role
     }
 
     def beforeInsert() {
@@ -65,7 +65,7 @@ class User implements Serializable{
     }
 
     def beforeUpdate() {
-        if (isDirty(password)) {
+        if (isDirty('password')) {
             encodePassword()
         }
     }
@@ -95,6 +95,7 @@ class User implements Serializable{
         addressZip nullable: true
         addressCountry nullable: true
         verificationCode nullable: true, blank: true, unique: true
+        resetToken nullable: true
 
         contactMobile nullable: true
         contactOffice nullable: true

@@ -22,7 +22,7 @@ class CustomAuthenticationProvider implements AuthenticationProvider {
                 String sha256Pass = customAuth.credentials.encodeAsSHA256()
 
                 if (BCrypt.checkpw(sha256Pass, user?.password)) {
-                    Collection<GrantedAuthority> authorities = user?.authorities?.collect {
+                    Collection<GrantedAuthority> authorities = user.authorities.collect {
                         new SimpleGrantedAuthority(it.authority)
                     }
                     def userDetails = new GrailsUser(user.username, user.password, true, true, true, true, authorities, user.id)
