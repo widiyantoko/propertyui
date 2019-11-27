@@ -3764,6 +3764,11 @@ strong {
     color: #8b8b8b;
 }
 
+/*custom footer text color*/
+.form-content-box .footer a {
+    color: #8b8b8b;
+}
+
 .form-content-box .checkbox a {
     color: #8b8b8b;
     font-size: 13px;

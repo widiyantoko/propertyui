@@ -38,37 +38,46 @@
                                 <form class="js-login-form" action="${postUrl ?: createLink(url:'/login/authenticate')}" method="post">
                                     <div class="form-group">
                                         <input type="text" id="login-email" name="username" class="input-text login-input" value="${user}"
-                                               placeholder="Email Address"
+                                               placeholder="${message(code: 'placeholder.email.label', default: 'Alamat  Email')}"
                                                data-rule-required="true"
-                                               data-msg="Wrong email or password. Please try again."
+                                               data-msg="${message(code: 'public.wrong.email.password.label', default: 'Email atau password tidak sesuai. Coba lagi.')}"
                                         />
                                     </div>
                                     <div class="form-group">
                                         <input type="password" name="password" class="input-text login-input"
-                                               placeholder="Password"
+                                               placeholder="${message(code: 'placeholder.password.label', default: 'Password')}"
                                                autocomplete="off"
                                                data-rule-required="true"
-                                               data-msg="Wrong email or password. Please try again."
+                                               data-msg="${message(code: 'public.wrong.email.password.label', default: 'Email atau password tidak sesuai. Coba lagi.')}"
                                         />
                                     </div>
                                     <div class="checkbox">
                                         <div class="ez-checkbox pull-left">
+                                            <!--
                                             <label>
                                                 <input type="checkbox" class="ez-hide" value="${rememberMeParameter}">
                                                 Remember me
                                             </label>
+                                            -->
                                         </div>
-                                        <a href="${createLink(controller: 'login', action: 'forgotPassword')}" class="link-not-important pull-right">Forgot Password</a>
+                                        <a href="${createLink(controller: 'login', action: 'forgotPassword')}" class="link-not-important pull-right">
+                                            ${message(code: 'public.label.forgot.password', default: 'Lupa password')}
+                                        </a>
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="button-md button-theme btn-block js-btn-login">login</button>
+                                        <button type="submit" class="button-md button-theme btn-block js-btn-login">
+                                            ${message(code: 'public.label.login', default: 'Login')}
+                                        </button>
                                     </div>
                                 </form>
                             </div>
                             <div class="footer">
                                 <span>
-                                    New to Tempo? <a href="${createLink(controller: 'registration', action: 'index')}">Sign up now</a>
+                                    ${message(code: 'public.label.new.account', default: 'Belum punya akun?')}
+                                    <a href="${createLink(controller: 'registration', action: 'index')}">
+                                        ${message(code: 'public.label.register', default: 'Daftar')}
+                                    </a>
                                 </span>
                             </div>
                         </div>

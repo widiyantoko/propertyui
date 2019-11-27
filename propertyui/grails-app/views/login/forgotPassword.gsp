@@ -57,14 +57,15 @@
                                         </g:hasErrors>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="button-md button-theme btn-block">Send Me Email</button>
+                                        <button type="submit" class="button-md button-theme btn-block">Kirim email reset password</button>
                                     </div>
                                 </g:form>
                             </div>
                             <div class="footer">
                                 <span>
-                                    I want to <a href="${createLink(controller: 'login', action: 'auth')}">Return to login</a>
+                                    Kembali ke <a href="${createLink(controller: 'login', action: 'auth')}">Login</a> atau
                                 </span>
+                                <a class="" href="${createLink(controller: 'property', action: 'index')}">Beranda</a>
                             </div>
                         </div>
                     </div>

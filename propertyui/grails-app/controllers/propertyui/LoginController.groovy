@@ -75,7 +75,7 @@ class LoginController extends grails.plugin.springsecurity.LoginController{
             } else if (exception instanceof LockedException) {
                 msg = message(code: 'springSecurity.errors.login.locked')
             } else {
-                msg = message(code: 'springSecurity.errors.login.fail')
+                msg = message(code: 'public.wrong.email.password.label')
             }
         }
 
