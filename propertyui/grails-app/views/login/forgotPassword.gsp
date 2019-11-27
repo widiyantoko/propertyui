@@ -33,6 +33,12 @@
                                         </div>
                                     </g:if>
                                 </g:if>
+                                <g:if test="${flash.email}">
+                                    <div class="alert alert-danger wow fadeInRight delay-03s" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <p>Reset password email has been sent to ${flash.email ?: ''}</p>
+                                    </div>
+                                </g:if>
                                 <div class="main-title">
                                     <h1>Forgot Password</h1>
                                 </div>

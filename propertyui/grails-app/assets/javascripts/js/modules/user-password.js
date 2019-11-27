@@ -44,7 +44,20 @@
 
         //new password
 
+        var _new_password_form = $('.js-new-password-form');
 
+        _new_password_form.validate({
+            errorClass: "o-form-error",
+            highlight: function (element) {
+               $(element).addClass('form-has-error');
+            },
+            success: function (label, element) {
+                $(element).removeClass('form-has-error');
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
 
         //end new password
 
