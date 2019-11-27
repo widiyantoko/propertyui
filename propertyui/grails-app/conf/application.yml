@@ -13,6 +13,41 @@ dataSource:
     username: sa
     password:
 
+grails:
+    mail:
+        protocol: smtps
+        host: smtp.gmail.com
+        port: 465
+        username: donotreplypropertyui@gmail.com
+        password: rkckusccvinkcyeh
+        props: [ 'mail.smtps.starttls.enable':'true',
+                 'mail.smtp.auth': 'true',
+                 'mail.smtp.sicketFactory.port': '465',
+                 'mail.smtp.socketFactory.class': 'javax.net.ssl.SSLSocketFactory',
+                 'mail.smtp.socketFactory.fallback': 'false']
+
+application:
+    defaultCacheInvalidate: 600000 #Every 1o minutes
+    mail:
+        logo:
+        name: "Property UI"
+        from:
+            confirmation:
+                name: "Property UI"
+                email: "donotreplypropertyui@gmail.com"
+            resetPassword:
+                name: "Reset Password Property UI"
+                email: "donotreplypropertyui@gmail.com"
+            contactUs:
+                name: "Property UI"
+                email: "donotreplypropertyui@gmail.com"
+            support:
+                name: "Property UI"
+                email: "donotreplypropertyui@gmail.com"
+    propertyUi:
+        baseUrl: http://localhost:8080
+
+
 environments:
     development:
         dataSource:

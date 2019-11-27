@@ -54,6 +54,7 @@ dependencies {
     compile "org.hibernate:hibernate-ehcache"
     compile "org.grails.plugins:spring-security-core:3.0.3"
     compile 'org.grails.plugins:grails-pretty-time:4.0.0'
+    compile "org.grails.plugins:mail:2.0.0"
     console "org.grails:grails-console"
     compile "commons-validator:commons-validator:1.6"
     profile "org.grails.profiles:web:3.1.2"

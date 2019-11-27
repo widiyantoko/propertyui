@@ -5,6 +5,7 @@ import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.transaction.Transactional
 import org.apache.commons.lang.RandomStringUtils
 import org.apache.commons.lang.math.RandomUtils
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.authentication.AccountExpiredException
 import org.springframework.security.authentication.DisabledException
 import org.springframework.security.authentication.LockedException
@@ -16,6 +17,12 @@ import javax.security.auth.login.CredentialExpiredException
 
 @Transactional(readOnly = true)
 class LoginController extends grails.plugin.springsecurity.LoginController{
+
+    @Value('${application.mail.from.resetPassword.name}')
+    private String mailFromResetPasswordName
+
+    @Value('${application.mail.from.resetPassword.email}')
+    private String mailFromResetPasswordEmail
 
     def checkEmailAddress() {
         if (request.xhr) {
@@ -102,6 +109,18 @@ class LoginController extends grails.plugin.springsecurity.LoginController{
             user.resetToken = token
             user.save()
 
+            String resetLink = createLink(absolute: true, controller: 'login', action: 'newPassword', id: token)
+            sendMail {
+                to user.email
+                from mailFromResetPasswordEmail
+                subject mailFromResetPasswordName
+                html g.render(template: '/templates/email/resetLinkSent', model: [
+                        user: user?.getFullName(),
+                        resetLink: resetLink
+                ])
+
+            }
+
         } catch (Exception e) {
             transactionStatus.setRollbackOnly()
             log.error(e?.message, e)
@@ -159,14 +178,15 @@ class LoginController extends grails.plugin.springsecurity.LoginController{
             return
         }
 
+        flash.message = 'Reset password berhasil<br> Silahkan login'
         passwordChange()
     }
 
     protected passwordChange() {
-
+        render(view: 'auth')
     }
 
     protected resetLinkSent() {
-
+        render(view: 'forgotPassword')
     }
 }
