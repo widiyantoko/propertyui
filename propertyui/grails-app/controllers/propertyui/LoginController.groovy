@@ -98,7 +98,7 @@ class LoginController extends grails.plugin.springsecurity.LoginController{
         forgotPassword.validate()
         if (forgotPassword.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            flash.error = message(code: "public.forgotPassword.change.failed", default: "Reset password email has not been sent.")
+            flash.error = message(code: "public.forgotPassword.change.failed", default: "Email reset password tidak dikirimkan.")
             respond forgotPassword.errors, view: 'forgotPassword'
             return
         }
@@ -125,7 +125,7 @@ class LoginController extends grails.plugin.springsecurity.LoginController{
             transactionStatus.setRollbackOnly()
             log.error(e?.message, e)
 
-            flash.error = message(code: "public.forgotPassword.change.failed", default: "Reset password email has not been sent.")
+            flash.error = message(code: "public.forgotPassword.change.failed", default: "Email reset password tidak dikirimkan.")
             respond forgotPassword.errors, view: 'forgotPassword'
             return
         }
