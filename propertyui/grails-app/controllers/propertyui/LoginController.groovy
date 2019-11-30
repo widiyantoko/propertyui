@@ -24,6 +24,9 @@ class LoginController extends grails.plugin.springsecurity.LoginController{
     @Value('${application.mail.from.resetPassword.email}')
     private String mailFromResetPasswordEmail
 
+    @Value('${application.mail.logo}')
+    private String mailLogo
+
     def checkEmailAddress() {
         if (request.xhr) {
             Boolean res = true
@@ -115,7 +118,9 @@ class LoginController extends grails.plugin.springsecurity.LoginController{
                 from mailFromResetPasswordEmail
                 subject mailFromResetPasswordName
                 html g.render(template: '/templates/email/resetLinkSent', model: [
+                        logo: mailLogo,
                         user: user?.getFullName(),
+                        homePageLink: createLink(controller: 'property', action: 'index'),
                         resetLink: resetLink
                 ])
 

@@ -30,7 +30,7 @@
                                     <tr>
                                         <td style="padding: 0 0 20px;">
                                             <br>
-                                            Hallo, ${user},
+                                            Hallo <strong>${user}!</strong>
                                             <br>
                                             Klik tautan dibawah untuk reset password
                                         </td>
@@ -48,7 +48,9 @@
                     <div style=" background: none repeat scroll 0 0 white;border-top: 1px solid #e7eaec;bottom: 0;left: 0;padding: 10px 20px;position: absolute;right: 0;">
                         <table width="100%">
                             <tr>
-                                <td style="padding: 0 0 20px; text-align: center"> Property UI <a href="${createLink(controller: 'property', action: 'index')}"></a></td>
+                                <td style="padding: 0 0 20px; text-align: center">
+                                    &copy; <g:formatDate date="${new Date()}" format="yyyy"/> Property UI
+                                </td>
                             </tr>
                         </table>
                     </div>
