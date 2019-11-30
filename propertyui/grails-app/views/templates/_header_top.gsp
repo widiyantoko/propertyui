@@ -23,6 +23,11 @@
                             <a href="${createLink(url: '/logout')}" class="-sign-out"><i class="fa fa-sign-out"></i> Logout</a>
                         </li>
                     </sec:access>
+                    <sec:access expression="isAuthenticated()">
+                        <li>
+                            <a href="${createLink(url: '/')}" class="profile-user"><i class="fa fa-user"></i>My Profile</a>
+                        </li>
+                    </sec:access>
                 </ul>
             </div>
         </div>

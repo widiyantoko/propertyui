@@ -10,6 +10,7 @@ class PropertyController {
 
     def propertyService
     def userService
+    def springSecurityService
 
     def index() {
         List<Property> propertyList = propertyService.getPropertyList()
@@ -225,6 +226,19 @@ class PropertyController {
         render view: "property_all_type", model: [
                 propertyList: propertyList,
                 countPropertyByStatus: propertyService.totalProperty(params)
+        ]
+    }
+
+    def submitProperty() {
+        User user = springSecurityService.currentUser
+
+        String provinceCode = params?.provinceCode ?: '11'
+        def regency = Regency.findAllByProvinceCode(provinceCode)
+
+
+        [
+                user: user,
+                regencyList: regency
         ]
     }
 
