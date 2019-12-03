@@ -3,6 +3,8 @@ package propertyui
 import Enums.PropertyFeature
 import Enums.PropertyStatus
 import Enums.PropertyType
+import grails.converters.JSON
+import propertyui.model.SubmitProperty
 
 import static org.springframework.http.HttpStatus.NOT_FOUND
 
@@ -229,17 +231,34 @@ class PropertyController {
         ]
     }
 
-    def submitProperty() {
+    def beforeSubmit() {
         User user = springSecurityService.currentUser
 
-        String provinceCode = params?.provinceCode ?: '11'
-        def regency = Regency.findAllByProvinceCode(provinceCode)
+        List<Province> provinceList = Province.findAll {it.name}
 
 
         [
                 user: user,
-                regencyList: regency
+                submitProperty: new SubmitProperty(),
+                propertyList: provinceList
         ]
+    }
+
+    def submitProperty() {
+
+    }
+
+    def getCityByProvince() {
+        ResultData res = new ResultData()
+        String provinceCode = params?.provinceCode
+        List<Regency> regencyList = Regency.findAllByProvinceCode(provinceCode)
+
+        res.success = true
+        res.data = [
+            regencyList: regencyList
+        ]
+
+        render res.result as JSON
     }
 
     def blog() {

@@ -24,6 +24,9 @@ class Property implements Serializable{
 
     Integer buildingAge
     Integer stars
+    Integer totalRoom
+    Integer totalBathRoom
+    Integer totalBedRoom
 
     User createBy
     User updateBy
@@ -57,6 +60,9 @@ class Property implements Serializable{
         userReview nullable: true, blank: true
 
         stars nullable: true
+        totalRoom nullable: true
+        totalBathRoom nullable: true
+        totalBedRoom nullable: true
 
         createBy nullable: true
         updateBy nullable: true
