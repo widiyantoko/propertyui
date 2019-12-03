@@ -79,7 +79,7 @@
                 <ul class="nav navbar-nav navbar-right rightside-navbar">
                     <li>
                         <sec:access expression="isAuthenticated()">
-                            <a href="${createLink(controller: 'property', action: 'submitProperty')}" class="button ${request.forwardURI?.equals('/submit') ? 'hide' : ''}">Submit Property</a>
+                            <a href="${createLink(controller: 'property', action: 'beforeSubmit')}" class="button ${request.forwardURI?.equals('/submit') ? 'hide' : ''}">Submit Property</a>
                         </sec:access>
                         <sec:access expression="!isAuthenticated()">
                             <a href="${createLink(controller: 'login', action: 'auth')}" class="button">Submit Property</a>
