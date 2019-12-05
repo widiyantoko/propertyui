@@ -4,6 +4,8 @@ import Enums.PropertyFeature
 import Enums.PropertyStatus
 import Enums.PropertyType
 import grails.converters.JSON
+import grails.plugin.springsecurity.annotation.Secured
+import grails.transaction.Transactional
 import propertyui.model.SubmitProperty
 
 import static org.springframework.http.HttpStatus.NOT_FOUND
@@ -231,6 +233,8 @@ class PropertyController {
         ]
     }
 
+    @Secured('isFullyAuthenticated()')
+    @Transactional
     def beforeSubmit() {
         User user = springSecurityService.currentUser
 
@@ -244,6 +248,8 @@ class PropertyController {
         ]
     }
 
+    @Secured('isFullyAuthenticated()')
+    @Transactional
     def submitProperty() {
 
     }
