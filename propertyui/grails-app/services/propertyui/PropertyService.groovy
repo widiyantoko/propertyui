@@ -14,6 +14,8 @@ class PropertyService {
         List<Property> propertyList = Property.createCriteria().list {
             eq("isAvailable", Boolean.TRUE)
             eq("isSale", Boolean.FALSE)
+            ne("propertyType", PropertyType.LAND.name())
+            isNotNull("propertyType")
             maxResults(6)
             order("lastModified", "desc")
         } as List<Property>

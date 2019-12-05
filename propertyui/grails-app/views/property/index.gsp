@@ -148,7 +148,7 @@
                 </div>
             </div>
             <div class="clearfix"></div>
-            <g:if test="${propertyList?.size() > 0}">
+            <g:if test="${propertyList?.size() > 6}">
                 <div class="categories">
                     <div class="container">
                         <div class="clearfix"></div>

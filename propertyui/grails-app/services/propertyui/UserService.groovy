@@ -13,9 +13,9 @@ class UserService {
 
         Long result = User.createCriteria().get {
             eq("accountLocked", Boolean.FALSE)
-            ne("enabled", Boolean.TRUE)
-            ne("accountExpired", Boolean.FALSE)
-            ne("passwordExpired", Boolean.FALSE)
+            eq("enabled", Boolean.TRUE)
+            eq("accountExpired", Boolean.FALSE)
+            eq("passwordExpired", Boolean.FALSE)
 
             projections {
                 count("id")

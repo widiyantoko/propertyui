@@ -10,6 +10,7 @@ import propertyui.model.SubmitProperty
 
 import static org.springframework.http.HttpStatus.NOT_FOUND
 
+@Transactional(readOnly = true)
 class PropertyController {
 
     def propertyService
