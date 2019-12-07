@@ -45,7 +45,7 @@
         <!-- Banner end -->
 
         <!-- Featured properties start -->
-        <g:if test="${propertyList?.size() > 6}">
+        <g:if test="${propertyList?.size() > 5}">
             <div class="content-area featured-properties">
                 <div class="container">
                     <div class="main-title">

@@ -76,7 +76,7 @@
                         </a>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right rightside-navbar">
+                <ul class="nav navbar-nav navbar-right rightside-navbar ${request.forwardURI?.equals('/profile') ? 'hidden' : ''}">
                     <li>
                         <sec:access expression="isAuthenticated()">
                             <a href="${createLink(controller: 'property', action: 'beforeSubmit')}" class="button ${request.forwardURI?.equals('/submit') ? 'hide' : ''}">Submit Property</a>

@@ -1,12 +1,25 @@
 package propertyui
 
+import grails.plugin.springsecurity.annotation.Secured
+import grails.transaction.Transactional
+
 import static org.springframework.http.HttpStatus.NOT_FOUND
 
 class UserController {
 
     def userService
+    def springSecurityService
 
+    @Secured('isFullyAuthenticated()')
+    @Transactional
     def index() {
+        User user = springSecurityService.currentUser
+        UserRole userRole = UserRole.findByUser(user)
+
+        [
+                user: user,
+                userRole: userRole
+        ]
 
     }
 

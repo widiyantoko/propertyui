@@ -281,6 +281,7 @@ class PropertyController {
         ]
     }
 
+    @Transactional
     def saveData() {
         User user = User.findById(1)
         Date date =  new Date()

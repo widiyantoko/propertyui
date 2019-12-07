@@ -23,6 +23,9 @@ class UrlMappings {
         "/property/details/$id?"(controller: 'property', action: 'propertyDetails')
         "/submit/"(controller: 'property', action: 'beforeSubmit')
 
+        //user page
+        "/profile"(controller: 'user', action: 'index')
+
         "500"(view:'/error')
         "404"(view:'/notFound')
     }

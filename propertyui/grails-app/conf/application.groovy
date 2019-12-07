@@ -7,7 +7,7 @@ grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'propertyui.Use
 grails.plugin.springsecurity.authority.className = 'propertyui.Role'
 grails.plugin.springsecurity.oauthProvider.userApprovalEndpointUrl = "/oauth/confirm"
 //grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/home'
-grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/'
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/profile'
 grails.plugin.springsecurity.logout.afterLogoutUrl = '/login/auth'
 
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
