@@ -45,7 +45,7 @@
         <!-- Banner end -->
 
         <!-- Featured properties start -->
-        <g:if test="${propertyList}">
+        <g:if test="${propertyList?.size() > 6}">
             <div class="content-area featured-properties">
                 <div class="container">
                     <div class="main-title">
@@ -147,73 +147,65 @@
                     </div>
                 </div>
             </div>
-            <div class="clearfix"></div>
-            <g:if test="${propertyList?.size() > 6}">
-                <div class="categories">
-                    <div class="container">
-                        <div class="clearfix"></div>
-                        <div class="row wow">
-                            <div class="col-lg-12 text-center mt-20">
-                                <a href="${createLink(controller: "property", action: "propertyList")}" class="btn button-md button-theme text-center">
-                                    <g:message code="public.button.more.label"/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </g:if>
+            <div class="col-lg-12 text-center mt-20">
+                <a href="${createLink(controller: "property", action: "propertyList")}" class="btn button-md button-theme text-center">
+                    <g:message code="public.button.more.label"/>
+                </a>
+            </div>
         </g:if>
         <!-- Featured properties end -->
 
         <div class="clearfix"></div>
         <!-- Categories strat -->
-        <g:if test="${popularPropertyList?.size > 2}">
-            <div class="categories">
-                <div class="container">
-                    <div class="main-title">
-                        <h1><g:message code="public.popular.place.label"/></h1>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="row wow">
-                        <g:each in="${popularPropertyList}" var="popularProperty" status="i">
-                            <g:set var="city" value="${popularProperty?.getAt(0)}"/>
-                            <g:set var="total" value="${popularProperty?.getAt(1)}"/>
+        <g:if test="${popularPropertyList}">
+            <div class="content-area">
+                <div class="categories">
+                    <div class="container">
+                        <div class="main-title">
+                            <h1><g:message code="public.popular.place.label"/></h1>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="row wow">
+                            <g:each in="${popularPropertyList}" var="popularProperty" status="i">
+                                <g:set var="city" value="${popularProperty?.getAt(0)}"/>
+                                <g:set var="total" value="${popularProperty?.getAt(1)}"/>
 
-                            <g:if test="${i == 0}">
-                                <div class="col-lg-5 col-md-5 col-sm-12 col-pad wow delay-04s fadeInRight">
-                                    <div class="category">
-                                        <div class="category_bg_box category_long_bg cat-${i}-bg">
-                                            <div class="category-overlay">
-                                                <div class="category-content">
-                                                    <div class="category-subtitle">${total} Properties</div>
-                                                    <h3 class="category-title"><a href="#">${city}</a></h3>
+                                <g:if test="${i == 0}">
+                                    <div class="col-lg-5 col-md-5 col-sm-12 col-pad wow delay-04s fadeInRight">
+                                        <div class="category">
+                                            <div class="category_bg_box category_long_bg cat-${i}-bg">
+                                                <div class="category-overlay">
+                                                    <div class="category-content">
+                                                        <div class="category-subtitle">${total} Properties</div>
+                                                        <h3 class="category-title"><a href="#">${city}</a></h3>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </g:if>
-                            <g:else>
-                                <div class="col-lg-7 col-md-7 col-sm-12">
-                                    <div class="row">
-                                        <div class="${i > 0 && i < 2 ? 'col-sm-12 col-pad wow fadeInLeft delay-04s' : 'col-sm-12 col-pad wow fadeInUp delay-04s'}">
-                                            <div class="category">
-                                                <div class="category_bg_box cat-${i}-bg">
-                                                    <div class="category-overlay">
-                                                        <div class="category-content">
-                                                            <div class="category-subtitle">${total} Properties</div>
-                                                            <h3 class="category-title">
-                                                                <a href="#">${city}</a>
-                                                            </h3>
+                                </g:if>
+                                <g:else>
+                                    <div class="col-lg-7 col-md-7 col-sm-12">
+                                        <div class="row">
+                                            <div class="${i > 0 && i < 2 ? 'col-sm-12 col-pad wow fadeInLeft delay-04s' : 'col-sm-12 col-pad wow fadeInUp delay-04s'}">
+                                                <div class="category">
+                                                    <div class="category_bg_box cat-${i}-bg">
+                                                        <div class="category-overlay">
+                                                            <div class="category-content">
+                                                                <div class="category-subtitle">${total} Properties</div>
+                                                                <h3 class="category-title">
+                                                                    <a href="#">${city}</a>
+                                                                </h3>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </g:else>
-                        </g:each>
+                                </g:else>
+                            </g:each>
+                        </div>
                     </div>
                 </div>
             </div>
