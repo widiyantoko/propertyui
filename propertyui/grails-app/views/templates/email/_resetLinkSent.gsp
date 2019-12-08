@@ -49,7 +49,8 @@
                         <table width="100%">
                             <tr>
                                 <td style="padding: 0 0 20px; text-align: center">
-                                    &copy; <g:formatDate date="${new Date()}" format="yyyy"/> Property UI
+                                    &copy; <g:formatDate date="${new Date()}" format="yyyy"/>
+                                    <a href="${homePageLink}">Property UI</a>
                                 </td>
                             </tr>
                         </table>

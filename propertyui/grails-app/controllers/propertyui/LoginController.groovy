@@ -113,6 +113,7 @@ class LoginController extends grails.plugin.springsecurity.LoginController{
             user.save()
 
             String resetLink = createLink(absolute: true, controller: 'login', action: 'newPassword', id: token)
+            String homePageLink = createLink(absolute:  true, controller: 'property', action: 'index')
             sendMail {
                 to user.email
                 from mailFromResetPasswordEmail
@@ -120,7 +121,7 @@ class LoginController extends grails.plugin.springsecurity.LoginController{
                 html g.render(template: '/templates/email/resetLinkSent', model: [
                         logo: mailLogo,
                         user: user?.getFullName(),
-                        homePageLink: createLink(controller: 'property', action: 'index'),
+                        homePageLink: homePageLink,
                         resetLink: resetLink
                 ])
 
