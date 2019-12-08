@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta name="layout" content="main">
-        <title></title>
+        <title>Profil Saya</title>
     </head>
 
     <body>
@@ -107,36 +107,39 @@
                             <g:if test="${!user?.emailVerified}">
                                 <div class="alert alert-danger wow fadeInLeft delay-03s"  role="alert">
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <strong>Email belum di verifikasi.</strong> <a style="color: #a94442; text-decoration: underline">Klik disini untuk verifikasi email anda.</a>
-                                    <p></p>
+                                    <strong>Email belum diverifikasi.</strong>
+                                        <span style="color: #a94442; text-decoration: underline">
+                                            <a>Link verifikasi telah dikirimkan ke ${user?.email}</a> atau
+                                            <a href="javascript:void(0);" class="js-verify-email">Kirim ulang link verifikasi?</a>
+                                        </span>
                                 </div>
                             </g:if>
                             <div class="main-title-2">
                                 <h1><span>PROFIL</span> SAYA</h1>
                             </div>
 
-                            <g:form>
+                            <g:form class="js-form-user-profile">
                                 <div class="form-group">
                                     <label>Nama</label>
-                                    <input type="text" class="input-text" name="name" value="${user?.firstName}">
+                                    <input type="text" class="input-text" name="name" value="${user?.firstName}" ${!user?.emailVerified ? 'disabled' : ''}/>
                                 </div>
                                 <div class="form-group">
                                     <label>Akses</label>
-                                    <input type="text" class="input-text" name="agent" value="${userRole?.role?.name}">
+                                    <input type="text" class="input-text" name="agent" value="${userRole?.role?.name}" ${!user?.emailVerified ? 'disabled' : ''}>
                                 </div>
                                 <div class="form-group">
                                     <label>Phone</label>
-                                    <input type="text" class="input-text" name="phone" value="${user?.contactMobile ?: user?.contactOffice}">
+                                    <input type="text" class="input-text" name="phone" value="${user?.contactMobile ?: user?.contactOffice}" ${!user?.emailVerified ? 'disabled' : ''}>
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="email" class="input-text" name="email" value="${user?.email}">
+                                    <input type="email" class="input-text" name="email" value="${user?.email}"  ${!user?.emailVerified ? 'disabled' : ''}>
                                 </div>
                                 <div class="form-group ${userRole?.role?.name?.equals('User') || userRole?.role?.name?.equals('Admin') ? 'hidden' : ''}">
                                     <label>Biografi</label>
-                                    <textarea class="input-text" style="text-align: justify" name="message">${user?.biography}</textarea>
+                                    <textarea class="input-text" style="text-align: justify" name="message" ${!user?.emailVerified ? 'disabled' : ''}>${user?.biography}</textarea>
                                 </div>
-                                <button type="submit" class="btn button-md button-theme">Save Changes</button>
+                                <button type="submit" class="btn button-md button-theme" ${!user?.emailVerified ? 'disabled' : ''}>Save Changes</button>
                             </g:form>
                         </div>
                         <!-- My address end -->

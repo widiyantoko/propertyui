@@ -1,6 +1,7 @@
 package propertyui
 
 import grails.transaction.Transactional
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
@@ -14,6 +15,15 @@ import javax.servlet.http.HttpServletRequest
 @Transactional(readOnly = true)
 class RegistrationController {
 
+    @Value('${application.mail.from.confirmation.name}')
+    private String mailFromVerifyEmailName
+
+    @Value('${application.mail.from.confirmation.email}')
+    private String mailFromVerifyEmail
+
+    @Value('${application.mail.logo}')
+    private String mailLogo
+
     def userService
     def springSecurityService
     AuthenticationManager authenticationManager
@@ -22,7 +32,7 @@ class RegistrationController {
 
         User user = springSecurityService.currentUser
         if (user) {
-            redirect(controller: 'property', action: 'index')
+            redirect(controller: 'user', action: 'index')
             return
         }
 
@@ -43,13 +53,6 @@ class RegistrationController {
             return
         }
 
-        //email new register here
-        try {
-
-        } catch (Exception ex) {
-            log?.error(ex?.message, ex)
-        }
-
         try {
             User user = new User()
             userService.createNewUser(user, userRegister)
@@ -58,6 +61,25 @@ class RegistrationController {
                 transactionStatus.setRollbackOnly()
                 flash.error = 'Registration unsuccessfully'
                 respond userRegister.errors, view: 'index'
+            }
+
+            try {
+                String verifyEmailLink = createLink(absolute: true, controller: 'registration', action: 'verifyMail', id: user?.verificationCode)
+                String homePageLink = createLink(absolute:  true, controller: 'property', action: 'index')
+                sendMail {
+                    to user?.email
+                    from mailFromVerifyEmail
+                    subject mailFromVerifyEmailName
+                    html g.render(template: '/templates/email/verifyMail', model: [
+                            logo: mailLogo,
+                            user: user?.getFullName(),
+                            homePageLink: homePageLink,
+                            verifyEmailLink: verifyEmailLink
+                    ])
+                }
+
+            } catch (Exception ex) {
+                log?.error(ex?.message, ex)
             }
 
             autoLogin(user.username, password, request)
@@ -71,6 +93,25 @@ class RegistrationController {
         }
 
         redirect(action: 'index')
+    }
+
+    @Transactional
+    def verifyMail(String id) {
+        def user = User.findByVerificationCode(id)
+
+//        int verificationStatus = 0
+        if (user) {
+            try {
+                user.emailVerified = true
+                user.save()
+//                verificationStatus = 1
+            } catch (Exception e) {
+                trasactionStatus.setRollbackOnly()
+                log.error(e?.message, e)
+            }
+        }
+
+        render(view: '/templates/email/verifySuccess')
     }
 
     def checkEmailAddress() {
