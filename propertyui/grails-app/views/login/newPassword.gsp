@@ -40,6 +40,7 @@
                                     <g:form class="js-new-password-form" id="${params?.id}" controller="login" action="resetPassword" method="POST">
                                         <div class="form-group">
                                             <input type="password" id="new_password" name="password" class="input-text"
+                                                   placeholder="${message(code: 'public.placeholder.newPassword.label')}"
                                                    autocomplete="off" data-rule-minlength="6"
                                                    data-rule-required="true"
                                                    data-msg="${message(code: 'password.require.label', default: 'Password harus diisi.')}"
@@ -53,6 +54,7 @@
                                         </div>
                                         <div class="form-group">
                                             <input type="password" id="passwordAgain" name="passwordAgain" class="input-text"
+                                                   placeholder="${message(code: 'public.placeholder.newPassword.confirm.label')}"
                                                    data-rule-required="true" data-rule-equalTo="#new_password"
                                                    data-msg="${message(code: 'property.model.PasswordReset.passwordAgain.doesnotmatch', default: 'Passwords tidak sesuai.')}"
                                                    data-msg-equalTo="${message(code: 'property.model.PasswordReset.passwordAgain.doesnotmatch', default: 'Passwords tidak sesuai.')}"
