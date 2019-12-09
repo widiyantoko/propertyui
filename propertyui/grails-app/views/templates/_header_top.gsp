@@ -12,18 +12,26 @@
                 <ul class="top-social-media pull-right">
                     <sec:access expression="!isAuthenticated()">
                         <li>
-                            <a href="${createLink(url: '/login/auth')}" class="sign-in"><i class="fa fa-sign-in"></i> Login</a>
+                            <a href="${createLink(url: '/login/auth')}" class="sign-in"><i class="fa fa-sign-in"></i>
+                                ${message(code: 'public.label.login', default:'Login')}
+                            </a>
                         </li>
                         <li>
-                            <a href="${createLink(controller: 'registration', action: 'index')}" class="sign-in"><i class="fa fa-user"></i> Register</a>
+                            <a href="${createLink(controller: 'registration', action: 'index')}" class="sign-in"><i class="fa fa-user"></i>
+                                ${message(code: 'public.label.register', default: 'Daftar')}
+                            </a>
                         </li>
                     </sec:access>
                     <sec:access expression="isAuthenticated()">
                         <li>
-                            <a href="${createLink(url: '/logout')}" class="-sign-out"><i class="fa fa-sign-out"></i> Logout</a>
+                            <a href="${createLink(url: '/logout')}" class="-sign-out"><i class="fa fa-sign-out"></i>
+                                ${message(code: 'public.logout.label', default: 'Logout')}
+                            </a>
                         </li>
                         <li>
-                            <a href="${createLink(url: '/profile')}" class="profile-user"><i class="fa fa-user"></i>My Profile</a>
+                            <a href="${createLink(url: '/profile')}" class="profile-user"><i class="fa fa-user"></i>
+                                ${message(code: 'public.myProfile.label', default: 'Akun')}
+                            </a>
                         </li>
                     </sec:access>
                 </ul>
