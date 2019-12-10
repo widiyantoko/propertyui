@@ -33,6 +33,20 @@
                             </div>
                         </div>
                     </g:if>
+                    <g:if test="${!user?.emailVerified}">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger wow fadeInLeft delay-09s"  role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <strong>Email belum diverifikasi</strong><br>
+                                <span style="color: #a94442; text-decoration: underline">
+                                    <a>Link verifikasi telah dikirimkan ke ${user?.email}</a> atau
+                                    <a href="javascript:void(0);" class="js-verify-email" data-action="${createLink(controller: 'user', action: 'resendVerificationLink')}">
+                                        ${message(code: 'account.resendVerification.label', default: 'Kirim ulang link verifikasi?')}
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </g:if>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -264,7 +278,7 @@
                                     <div class="col-md-4 col-sm-4">
                                         <label></label>
                                         <div class="form-group">
-                                            <button type="submit" class="button-md button-theme btn-block">Submit</button>
+                                            <button type="submit" class="btn button-md button-theme btn-block" ${!user?.emailVerified ? 'disabled' : ''}>Submit</button>
                                         </div>
                                     </div>
                                 </div>
@@ -276,5 +290,7 @@
         </div>
         <!-- Submit Property end -->
         <g:render template="/templates/footer"/>
+        <g:render template="/user/modal_verification_email" model="${user}"/>
+
     </body>
 </html>

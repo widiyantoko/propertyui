@@ -13,7 +13,7 @@
     </head>
     <body>
         <g:render template="/templates/header_top"/>
-
+        <g:render template="/templates/header"/>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
