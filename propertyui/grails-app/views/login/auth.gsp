@@ -13,6 +13,7 @@
     </head>
 
     <body>
+        <g:render template="/templates/header"/>
         <div class="content-area">
             <div class="container">
                 <div class="row">
@@ -85,6 +86,7 @@
                 </div>
             </div>
         </div>
+        <g:render template="/templates/simple_footer"/>
         <g:render template="/templates/footer"/>
     </body>
 </html>
