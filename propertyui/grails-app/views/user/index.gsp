@@ -136,7 +136,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>${message(code: 'account.user.role.label', default: 'Hak Akses')}</label>
-                                    <input type="text" class="input-text" name="agent" value="${userRole?.role?.name}" ${!user?.emailVerified ? 'disabled' : ''}>
+                                    <input type="text" class="input-text" name="agent" value="${userRole?.role?.name}" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label>${message(code: 'account.user.phone.label', default: 'No Hp')}</label>
