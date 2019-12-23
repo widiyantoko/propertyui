@@ -51,6 +51,7 @@
                     <div class="main-title">
                         <h1><g:message code="public.feature.property.label"/></h1>
                     </div>
+                    <!--
                     <ul class="list-inline-listing filters filters-listing-navigation">
                         <li class="active btn filtr-button filtr" data-filter="all">
                             <g:message code="property.type.all.label"/>
@@ -64,12 +65,13 @@
                         </g:each>
 
                     </ul>
+                    -->
                     <div class="clearfix"></div>
                     <div class="row wow">
                         <div class="filtr-container">
                             <g:each in="${propertyList}" var="property" status="i">
                                 <g:set var="details" value="${property?.propertyDetails}"/>
-                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  filtr-item" data-category="${PropertyType?.getByValue(property?.propertyType)?.code()}">
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  filtr-item" data-category="1">
                                     <div class="property">
                                         <div class="property-img">
                                             <g:if test="${property?.propertyStatus == PropertyStatus.SALE.name()}">
