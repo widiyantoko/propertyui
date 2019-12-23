@@ -245,14 +245,55 @@ class PropertyController {
         [
                 user: user,
                 submitProperty: new SubmitProperty(),
-                propertyList: provinceList
+                provinceList: provinceList
         ]
     }
 
     @Secured('isFullyAuthenticated()')
     @Transactional
-    def submitProperty() {
+    def save(SubmitProperty submitProperty) {
 
+        def features = params?.list('feature')
+        String type = params?.type
+        String status = params?.status
+        String state = params?.state
+        String city = params?.city
+
+        Province province = Province.findByCode(state)
+        Regency regency = Regency.findByCode(city)
+
+        submitProperty.propertyType = type
+        submitProperty.propertyStatus = status
+        submitProperty.state = province?.name
+        submitProperty.city = regency?.name
+
+        submitProperty.validate()
+        if (submitProperty.hasErrors()) {
+            flash.error = 'Gagal input data a'
+            respond submitProperty.errors, view: 'beforeSubmit'
+            return
+        }
+
+        try {
+            Property property = new Property()
+            propertyService.submitNewProperty(property, submitProperty, features)
+
+            if (property.hasErrors()) {
+                transactionStatus.setRollbackOnly()
+                flash.error = 'Gagal input data b'
+                respond submitProperty.errors, view: 'beforeSubmit'
+            }
+
+        } catch (Exception e) {
+            transactionStatus.setRollbackOnly()
+            log.error(e?.message, e)
+
+            flash.error = 'Gagal input data c'
+            respond submitProperty.errors, view: 'beforeSubmit'
+            return
+        }
+
+        redirect(controller: 'user', action: 'index')
     }
 
     def getCityByProvince() {

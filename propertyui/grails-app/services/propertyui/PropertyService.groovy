@@ -1,13 +1,17 @@
 package propertyui
 
+import Enums.PropertyFeature
 import Enums.PropertyStatus
 import Enums.PropertyType
 import org.apache.commons.lang.StringUtils
 import grails.transaction.Transactional
 import grails.web.servlet.mvc.GrailsParameterMap
+import propertyui.model.SubmitProperty
 
 @Transactional
 class PropertyService {
+
+    def springSecurityService
 
     List<Property> getPropertyList() {
 
@@ -512,6 +516,62 @@ class PropertyService {
 
        }
         return results
+    }
+
+    void submitNewProperty(Property property, SubmitProperty submitProperty, def features) {
+
+        User user = springSecurityService.currentUser
+        Date date = new Date()
+
+        property.title = submitProperty.title
+        property.propertyStatus = submitProperty.propertyStatus
+        property.propertyType = submitProperty.propertyType
+        property.price = submitProperty.price
+        property?.gallery = submitProperty.gallery
+        property.totalRoom = submitProperty.totalRoom
+        property.totalBathRoom = submitProperty.totalBathRoom
+        property.address = submitProperty.address
+        property.state = submitProperty.state
+        property.city = submitProperty.city
+        property.postalCode = submitProperty.postalCode
+        property.description = submitProperty.description
+        property.buildingAge = submitProperty.buildingAge
+        property.totalBedRoom = submitProperty.totalBedRoom
+
+        property.user = user
+        property.createBy = user
+        property.updateBy = user
+
+        property.createDate = date
+        property.lastModified = date
+
+        property.validate()
+        if (property.hasErrors()) {
+            return
+        }
+        property.save()
+
+        if (features) {
+            features?.each {
+                PropertyDetails propertyDetails = new PropertyDetails(
+                        dateCreated: date,
+                        feature: it,
+                        lastUpdated: date,
+                        property: property,
+                        unit: null,
+                        user: user
+                )
+
+                propertyDetails.validate()
+                if (propertyDetails.hasErrors()) {
+                    return
+                }
+                propertyDetails.save()
+
+                property.propertyDetails.add(propertyDetails)
+            }
+        }
+        property.save()
     }
 
     private static Map<String, Object> processParams(GrailsParameterMap params) {

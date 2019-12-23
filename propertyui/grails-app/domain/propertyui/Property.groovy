@@ -63,6 +63,7 @@ class Property implements Serializable{
         totalRoom nullable: true
         totalBathRoom nullable: true
         totalBedRoom nullable: true
+        buildingAge nullable: true
 
         createBy nullable: true
         updateBy nullable: true
