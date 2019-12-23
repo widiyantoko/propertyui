@@ -40,14 +40,12 @@
         });
 
         _select_property_status.on('change', function () {
-            var _this = $(this).children("option:selected");
-            console.log(_this.val());
+            var _this = $(this).children("option:selected");s
         });
 
         //Disable some field while property Land selected
         _select_property_type.on('change', function () {
             var _val = $(this).val();
-            console.log(_val);
             if (_val === 'Tanah' || _val === '5' || _val === 'LAND') {
                 $(_field_total_room).attr('disabled', true);
                 $(_field_total_bath_room).attr('disabled', true);
