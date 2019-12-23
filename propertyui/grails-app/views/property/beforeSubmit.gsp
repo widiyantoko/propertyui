@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta name="layout" content="main">
-        <title>Submit Property</title>
+        <title>${message(code: 'submit.property.title', default: 'Submit Property')}</title>
     </head>
 
     <body>
@@ -25,44 +25,44 @@
                             <strong>Well done!</strong> You successfully read this important alert message.
                         </div>
                     </div>
-                    <g:if test="${flash.error || flash.message}">
+                    <g:if test="${flash.error || flash.message || !user?.emailVerified}">
                         <div class="col-md-12">
                             <div class="alert alert-danger wow fadeInLeft delay-03s"  role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <strong>Well done!</strong> You successfully read this important alert message.
+                                <strong>${flash.error}!</strong> You successfully read this important alert message.
                             </div>
                         </div>
-                    </g:if>
-                    <g:if test="${!user?.emailVerified}">
-                        <div class="col-md-12">
-                            <div class="alert alert-danger wow fadeInLeft delay-09s"  role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <strong>Email belum diverifikasi</strong><br>
-                                <span style="color: #a94442; text-decoration: underline">
-                                    <a>Link verifikasi telah dikirimkan ke ${user?.email}</a> atau
-                                    <a href="javascript:void(0);" class="js-verify-email" data-action="${createLink(controller: 'user', action: 'resendVerificationLink')}">
-                                        ${message(code: 'account.resendVerification.label', default: 'Kirim ulang link verifikasi?')}
-                                    </a>
-                                </span>
+                        <g:if test="${!user?.emailVerified}">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger wow fadeInLeft delay-09s"  role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <strong>Email belum diverifikasi</strong><br>
+                                    <span style="color: #a94442; text-decoration: underline">
+                                        <a>${message(code: 'account.verificationSent.label', default: 'Link verifikasi telah dikirimkan ke {0}', args: [user?.email])}</a> atau
+                                        <a href="javascript:void(0);" class="js-verify-email" data-action="${createLink(controller: 'user', action: 'resendVerificationLink')}">
+                                            ${message(code: 'account.resendVerification.label', default: 'Kirim ulang link verifikasi?')}
+                                        </a>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
+                        </g:if>
                     </g:if>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="submit-address">
-                            <g:form class="js-submit-property" controller="property" action="submitProperty" method="post">
+                            <g:form class="js-submit-property" controller="property" action="save" method="post">
                                 <div class="main-title-2">
                                     <h1><span>Basic</span> Information</h1>
                                 </div>
                                 <div class="search-contents-sidebar mb-30">
                                     <div class="form-group">
-                                        <label>Nama Property</label>
+                                        <label>${message(code: 'placeholder.property.name.label', default: 'Nama Property')}</label>
                                         <input type="text" id="title" name="title" class="input-text ${hasErrors(bean: submitProperty, field: 'title', 'form-has-error')}"
                                                value="${this.submitProperty?.title}"
-                                               placeholder="Property Title"
+                                               placeholder="${message(code: 'placeholder.property.name.label', default: 'Nama Property')}"
                                                data-rule-required="true"
-                                               data-msg="Nama property harus diisi"
+                                               data-msg='${message(code: 'message.property.name.label', default: 'Nama property harus diisi')}'
                                         />
                                     </div>
                                     <div class="js-error-property-title">
@@ -75,38 +75,58 @@
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
-                                                <label>Status</label>
-                                                <select class="selectpicker search-fields" id="status" name="status">
-                                                    <g:each in="${PropertyStatus.values()}" var="status">
-                                                        <option value="${this.submitProperty?.propertyStatus}">
-                                                            <g:message code="property.status.${status}.label"/>
-                                                        </option>
-                                                    </g:each>
-                                                </select>
+                                                <label>${message(code: 'submit.property.status.label', default: 'Status')}</label>
+                                                <g:set var="status" value="${PropertyStatus.values()}"/>
+                                                <g:select class="selectpicker search-fields" from="${status}"
+                                                          id="status" name="status"
+                                                          noSelection="${['': 'Status property']}"
+                                                          value="${this.submitProperty?.propertyStatus}"
+                                                          data-rule-required="true"
+                                                          data-msg="Pilih status"
+                                                          optionValue="${{it.value}}"
+
+                                                />
                                             </div>
+                                            <div class="js-error-property-status">
+                                                <g:hasErrors bean="${submitProperty}" field="propertyStatus">
+                                                    <label id="status-error" class="o-form-error" for="status">
+                                                        <g:fieldError field="propertyStatus" bean="${submitProperty}"/>
+                                                    </label>
+                                                </g:hasErrors>
+                                            </div><br>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
-                                                <label>Type</label>
-                                                <select class="selectpicker search-fields" id="type" name="type">
-                                                    <g:each in="${PropertyType.values()}" var="type">
-                                                        <option value="${type}">
-                                                            <g:message code="property.type.${type}.label"/>
-                                                        </option>
-                                                    </g:each>
-                                                </select>
+                                                <label>${message(code: 'submit.property.type.label', default: 'Tipe')}</label>
+                                                <g:set var="type" value="${PropertyType.values()}"/>
+                                                <g:select class="selectpicker search-fields" from="${type}"
+                                                          id="type" name="type"
+                                                          noSelection="${['': 'Tipe Property']}"
+                                                          value="${this.submitProperty?.propertyType?.toUpperCase()}"
+                                                          data-rule-required="true"
+                                                          data-msg="Pilih tipe"
+                                                          optionValue="${{it.value}}"
+
+                                                />
+                                            </div>
+                                            <div class="js-error-property-type">
+                                                <g:hasErrors bean="${submitProperty}" field="propertyType">
+                                                    <label id="type-error" class="o-form-error" for="type">
+                                                        <g:fieldError field="propertyType" bean="${submitProperty}"/>
+                                                    </label>
+                                                </g:hasErrors>
                                             </div>
                                         </div>
                                     </div><br>
                                     <div class="row">
                                         <div class="col-md-4 col-sm-6">
                                             <div class="form-group">
-                                                <label>Harga</label>
+                                                <label>${message(code: 'submit.property.price.label', default: 'Harga')}</label>
                                                 <input type="text" id="price" name="price" class="input-text ${hasErrors(bean: submitProperty, field: 'price', 'form-has-error')}"
                                                        value="${this.submitProperty?.price}"
                                                        placeholder="IDR"
                                                        data-rule-required="true"
-                                                       data-msg="Harga harus diisi"
+                                                       data-msg='${message(code: 'message.property.price.label', default: 'Harga harus diisi')}'
                                                 />
                                             </div>
                                             <div class="js-error-property-price">
@@ -119,12 +139,12 @@
                                         </div>
                                         <div class="col-md-4 col-sm-6">
                                             <div class="form-group">
-                                                <label>Jumlah Ruangan</label>
+                                                <label>${message(code: 'submit.property.totalRoom.label', default: 'Jumlah Ruangan')}</label>
                                                 <input type="text" id="totalRoom" name="totalRoom" class="input-text ${hasErrors(bean: submitProperty, field: 'totalRoom', 'form-has-error')}"
-                                                       placeholder="Jumlah Ruangan"
+                                                       placeholder="${message(code: 'submit.property.totalRoom.label', default: 'Jumlah Ruangan')}"
                                                        value="${this.submitProperty?.totalRoom}"
                                                        data-rule-required="true"
-                                                       data-msg="Jumlah ruangan harus diisi"
+                                                       data-msg='${message(code: 'message.property.totalRoom.label', default: 'Jumlah ruangan harus diisi')}'
                                                 />
                                             </div>
                                             <div class="js-error-total-room">
@@ -137,12 +157,12 @@
                                         </div>
                                         <div class="col-md-4 col-sm-6">
                                             <div class="form-group">
-                                                <label>Jumlah Kamar Mandi</label>
+                                                <label>${message(code: 'submit.property.totalBathRoom.label', default: 'Jumlah Kamar Mandi')}</label>
                                                 <input type="text" id="totalBathRoom" name="totalBathRoom" class="input-text ${hasErrors(bean: submitProperty, field: 'totalBathRoom', 'form-has-error')}"
-                                                       placeholder="Jumlah Kamar Mandi"
+                                                       placeholder="${message(code: 'submit.property.totalBathRoom.label', default: 'Jumlah Kamar Mandi')}"
                                                        value="${this.submitProperty?.totalBathRoom}"
                                                        data-rule-required="true"
-                                                       data-msg="Jumlah kamar mandi harus diisi"
+                                                       data-msg='${message(code: 'message.property.totalBathRoom.label', default: 'Jumlah kamar mandi harus diisi')}'
                                                 />
                                             </div>
                                             <div class="js-error-total-bath-room">
@@ -181,20 +201,31 @@
                                     <div class="col-md-6 col-sm-6">
                                         <div class="form-group">
                                             <label>Propinsi</label>
-                                            <select class="selectpicker search-fields js-filter-province-list" name="state" data-live-search="true" data-live-search-placeholder="Search value">
-                                                <g:each in="${propertyList}" var="province">
-                                                    <option name="provinceCode" value="${this.submitProperty?.state}" class="js-option-province"
-                                                            data-url="${createLink(action: 'getCityByProvince', params: [provinceCode: province?.code])}">
-                                                        ${province?.name}
-                                                    </option>
-                                                </g:each>
-                                            </select>
+                                            <g:select id="state" name="state" from="${provinceList}" class="selectpicker search-fields js-filter-province-list"
+                                                      data-live-search="true"
+                                                      data-live-search-placeholder="Search value"
+                                                      data-url="${createLink(action: 'getCityByProvince', params: [provinceCode: ''])}"
+                                                      data-msg="Required"
+                                                      noSelection="${['': message(code: 'submit.property.select.state', default: 'Pilih Provinsi')]}"
+                                                      optionKey="${{it.code}}"
+                                                      optionValue="${{it.name}}"
+
+                                            />
+                                        </div>
+                                        <div class="js-error-property-state">
+                                            <g:hasErrors bean="${submitProperty}" field="state">
+                                                <label id="state-error" class="o-form-error" for="state">
+                                                    <g:fieldError bean="${submitProperty}" field="state"/>
+                                                </label>
+                                            </g:hasErrors>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
                                         <div class="form-group">
                                             <label>Kota</label>
-                                            <select class="selectpicker search-fields js-filter-regency-list" name="city" data-live-search="true" data-live-search-placeholder="Search value"></select>
+                                            <g:select class="selectpicker search-fields js-filter-regency-list" from=""
+                                                      name="city" data-live-search="true"
+                                                      data-live-search-placeholder="Search value"/>
                                         </div>
                                         <div class="js-error-property-address">
                                             <g:hasErrors bean="${submitProperty}" field="address">
@@ -245,7 +276,7 @@
                                             <g:each in="${PropertyFeature.values()}" var="feature" status="i">
                                                 <div class="col-lg-4 col-sm-4 col-xs-12">
                                                     <div class="checkbox-2 checkbox-theme checkbox-circle">
-                                                        <input id="checkbox-${i}" type="checkbox" name="feature" class="js-feature-option">
+                                                        <input id="checkbox-${i}" type="checkbox" name="feature" value="${this.submitProperty?.features}" class="js-feature-option">
                                                         <label for="checkbox-${i}">
                                                             <g:message code="property.feature.${feature.name()}.label" default="${feature.name()}"/>
                                                         </label>

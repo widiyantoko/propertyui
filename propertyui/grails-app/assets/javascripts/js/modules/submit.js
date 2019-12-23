@@ -8,6 +8,7 @@
         var _form_submit_property = $('.js-submit-property');
         var _filter_province_list = $('.js-filter-province-list');
         var _select_regency_list = $('.js-filter-regency-list select');
+        var _select_property_status = $('#status');
         var _select_property_type = $('#type');
 
         var _field_total_room = $('#totalRoom');
@@ -20,7 +21,7 @@
         //Filter province and regency
         _filter_province_list.on('change', function () {
             var _this = $(this).children("option:selected");
-            var _url = _this.data('url');
+            var _url = $(this).data('url') + _this.val();
 
             $.ajax({
                 type: "POST",
@@ -38,10 +39,16 @@
             })
         });
 
+        _select_property_status.on('change', function () {
+            var _this = $(this).children("option:selected");
+            console.log(_this.val());
+        });
+
         //Disable some field while property Land selected
         _select_property_type.on('change', function () {
             var _val = $(this).val();
-            if (_val === 'LAND') {
+            console.log(_val);
+            if (_val === 'Tanah' || _val === '5' || _val === 'LAND') {
                 $(_field_total_room).attr('disabled', true);
                 $(_field_total_bath_room).attr('disabled', true);
                 $(_field_total_bed_room).attr('disabled', true);
@@ -73,6 +80,12 @@
                 var name = element.attr('name');
                 if (name === 'title') {
                     error.appendTo($('.js-error-property-title'));
+                } else if (name === 'status') {
+                    error.appendTo($('.js-error-property-status'));
+                } else if (name === 'type') {
+                    error.appendTo($('.js-error-property-type'));
+                } else if (name === 'state' ) {
+                    error.appendTo($('.js-error-property-state'));
                 } else if (name === 'price') {
                     error.appendTo($('.js-error-property-price'));
                 } else if (name === 'totalRoom') {
