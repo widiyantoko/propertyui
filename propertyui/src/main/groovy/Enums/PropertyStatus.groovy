@@ -1,5 +1,14 @@
 package Enums
 
 enum PropertyStatus {
-    SALE, RENT
+    SALE("Jual"),
+    RENT("Sewa")
+
+    private final String value
+
+    PropertyStatus(String value) {
+        this.value = value
+    }
+
+    String value() { value }
 }
