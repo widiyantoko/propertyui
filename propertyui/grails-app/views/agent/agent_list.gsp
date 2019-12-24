@@ -122,8 +122,13 @@
         </g:if>
         <!-- Agent section end -->
 
+        <div class="clearfix"></div>
+
+        <div class="content-area-10"></div>
+
         <g:render template="/templates/brands_partner"/>
 
+        <g:render template="/templates/simple_footer"/>
         <g:render template="/templates/footer"/>
 
     </body>

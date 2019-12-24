@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta name="layout" content="main">
-        <title></title>
+        <title>${message(code: 'public.title.all.property.label', default: 'Semua Property')}</title>
     </head>
 
     <body>
@@ -21,10 +21,13 @@
             <div class="overlay">
                 <div class="container">
                     <div class="breadcrumb-area">
-                        <h1>Property Listing</h1>
+                        <h1>${message(code: 'public.title.all.property.label', default: 'Semua Property')}</h1>
                         <ul class="breadcrumbs">
-                            <li><a href="${createLink(controller: 'property', action: 'index')}">Home</a></li>
-                            <li class="active">Property Listing</li>
+                            <li><a href="${createLink(controller: 'property', action: 'index')}">
+                                    ${message(code: 'public.home.label', default: 'Beranda')}
+                                </a>
+                            </li>
+                            <li class="active">${message(code: 'public.title.all.property.list.label', default: 'Semua Tipe')}</li>
                         </ul>
                     </div>
                 </div>
@@ -67,8 +70,10 @@
                                                 <g:message code="public.price.filter.desc.label"/>
                                             </option>
                                         </select>
-                                        <a href="" class="change-view-btn active-view-btn"><i class="fa fa-th-list"></i></a>
+                                        <a class="change-view-btn active-view-btn"><i class="fa fa-th-list"></i></a>
+                                        <!--
                                         <a href="" class="change-view-btn"><i class="fa fa-th-large"></i></a>
+                                        -->
                                     </div>
                                 </div>
                             </div>
@@ -123,9 +128,7 @@
                                         </a>
                                     </h1>
                                     <h3 class="property-address">
-                                        <a href="">
-                                            <i class="fa fa-map-marker"></i>${property?.getFullAddress()}
-                                        </a>
+                                        <a><i class="fa fa-map-marker"></i>${property?.getFullAddress()}</a>
                                     </h3>
                                     <ul class="facilities-list clearfix">
                                         <g:if test="${details}">
@@ -155,7 +158,7 @@
                         </g:each>
                         <!-- Property end -->
 
-                        <g:if test="${totalProperty >= 8}">
+                        <g:if test="${totalProperty >= 6}">
                             <nav aria-label="Page navigation">
                                 <ul class="pagination">
                                     <g:form method="post" controller="property" action="propertyList" params="${params - [inputPage: params.inputPage]}">
@@ -179,6 +182,7 @@
                                         <option disabled value="" style="display: none" ${!params?.status ? 'selected' : ''}>
                                             <g:message code="property.status.label"/>
                                         </option>
+                                        <option value="">Status</option>
                                         <g:each in="${PropertyStatus?.values()}" var="pStatus">
                                             <option name="status" value="${pStatus?.name()?.toLowerCase()}" ${params?.status == pStatus?.name()?.toLowerCase() ? 'selected' : ''}>
                                                 <g:message code="property.status.${pStatus}.label"/>
@@ -204,6 +208,7 @@
                                         <option disabled value="" style="display: none" ${!params?.type ? 'selected' : ''}>
                                             <g:message code="property.type.label"/>
                                         </option>
+                                        <option value="">Pilih Tipe</option>
                                         <g:each in="${PropertyType?.values()}" var="pType">
                                             <option name="type" value="${pType?.name()?.toLowerCase()}" ${params?.type == pType?.name()?.toLowerCase() ? 'selected' : ''}>
                                                 <g:message code="property.type.${pType}.label"/>

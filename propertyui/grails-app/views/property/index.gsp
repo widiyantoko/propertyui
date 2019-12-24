@@ -329,7 +329,7 @@
             <g:render template="modal_property_preview" model="${propertyList}"/>
         </g:if>
 
-%{--        <g:render template="/templates/simple_footer"/>--}%
+        <g:render template="/templates/simple_footer"/>
         <g:render template="/templates/footer"/>
 
     </body>
