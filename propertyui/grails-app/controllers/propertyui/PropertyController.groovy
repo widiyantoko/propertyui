@@ -66,7 +66,7 @@ class PropertyController {
 
     def search() {
 
-        params?.max = params?.int("max", 8)
+        params?.max = params?.int("max", 6)
         if (params?.inputPage) {
             Integer inputPage = (params?.int("inputPage") - 1 ) * params?.max
             params?.offset = inputPage
@@ -98,7 +98,7 @@ class PropertyController {
 
     def propertyList() {
 
-        params?.max = params?.int("max", 8)
+        params?.max = params?.int("max", 6)
         if (params?.inputPage) {
             Integer inputPage = (params?.int("inputPage") - 1 ) * params?.max
             params?.offset = inputPage
@@ -145,7 +145,7 @@ class PropertyController {
 
     def buy() {
 
-        params?.max = params?.int("max", 8)
+        params?.max = params?.int("max", 6)
         if (params?.inputPage) {
             Integer inputPage = (params?.int("inputPage") - 1 ) * params?.max
             params?.offset = inputPage
@@ -168,7 +168,7 @@ class PropertyController {
 
     def rent(){
 
-        params?.max = params?.int("max", 8)
+        params?.max = params?.int("max", 6)
         if (params?.inputPage) {
             Integer inputPage = (params?.int("inputPage") - 1 ) * params?.max
             params?.offset = inputPage
@@ -193,7 +193,7 @@ class PropertyController {
 
     def list() {
 
-        params?.max = params?.int("max", 8)
+        params?.max = params?.int("max", 6)
         if (params?.inputPage) {
             Integer inputPage = (params?.int("inputPage") - 1 ) * params?.max
             params?.offset = inputPage
@@ -217,7 +217,7 @@ class PropertyController {
     }
 
     def type() {
-        params?.max = params?.int("max", 8)
+        params?.max = params?.int("max", 6)
         if (params?.inputPage) {
             Integer inputPage = (params?.int("inputPage") - 1 ) * params?.max
             params?.offset = inputPage

@@ -94,7 +94,7 @@ class Property implements Serializable{
     }
 
     def getFullAddress() {
-        String fullAddress = (address ?: "") + ", " + (city ?: "") + ", " + (state ?: "")
+        String fullAddress = (address?.toLowerCase()?.capitalize() ?: "") + ", " + (city?.toLowerCase()?.capitalize() ?: "") + ", " + (state?.toLowerCase()?.capitalize() ?: "")
         return fullAddress?.trim()
     }
 }
