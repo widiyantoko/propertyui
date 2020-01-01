@@ -32,6 +32,7 @@
         </div>
 
         <g:render template="/templates/simple_footer"/>
+        <g:render template="/templates/footer"/>
 
     </body>
 </html>
