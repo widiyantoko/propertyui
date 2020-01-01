@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta name="layout" content="main">
-        <title>${params?.status ? ' status' : ' Tipe'} - <g:message code="property.listing.${params?.status ?: params?.type}.label" default="${params?.status ?: params?.type }"/></title>
+        <title>${params?.status ? ' Status' : ' Tipe'} - <g:message code="property.listing.${params?.status ?: params?.type?.capitalize()}.label" default="${params?.status ?: params?.type?.capitalize() }"/></title>
     </head>
 
     <body>
@@ -28,7 +28,7 @@
                                  </a>
                             </li>
                             <li class="active">Property  ${params?.type ? ' Type' : ''}
-                                <g:message code="property.listing.${params?.type}.label" default="${params?.type}"/>
+                                <g:message code="property.listing.${params?.type}.label"/>
                             </li>
                         </ul>
                     </div>
@@ -49,7 +49,10 @@
                                             <span class="heading-icon">
                                                 <i class="fa fa-th-list"></i>
                                             </span>
-                                            <span class="hidden-xs">${propertyList?.size()} Properties List ${params?.type}</span>
+                                            <span class="hidden-xs">
+                                                ${message(code: 'property.listing.title.label', args: propertyList?.size())}
+                                                <g:message code="property.listing.${params?.type}.label"/>
+                                            </span>
                                         </h4>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10 col-pad">
@@ -73,7 +76,9 @@
                                                 </option>
                                             </select>
                                             <a href="" class="change-view-btn active-view-btn"><i class="fa fa-th-list"></i></a>
+                                            <!--
                                             <a href="" class="change-view-btn"><i class="fa fa-th-large"></i></a>
+                                            -->
                                         </div>
                                     </div>
                                 </div>

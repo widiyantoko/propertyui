@@ -34,7 +34,7 @@
                             <li class="dropdown-submenu">
                                 <g:each in="${PropertyType.values() - [PropertyType.OFFICE]}" var="type">
                                     <li>
-                                        <a href="${createLink(controller: 'property', action: 'buy', params: [type: type?.value()?.toLowerCase()])}">
+                                        <a href="${createLink(controller: 'property', action: 'buy', params: [type: type?.name()?.toLowerCase()])}">
                                             <g:message code="property.type.${type}.label" default="${type}"/>
                                         </a>
                                     </li>
@@ -52,7 +52,7 @@
                             <li class="dropdown-submenu">
                                 <g:each in="${PropertyType.values() - [PropertyType.LAND]}" var="type">
                                     <li>
-                                        <a href="${createLink(controller: 'property', action: 'rent', params: [type: type?.value()?.toLowerCase()])}">
+                                        <a href="${createLink(controller: 'property', action: 'rent', params: [type: type?.name()?.toLowerCase()])}">
                                             <g:message code="property.type.${type}.label" default="${type}"/>
                                         </a>
                                     </li>

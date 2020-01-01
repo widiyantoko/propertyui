@@ -23,7 +23,7 @@
                         <h2>Something is wrong</h2>
                         <p>The page you are looking for was moved, removed, renamed or might never.</p>
                         <form action="${createLink(controller: 'property', action: 'index')}" method="post">
-                            <button type="submit" class="button-sm out-line-btn">Back to property page</button>
+                            <button type="submit" class="button-sm out-line-btn">Back to home page</button>
                         </form>
                     </div>
                     <!-- Error404 content end -->
