@@ -9,6 +9,12 @@ class UrlMappings {
             }
         }
 
+        //admin
+        "/admin"(controller: 'adminUser', action: 'index')
+        group "/admin", {
+
+        }
+
         //home page & header
         "/"(controller: 'property', action: 'index')
         "/agent/"(controller: "user", action: "agentList")
