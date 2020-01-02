@@ -9,7 +9,11 @@
 <html>
     <head>
         <meta name="layout" content="main">
-        <title>${params?.status ? ' Status' : ' Tipe'} - <g:message code="property.listing.${params?.status ?: params?.type?.capitalize()}.label" default="${params?.status ?: params?.type?.capitalize() }"/></title>
+        <title>
+            <g:if test="${request.forwardURI?.equals('/property/rent/' + params?.type)}">
+                Sewa - <g:message code="property.listing.${params?.type}.label"/>
+            </g:if>
+        </title>
     </head>
 
     <body>
