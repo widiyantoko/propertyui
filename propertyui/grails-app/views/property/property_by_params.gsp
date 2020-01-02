@@ -67,8 +67,10 @@
                                                 <g:message code="public.price.filter.asc.label"/>
                                             </option>
                                         </select>
-                                        <a href="" class="change-view-btn active-view-btn"><i class="fa fa-th-list"></i></a>
+                                        <a class="change-view-btn active-view-btn"><i class="fa fa-th-list"></i></a>
+                                        <!--
                                         <a href="" class="change-view-btn"><i class="fa fa-th-large"></i></a>
+                                        -->
                                     </div>
                                 </div>
                             </div>
