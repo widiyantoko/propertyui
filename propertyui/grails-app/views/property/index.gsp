@@ -178,8 +178,10 @@
                                             <div class="category_bg_box category_long_bg cat-${i}-bg">
                                                 <div class="category-overlay">
                                                     <div class="category-content">
-                                                        <div class="category-subtitle">${total} Properties</div>
-                                                        <h3 class="category-title"><a href="#">${city}</a></h3>
+                                                        <div class="category-subtitle">
+                                                            <g:message code="public.text.property.label" default="{0} Property" args="${total}"/>
+                                                        </div>
+                                                        <h3 class="category-title"><a href="${createLink(controller: 'property', action: 'findPropertyByCity', params: [city: city?.toLowerCase()])}">${city}</a></h3>
                                                     </div>
                                                 </div>
                                             </div>
@@ -194,9 +196,11 @@
                                                     <div class="category_bg_box cat-${i}-bg">
                                                         <div class="category-overlay">
                                                             <div class="category-content">
-                                                                <div class="category-subtitle">${total} Properties</div>
+                                                                <div class="category-subtitle">
+                                                                    <g:message code="public.text.property.label" default="{0} Property" args="${total}"/>
+                                                                </div>
                                                                 <h3 class="category-title">
-                                                                    <a href="#">${city}</a>
+                                                                    <a href="${createLink(controller: 'property', action: 'findPropertyByCity', params: [city: city?.toLowerCase()])}">${city}</a>
                                                                 </h3>
                                                             </div>
                                                         </div>

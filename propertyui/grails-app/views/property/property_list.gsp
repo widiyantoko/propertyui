@@ -173,7 +173,7 @@
                     <div class="col-lg-4 col-md-4 col-xs-12 col-md-pull-8">
                         <div class="sidebar-widget">
                             <div class="main-title-2">
-                                <h1><span>Advanced</span> Search</h1>
+                                ${message(code: 'public.filter.search.property.label')}
                             </div>
 
                             <g:form method="GET" controller="property" action="propertyList">
@@ -280,7 +280,9 @@
                                 </div>
                                 -->
                                 <div class="form-group mb-0">
-                                    <button class="search-button">Apply</button>
+                                    <button class="search-button">
+                                        <g:message code="public.button.apply.label" default="Terapkan"/>
+                                    </button>
                                 </div>
                             </g:form>
                         </div>
@@ -288,7 +290,7 @@
                         <!-- Category posts start -->
                         <div class="sidebar-widget category-posts">
                             <div class="main-title-2">
-                                <h1><span>popular</span> Category</h1>
+                                ${message(code: 'public.popular.property.label')}
                             </div>
                             <ul class="list-unstyled list-cat">
                                 <g:each in="${typeList}" var="type">
@@ -302,53 +304,29 @@
                         </div>
 
                         <!-- Popular posts start -->
-                        <div class="sidebar-widget popular-posts">
-                            <div class="main-title-2">
-                                <h1><span>Recent</span> Properties</h1>
-                            </div>
-                            <div class="media">
-                                <div class="media-left">
-                                    <img class="media-object" src="http://placehold.it/90x63" alt="small-properties-1">
+                        <g:if test="${propertyList}">
+                            <div class="sidebar-widget popular-posts">
+                                <div class="main-title-2">
+                                    ${message(code: 'public.recent.property.label')}
                                 </div>
-                                <div class="media-body">
-                                    <h3 class="media-heading">
-                                        <a href="properties-details.html">Modern Family Home</a>
-                                    </h3>
-                                    <p>February 27, 2018</p>
-                                    <div class="price">
-                                        $734,000
+                                <g:each in="${propertyList?.take(3)}" var="property">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <img class="media-object" src="http://placehold.it/90x63" alt="small-properties-1">
+                                        </div>
+                                        <div class="media-body">
+                                            <h3 class="media-heading">
+                                                <a href="${createLink(controller: 'property', action: 'propertyDetails', params: [id: property?.id])}">${property?.title}</a>
+                                            </h3>
+                                            <p><g:formatDate date="${property?.lastModified}" format="dd-MM-yyyy" type="date" style="LONG" locale="id_ID"/> </p>
+                                            <div class="price">
+                                                <g:formatNumber number="${property?.price}" format="\$###,##0" type="currency" currencyCode="IDR" locale="id_ID"/>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                </g:each>
                             </div>
-                            <div class="media">
-                                <div class="media-left">
-                                    <img class="media-object" src="http://placehold.it/90x63" alt="small-properties-2">
-                                </div>
-                                <div class="media-body">
-                                    <h3 class="media-heading">
-                                        <a href="properties-details.html">Modern Family Home</a>
-                                    </h3>
-                                    <p>February 27, 2018</p>
-                                    <div class="price">
-                                        $734,000
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="media-left">
-                                    <img class="media-object" src="http://placehold.it/90x63" alt="small-properties-3">
-                                </div>
-                                <div class="media-body">
-                                    <h3 class="media-heading">
-                                        <a href="properties-details.html">Beautiful Single Home</a>
-                                    </h3>
-                                    <p>February 27, 2018</p>
-                                    <div class="price">
-                                        $734,000
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </g:if>
 
                         <!-- Helping box Start -->
                         <div class="sidebar-widget helping-box clearfix">
