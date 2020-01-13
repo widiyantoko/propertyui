@@ -169,7 +169,7 @@
                         <div class="clearfix"></div>
                         <div class="row wow">
                             <g:each in="${popularPropertyList}" var="popularProperty" status="i">
-                                <g:set var="city" value="${popularProperty?.getAt(0)}"/>
+                                <g:set var="city" value="${popularProperty?.getAt(0)?.split()?.getAt(1)}"/>
                                 <g:set var="total" value="${popularProperty?.getAt(1)}"/>
 
                                 <g:if test="${i == 0}">
