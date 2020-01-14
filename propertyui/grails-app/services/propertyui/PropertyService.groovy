@@ -6,10 +6,18 @@ import Enums.PropertyType
 import org.apache.commons.lang.StringUtils
 import grails.transaction.Transactional
 import grails.web.servlet.mvc.GrailsParameterMap
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.web.multipart.MultipartFile
 import propertyui.model.SubmitProperty
+import utils.ImageUpload
+
+import javax.servlet.http.HttpServletRequest
 
 @Transactional
 class PropertyService {
+
+    @Value('${application.image.directory}')
+    private String imageDir
 
     def springSecurityService
 
@@ -572,6 +580,38 @@ class PropertyService {
             }
         }
         property.save()
+    }
+
+    Map<String, String> uploadImage(HttpServletRequest request) throws Throwable {
+        Map<String, String> attr = new HashMap<>()
+        MultipartFile[] avatar = request.multiFileMap.userAvatar
+        String imgName = UUID.randomUUID().toString()
+
+        try {
+            if (avatar.size() > 0) {
+                String path = imageDir
+                if (!new File(path).exists()) {
+                    new File(path).mkdirs()
+                }
+
+                avatar.each {
+                    imgName = UUID.randomUUID().toString()
+                    Map<String, String> results = ImageUpload.saveImage(it, path, imgName)
+                    if (results?.getAt("status")?.equalsIgnoreCase("success")) {
+                        println(results?.getAt("message")?.toString())
+                        attr.put("success", "OK")
+                    }
+                }
+
+            } else {
+                attr.put("error", "gagal")
+            }
+
+        } catch (Exception e) {
+            log.error(e.message)
+        }
+
+        return attr
     }
 
     private static Map<String, Object> processParams(GrailsParameterMap params) {
