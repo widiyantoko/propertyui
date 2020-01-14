@@ -6,12 +6,18 @@ import Enums.PropertyType
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
+import org.springframework.beans.factory.annotation.Value
 import propertyui.model.SubmitProperty
+
+import javax.servlet.http.HttpServletResponse
 
 import static org.springframework.http.HttpStatus.NOT_FOUND
 
 @Transactional(readOnly = true)
 class PropertyController {
+
+    @Value('${application.upload.image.maxFileSize}')
+    int maxFileSize
 
     def propertyService
     def userService
@@ -266,6 +272,26 @@ class PropertyController {
         submitProperty.propertyStatus = status
         submitProperty.state = province?.name
         submitProperty.city = regency?.name
+
+        def fileImage = request.multiFileMap.images
+
+        if (fileImage && !fileImage.empty) {
+            if (fileImage.size() > maxFileSize) {
+                transactionStatus.setRollbackOnly()
+                flash.error = 'Ukuran file terlalu besar, coba lagi'
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST)
+                beforeSubmit()
+                return
+            } else {
+                propertyService.uploadImage(request)
+            }
+        } else {
+            transactionStatus.setRollbackOnly()
+            flash.error = 'Ukuran file terlalu besar, coba lagi'
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST)
+            beforeSubmit()
+            return
+        }
 
         submitProperty.validate()
         if (submitProperty.hasErrors()) {

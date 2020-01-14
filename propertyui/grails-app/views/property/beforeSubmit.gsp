@@ -51,7 +51,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="submit-address">
-                            <g:form class="js-submit-property" controller="property" action="save" method="post">
+                            <g:form class="js-submit-property" controller="property" action="save" method="post" enctype="multipart/form-data">
                                 <div class="main-title-2">
                                     <h1><span>Basic</span> Information</h1>
                                 </div>
@@ -178,10 +178,11 @@
 
                                 <div class="main-title-2">
                                     <h1><span>Property</span> Gallery</h1>
-                                </div>
-                                <div id="myDropZone" class="dropzone dropzone-design mb-50">
-                                    <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
-                                </div>
+                                <div class="input-field">
+                                    <div class="input-images" style="padding-top: .5rem;"></div>
+                                </div><br>
+
+                                <div class="js-error-image-placement"></div>
 
                                 <div class="main-title-2">
                                     <h1><span>Location</span></h1>
