@@ -39,9 +39,13 @@
             })
         });
 
-        _select_property_status.on('change', function () {
-            var _this = $(this).children("option:selected");s
+        $(document).ready(function(){
+            $('.input-images').imageUploader();
         });
+
+        // _select_property_status.on('change', function () {
+        //     var _this = $(this).children("option:selected");
+        // });
 
         //Disable some field while property Land selected
         _select_property_type.on('change', function () {
@@ -94,6 +98,8 @@
                     error.appendTo($('.js-error-property-address'));
                 } else if (name === 'postalCode') {
                     error.appendTo($('.js-error-property-zip'));
+                } else if (name === 'userAvatar') {
+                    error.appendTo($('.js-error-image-placement'));
                 } else {
                     error.insertAfter(element);
                 }

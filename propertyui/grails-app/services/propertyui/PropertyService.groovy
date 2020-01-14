@@ -583,8 +583,9 @@ class PropertyService {
     }
 
     Map<String, String> uploadImage(HttpServletRequest request) throws Throwable {
+        User user = springSecurityService.currentUser
         Map<String, String> attr = new HashMap<>()
-        MultipartFile[] avatar = request.multiFileMap.userAvatar
+        MultipartFile[] avatar = request.multiFileMap.images
         String imgName = UUID.randomUUID().toString()
 
         try {
@@ -604,7 +605,7 @@ class PropertyService {
                 }
 
             } else {
-                attr.put("error", "gagal")
+                attr.put("error", "File not found")
             }
 
         } catch (Exception e) {

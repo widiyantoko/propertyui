@@ -212,18 +212,18 @@ $(function () {
     $('.sidebar-widget iframe').css('height', videoHeight);
 
     // Dropzone initialization
-    Dropzone.autoDiscover = false;
-    $(function () {
-        $("div#myDropZone").dropzone({
-            url: "/file-upload"
-        });
-    });
+    // Dropzone.autoDiscover = false;
+    // $(function () {
+    //     $("div#myDropZone").dropzone({
+    //         url: "/file-upload"
+    //     });
+    // });
 
 
     // SO something in mega menu
     jQuery(document).on('click', '.mega-dropdown', function(e) {
         e.stopPropagation()
-    })
+    });
 
     // Magnify activation
     $('.property-magnify-gallery').each(function() {

@@ -24,6 +24,7 @@
         <asset:link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.css"/>
         <asset:link rel="stylesheet" type="text/css" href="css/dropzone.css"/>
         <asset:link rel="stylesheet" type="text/css" href="css/magnific-popup.css"/>
+        <asset:link rel="stylesheet" type="text/css" href="css/image-uploader.min.css"/>
 
         <asset:link rel="stylesheet" type="text/css" href="css/style.css"/>
         <asset:link rel="stylesheet" type="text/css" href="css/skins/red.css"/>
@@ -54,7 +55,8 @@
         <asset:javascript src="js/leaflet.js"/>
         <asset:javascript src="js/leaflet-providers.js"/>
         <asset:javascript src="js/leaflet.markercluster.js"/>
-        <asset:javascript src="js/dropzone.js"/>
+        <!--asset:javascript src="js/dropzone.js"/-->
+        <asset:javascript src="/js/modules/image-uploader.min.js"/>
         <asset:javascript src="js/jquery.filterizr.js"/>
         <asset:javascript src="js/jquery.magnific-popup.min.js"/>
         <asset:javascript src="js/maps.js"/>
